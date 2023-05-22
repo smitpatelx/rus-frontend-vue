@@ -13,69 +13,68 @@ body, body > * {
   }
 }
 
-.rus-modal-wrapper {
-  @apply fixed top-0 left-0 w-full h-screen z-[100];
 
-  .rus-modal-container {
-    @apply flex relative w-full h-full min-h-screen z-[125];
+.rus-modal {
+  animation: zoom-up 0.5s ease-in-out;
 
-    .rus-modal {
-      @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-        bg-teal-50 w-full max-w-lg p-0 rounded-xl shadow-2xl z-[250];
+  @apply bg-teal-50 w-full max-w-lg p-0 rounded-xl shadow-2xl z-[250];
 
-      .rus-modal-header {
-        @apply flex flex-nowrap flex-row items-center select-none
-          justify-between py-4 px-5 border-b border-teal-500;
+  .rus-modal-header {
+    @apply flex flex-nowrap flex-row items-center select-none
+      justify-between py-4 px-5 border-b border-teal-500;
 
-        & > div {
-          @apply flex flex-nowrap flex-row items-center justify-start;
+    & > div {
+      @apply flex flex-nowrap flex-row items-center justify-start;
 
-          svg {
-            @apply w-6 h-6 mr-2 text-teal-500;
-          }
-
-          h3 {
-            @apply text-lg font-medium text-transparent
-              bg-gradient-to-br from-teal-500 to-teal-800
-              bg-clip-text;
-          }
-        }
-
-        button {
-          @apply flex flex-nowrap flex-row items-center shadow-inner shadow-teal-500/30
-            justify-center w-8 h-8 rounded-full bg-teal-500/20 text-teal-500
-            hover:bg-teal-500 hover:text-teal-100 focus:outline-none;
-        }
+      svg {
+        @apply w-6 h-6 mr-2 text-teal-500;
       }
 
-      .rus-modal-body {
-        @apply py-10 px-6 bg-slate-50;
+      h3 {
+        @apply text-lg font-medium text-transparent
+          bg-gradient-to-br from-teal-500 to-teal-800
+          bg-clip-text;
       }
+    }
 
-      .rus-modal-footer {
-        @apply flex flex-nowrap flex-row items-center
-          justify-end py-4 px-5 border-t border-teal-500;
-        
-        .btn {
-          @apply flex flex-nowrap flex-row items-center cursor-pointer
-            justify-center px-4 py-1 rounded-full focus:outline-none
-            select-none;
-        }
-
-        .close-btn {
-          @apply bg-teal-500/20 text-teal-600 shadow-inner hover:bg-teal-500
-            shadow-teal-500/30 hover:text-teal-100;
-        }
-
-        .save-btn {
-          @apply bg-teal-500/20 text-teal-600 shadow-inner hover:bg-teal-500
-            shadow-teal-500/30 hover:text-teal-100;
-        }
-      }
+    button {
+      @apply flex flex-nowrap flex-row items-center shadow-inner shadow-teal-500/30
+        justify-center w-8 h-8 rounded-full bg-teal-500/20 text-teal-500
+        hover:bg-teal-500 hover:text-teal-100 focus:outline-none
+        focus-visible:ring-1 focus-visible:ring-teal-500;
     }
   }
 
-  .rus-modal-overylay {
+  .rus-modal-body {
+    @apply py-10 px-6 bg-slate-50;
+  }
+
+  .rus-modal-footer {
+    @apply flex flex-nowrap flex-row items-center
+      justify-end py-4 px-5 border-t border-teal-500;
+    
+    .btn {
+      @apply flex flex-nowrap flex-row items-center cursor-pointer
+        justify-center px-4 py-1 rounded-full focus:outline-none
+        select-none focus-visible:ring-1 focus-visible:ring-teal-500;
+    }
+
+    .close-btn {
+      @apply bg-teal-500/20 text-teal-600 shadow-inner hover:bg-teal-500
+        shadow-teal-500/30 hover:text-teal-100;
+    }
+
+    .save-btn {
+      @apply bg-teal-500/20 text-teal-600 shadow-inner hover:bg-teal-500
+        shadow-teal-500/30 hover:text-teal-100;
+    }
+  }
+}
+
+dialog {
+  @apply focus:outline-none focus:border-0;
+
+  &::backdrop {
     @apply absolute top-0 left-0 w-full h-full bg-slate-900/50 z-[150]
       transform-gpu backdrop-filter backdrop-blur-sm;
   }
@@ -108,13 +107,15 @@ body, body > * {
 }
 @keyframes zoom-up {
   0% {
-    transform: scale(0) translate3d(0, -10rem, 0);
+    transform: scale(0) translateY(-200px);
+    filter: blur(10px);
     transform-origin: center;
     opacity: 0;
   }
 
   100% {
-    transform: scale(1) translate3d(0, 0, 0);
+    transform: scale(1) translateY(0px);
+    filter: blur(0);
     transform-origin: center;
     opacity: 1;
   }

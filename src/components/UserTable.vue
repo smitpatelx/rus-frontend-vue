@@ -1,24 +1,24 @@
 <template>
-  <div class="w-full flex-1 p-4 flex flex-col">
-    <div class="rus-table-wrap">
-      <table class="rus-table">
+  <div class='w-full flex-1 p-4 flex flex-col'>
+    <div class='rus-table-wrap'>
+      <table class='rus-table'>
         <TableHeader
-          :columns="rowHeaders"
-          @toggleSortDirection="hToggleSortDirection"
+          :columns='rowHeaders'
+          @toggleSortDirection='hToggleSortDirection'
         />
       
-        <tr v-for="(item, i) in rowFill" :key="i">
+        <tr v-for='(item, i) in rowFill' :key='i'>
           <td>pwoeoskszahs {{ i }}</td>
           <td>Smit</td>
           <td>Patel</td>
           <td>
-            <span class="w-full flex flex-row items-center justify-start">
+            <span class='w-full flex flex-row items-center justify-start'>
               <a
-                href="tel:+918892982637"
-                class="flex flex-nowrap flex-row items-center justify-start
+                href='tel:+918892982637'
+                class='flex flex-nowrap flex-row items-center justify-start
                   hover:text-sky-500 gap-x-1 cursor-pointer whitespace-nowrap
                   focus:outline-none focus:ring-1 focus:ring-teal-500 focus:ring-offset-1
-                  focus:ring-offset-teal-100 -ml-2 px-2 rounded-md"
+                  focus:ring-offset-teal-100 -ml-2 px-2 rounded-md'
               >
                 <span>+91</span>
                 <span>889-298-2637</span>
@@ -26,13 +26,13 @@
             </span>
           </td>
           <td>
-            <span class="w-full flex flex-row items-center justify-start">
+            <span class='w-full flex flex-row items-center justify-start'>
               <a
-                href="mailto:smitpatel.dev@gmail.com"
-                class="flex flex-nowrap flex-row items-center justify-start
+                href='mailto:smitpatel.dev@gmail.com'
+                class='flex flex-nowrap flex-row items-center justify-start
                   hover:text-sky-500 gap-x-1 cursor-pointer whitespace-pre-wrap md:whitespace-nowrap
                   focus:outline-none focus:ring-1 focus:ring-teal-500 focus:ring-offset-1
-                  focus:ring-offset-teal-100 -ml-2 px-2 rounded-md"
+                  focus:ring-offset-teal-100 -ml-2 px-2 rounded-md'
               >
                 smitpatel.dev@gmail.com
               </a>
@@ -41,44 +41,44 @@
           <td>Demo company name LTD.</td>
           <!-- Actions -->
           <td>
-            <div class="w-full flex flex-nowrap flex-row items-center justify-end
-              gap-x-2">
+            <div class='w-full flex flex-nowrap flex-row items-center justify-end
+              gap-x-2'>
               <button
-                title="Open wp account page"
-                class="w-9 h-9 flex items-center justify-center rounded-full bg-transparent
+                title='Open wp account page'
+                class='w-9 h-9 flex items-center justify-center rounded-full bg-transparent
                   hover:bg-teal-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
                   duration-300 ease-in-out transition-all focus:outline-none focus-visible:ring-1
                   focus-visible:ring-offset-1 focus-visible:ring-teal-600
-                  focus-visible:ring-offset-slate-100 active:scale-110"
+                  focus-visible:ring-offset-slate-100 active:scale-110'
               >
                 <RusIcon
-                  :icon="mdiLinkVariant"
+                  :icon='mdiLinkVariant'
                 />
               </button>
       
               <button
-                title="Edit - user name"
-                class="w-9 h-9 flex items-center justify-center rounded-full bg-transparent
+                title='Edit - user name'
+                class='w-9 h-9 flex items-center justify-center rounded-full bg-transparent
                   hover:bg-teal-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
                   duration-300 ease-in-out transition-all focus:outline-none focus-visible:ring-1
                   focus-visible:ring-offset-1 focus-visible:ring-teal-600
-                  focus-visible:ring-offset-slate-100 active:scale-110"
+                  focus-visible:ring-offset-slate-100 active:scale-110'
               >
                 <RusIcon
-                  :icon="mdiPencil"
+                  :icon='mdiPencil'
                 />
               </button>
       
               <button
-                title="Delete - user name"
-                class="w-9 h-9 flex items-center justify-center rounded-full bg-transparent
+                title='Delete - user name'
+                class='w-9 h-9 flex items-center justify-center rounded-full bg-transparent
                   hover:bg-red-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
                   duration-300 ease-in-out transition-all focus:outline-none focus-visible:ring-1
                   focus-visible:ring-offset-1 focus-visible:ring-red-600
-                  focus-visible:ring-offset-slate-100 active:scale-110"
+                  focus-visible:ring-offset-slate-100 active:scale-110'
               >
                 <RusIcon
-                  :icon="mdiDelete"
+                  :icon='mdiDelete'
                 />
               </button>
             </div>
@@ -86,70 +86,70 @@
         </tr>
       </table>
       <div
-        class="w-full bg-slate-100 rounded-b-md ring-1
+        class='w-full bg-slate-100 rounded-b-md ring-1
           ring-teal-500 flex flex-wrap items-center justify-between
-          px-4 py-2"
+          px-4 py-2'
       >
-        <span class="text-slate-500 text-sm">
+        <span class='text-slate-500 text-sm'>
           Showing 1 to 10 of 100 entries
         </span>
         
-        <div class="flex flex-row flex-nowrap gap-x-2">
+        <div class='flex flex-row flex-nowrap gap-x-2'>
           <button
-            title="Previous page"
-            class="w-9 h-9 flex items-center justify-center rounded-full bg-transparent
+            title='Previous page'
+            class='w-9 h-9 flex items-center justify-center rounded-full bg-transparent
               hover:bg-teal-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
               duration-300 ease-in-out transition-all focus:outline-none focus-visible:ring-1
               focus-visible:ring-offset-1 focus-visible:ring-teal-600
-              focus-visible:ring-offset-slate-100 active:scale-110"
+              focus-visible:ring-offset-slate-100 active:scale-110'
           >
             <RusIcon
-              :icon="mdiChevronLeft"
+              :icon='mdiChevronLeft'
             />
           </button>
 
           <button
-            v-for="(item, i) in Array(5)"
-            :key="i"
-            :title="`Page: ${i + 1}`"
-            class="w-9 h-9 flex items-center justify-center rounded-full bg-transparent
+            v-for='(item, i) in Array(5)'
+            :key='i'
+            :title='`Page: ${i + 1}`'
+            class='w-9 h-9 flex items-center justify-center rounded-full bg-transparent
               hover:bg-teal-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
               duration-300 ease-in-out transition-all focus:outline-none focus-visible:ring-1
               focus-visible:ring-offset-1 focus-visible:ring-teal-600
-              focus-visible:ring-offset-slate-100 active:scale-110"
+              focus-visible:ring-offset-slate-100 active:scale-110'
           >
             {{ i + 1 }}
           </button>
           
           <button
-            title="Next page"
-            class="w-9 h-9 flex items-center justify-center rounded-full bg-transparent
+            title='Next page'
+            class='w-9 h-9 flex items-center justify-center rounded-full bg-transparent
               hover:bg-teal-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
               duration-300 ease-in-out transition-all focus:outline-none focus-visible:ring-1
               focus-visible:ring-offset-1 focus-visible:ring-teal-600
-              focus-visible:ring-offset-slate-100 active:scale-110"
+              focus-visible:ring-offset-slate-100 active:scale-110'
           >
             <RusIcon
-              :icon="mdiChevronRight"
+              :icon='mdiChevronRight'
             />
           </button>
         </div>
 
         <!-- Page size -->
-        <div class="flex flex-row flex-nowrap gap-x-4 items-center justify-end">
-          <p class="text-slate-700 font-normal text-base">
+        <div class='flex flex-row flex-nowrap gap-x-4 items-center justify-end'>
+          <p class='text-slate-700 font-normal text-base'>
             Page size
           </p>
           <select
-            value="10"
-            name="page-size"
-            class="rounded-md bg-slate-200 text-slate-500
+            value='10'
+            name='page-size'
+            class='rounded-md bg-slate-200 text-slate-500
               hover:bg-slate-400 hover:text-teal-100 active:bg-opacity-30
               duration-300 ease-in-out transition-all focus:outline-none
               focus:ring-1 focus:ring-offset-1 focus:ring-teal-600
               focus:ring-offset-slate-100 flex flex-wrap items-center justify-center
-              leading-none form-select fill-current stroke-current"
-            placeholder="Page size"
+              leading-none form-select fill-current stroke-current'
+            placeholder='Page size'
           >
             <option>10</option>
             <option>20</option>

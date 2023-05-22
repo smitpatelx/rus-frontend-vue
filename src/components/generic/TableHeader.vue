@@ -1,8 +1,8 @@
 <template>
   <tr>
     <th
-      v-for="(column, i) in columns"
-      :key="i"
+      v-for='(column, i) in columns'
+      :key='i'
     >
       <span
         :class="classnames(
@@ -15,14 +15,14 @@
         )"
       >
         <button
-          v-if="column.sortable"
-          type="button"
-          @click="toggleBetweenSortDirections(column)"
+          v-if='column.sortable'
+          type='button'
+          @click='toggleBetweenSortDirections(column)'
         >
           {{ column.label }}
-          <div v-if="column.sortable && column.sortActive">
+          <div v-if='column.sortable && column.sortActive'>
             <RusIcon
-              :icon="mdiMenuUp"
+              :icon='mdiMenuUp'
               :class-name="classnames(
                 'w-5 h-5 text-teal-100',
                 {
@@ -40,7 +40,7 @@
   </tr>
 </template>
 
-<script setup lang="ts">
+<script setup lang='ts'>
 import type { TableHeaderItem, TableSortDirection } from '@/interfaces/table';
 import RusIcon from '@/components/generic/RusIcon.vue';
 import { mdiMenuUp } from '@mdi/js';
@@ -72,7 +72,7 @@ const toggleBetweenSortDirections = (col: TableHeaderItem) => {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
 // Header
 tr:nth-child(1) {
   @apply bg-teal-500 w-full py-0 border-b border-slate-300
