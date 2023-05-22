@@ -207,7 +207,7 @@ defineProps<{
   openDialog: (mode: DialogMode) => void;
 }>();
 
-const totalRows = 10;
+const totalRows = 20;
 const rowFill = Array(totalRows).fill(null);
 const rowHeaders: TableHeaderItems = [
   {
@@ -274,7 +274,7 @@ const hToggleSortDirection = (sortD: TableSortDirection) => {
 
 .rus-table {
   @apply w-full flex-1 leading-none rounded-t-md
-    overflow-y-auto overflow-x-hidden;
+    overflow-y-hidden overflow-x-hidden;
 
   tr:not(:nth-child(1)) {
     @apply bg-transparent w-full py-0 hover:bg-slate-200/40 border-0 odd:bg-teal-500/10;

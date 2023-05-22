@@ -90,7 +90,7 @@ const toggleBetweenSortDirections = (col: TableHeaderItem) => {
 // Header
 tr:nth-child(1) {
   @apply bg-teal-500 w-full py-0 border-b border-slate-300
-    z-10;
+    z-10 sticky top-0 left-0;
 
   th {
     @apply text-lg font-medium text-teal-50 pr-3 py-2;

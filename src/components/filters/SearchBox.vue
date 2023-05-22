@@ -1,6 +1,6 @@
 <template>
   <div
-    class='w-full max-w-xs relative group overflow-hidden
+    class='w-full max-w-sm relative group overflow-hidden
     focus-within:ring-1 focus-within:ring-teal-500 focus-within:outline-none
     ring-1 ring-slate-300 rounded-md'
   >
@@ -23,7 +23,7 @@
       class='w-full py-1.5 pl-10 pr-4 bg-slate-50 text-teal-700
         text-base focus:outline-none focus:ring-0
         placeholder-slate-400 border-0 focus:border-0 placeholder:select-none'
-      placeholder='Search user    [Esc to clear]'
+      placeholder='Search (Cmd + /)(Esc to clear)'
     >
   </div>
 </template>

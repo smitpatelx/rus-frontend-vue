@@ -1,8 +1,8 @@
 <template>
-  <div class='w-full h-full max-h-screen min-h-screen bg-slate-50 flex flex-col flex-nowrap'>
+  <div class='w-full h-screen overflow-y-hidden bg-slate-50 flex flex-col flex-nowrap'>
     <AppHeader />
     
-    <main class='flex-1 flex flex-col h-full'>
+    <main class='flex-1 flex flex-col h-full overflow-y-auto'>
       <RusMainPage />
     </main>
   </div>
