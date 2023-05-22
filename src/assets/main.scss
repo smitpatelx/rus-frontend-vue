@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Inter';
+  src: url('./Inter-roman-latin.woff2') format('woff2');
+}
+
 body, body > * {
   @apply antialiased;
 }
@@ -56,7 +61,8 @@ body, body > * {
     .btn {
       @apply flex flex-nowrap flex-row items-center cursor-pointer
         justify-center px-4 py-1 rounded-full focus:outline-none
-        select-none focus-visible:ring-1 focus-visible:ring-teal-500;
+        select-none focus-visible:ring-1 focus-visible:ring-teal-500
+        text-base font-medium;
     }
 
     .close-btn {

@@ -7,7 +7,7 @@
     <div class='flex flex-row flex-nowrap gap-x-3 items-center'>
       <div
         class='w-auto bg-sky-600/20 text-teal-900 rounded text-sm font-medium py-0.5 px-2
-        shadow ring-1 ring-sky-500/30 leading-none cursor-help'
+          shadow ring-1 ring-sky-500/30 leading-none cursor-help font-mono'
         title='RUS plugin version - 1.0.6'
       >
         1.1.0

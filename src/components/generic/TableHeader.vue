@@ -7,11 +7,7 @@
       <span
         :class="classnames(
           'w-full flex flex-nowrap items-center',
-          {
-            'justify-start': column.align === 'left' || !column.align,
-            'justify-end': column.align === 'right',
-            'justify-center': column.align === 'center',
-          }
+          `rus-tb-h-align-${column.align}`,
         )"
       >
         <button
@@ -20,7 +16,7 @@
           @click='toggleBetweenSortDirections(column)'
         >
           {{ column.label }}
-          <div v-if='column.sortable && column.sortActive'>
+          <div v-if='column.sortActive'>
             <RusIcon
               :icon='mdiMenuUp'
               :class-name="classnames(
@@ -73,6 +69,24 @@ const toggleBetweenSortDirections = (col: TableHeaderItem) => {
 </script>
 
 <style scoped lang='scss'>
+.rus-tb-h-align {
+  &-left {
+    &, button {
+      @apply justify-start text-start;
+    }
+  }
+  &-right {
+    &, button {
+      @apply justify-end text-end;
+    }
+  }
+  &-center {
+    &, button {
+      @apply justify-center text-center;
+    }
+  }
+}
+
 // Header
 tr:nth-child(1) {
   @apply bg-teal-500 w-full py-0 border-b border-slate-300

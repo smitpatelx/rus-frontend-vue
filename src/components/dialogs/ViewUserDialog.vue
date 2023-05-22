@@ -5,7 +5,7 @@
         <RusIcon :icon='mdiAccount' />
         <h3>View User</h3>
       </div>
-      <button @click='closeModal' tabindex='0'>
+      <button @click='closeDialog' tabindex='0'>
         <RusIcon :icon='mdiClose' />
       </button>
     </div>
@@ -24,7 +24,7 @@
     <div class='rus-modal-footer' @click.stop>
       <button
         class='btn close-btn'
-        @click='closeModal'
+        @click='closeDialog'
         tabindex='0'
       >
         Close
@@ -37,6 +37,14 @@
 import { onMounted, reactive, ref, watch } from 'vue';
 import RusIcon from '../generic/RusIcon.vue';
 import { mdiAccount, mdiClose } from '@mdi/js';
+
+const props = defineProps<{
+  open: { value: boolean };
+}>();
+
+const emit = defineEmits({
+  close: () => true,
+});
 
 // Display data
 const userDetails = reactive({
@@ -69,29 +77,36 @@ const userDetails = reactive({
 // Dialog
 const dialogRef = ref<HTMLDialogElement | null>(null);
 
-const openModal = async () => {
+const openDialog = () => {
   dialogRef.value?.showModal();
 }
 
-const closeModal = async () => {
-  dialogRef.value?.close();
+const closeDialog = () => {
+  emit('close');
 }
 
-onMounted(() => {
-  openModal();
+// React on props.open
+watch([props.open], () => {
+  if (props.open.value) {
+    openDialog();
+  } else {
+    dialogRef.value?.close();
+  }
+});
 
+onMounted(() => {
   const overlay = dialogRef.value;
 
   if (overlay) {
     overlay.addEventListener('click', () => {
-      closeModal();
+      closeDialog();
     });
   }
 
   return () => {
     if (overlay) {
       overlay.removeEventListener('click', () => {
-        closeModal();
+        closeDialog();
       });
     }
   }

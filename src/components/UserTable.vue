@@ -8,7 +8,13 @@
         />
       
         <tr v-for='(item, i) in rowFill' :key='i'>
-          <td>pwoeoskszahs {{ i }}</td>
+          <td>
+            <code class="text-sm font-normal font-mono
+              leading-none bg-teal-500/20 text-teal-900
+              px-1 py-0.5 rounded overflow-hidden">
+              smitpatelx
+            </code>
+          </td>
           <td>Smit</td>
           <td>Patel</td>
           <td>
@@ -26,13 +32,12 @@
             </span>
           </td>
           <td>
-            <span class='w-full flex flex-row items-center justify-start'>
+            <span class='w-full flex flex-row flex-nowrap items-center justify-start'>
               <a
                 href='mailto:smitpatel.dev@gmail.com'
-                class='flex flex-nowrap flex-row items-center justify-start
-                  hover:text-sky-500 gap-x-1 cursor-pointer whitespace-pre-wrap md:whitespace-nowrap
+                class='inline-block h-full hover:text-sky-500 whitespace-pre md:whitespace-nowrap
                   focus:outline-none focus:ring-1 focus:ring-teal-500 focus:ring-offset-1
-                  focus:ring-offset-teal-100 -ml-2 px-2 rounded-md'
+                  focus:ring-offset-teal-100 -ml-2 px-2 rounded-md cursor-pointer'
               >
                 smitpatel.dev@gmail.com
               </a>
@@ -45,6 +50,7 @@
               gap-x-2'>
               <button
                 title='Open wp account page'
+                type='button'
                 class='w-9 h-9 flex items-center justify-center rounded-full bg-transparent
                   hover:bg-teal-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
                   duration-300 ease-in-out transition-all focus:outline-none focus-visible:ring-1
@@ -55,8 +61,25 @@
                   :icon='mdiLinkVariant'
                 />
               </button>
+
+              <button
+                @click.stop.capture.passive="openDialog('view')"
+                type='button'
+                title='View - user name'
+                class='w-9 h-9 flex items-center justify-center rounded-full bg-transparent
+                  hover:bg-teal-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
+                  duration-300 ease-in-out transition-all focus:outline-none focus-visible:ring-1
+                  focus-visible:ring-offset-1 focus-visible:ring-teal-600
+                  focus-visible:ring-offset-slate-100 active:scale-110'
+              >
+                <RusIcon
+                  :icon='mdiEye'
+                />
+              </button>
       
               <button
+                @click.stop.capture.passive="openDialog('edit')"
+                type='button'
                 title='Edit - user name'
                 class='w-9 h-9 flex items-center justify-center rounded-full bg-transparent
                   hover:bg-teal-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
@@ -70,6 +93,8 @@
               </button>
       
               <button
+                @click.stop.capture.passive="openDialog('delete')"
+                type='button'
                 title='Delete - user name'
                 class='w-9 h-9 flex items-center justify-center rounded-full bg-transparent
                   hover:bg-red-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
@@ -116,7 +141,8 @@
               hover:bg-teal-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
               duration-300 ease-in-out transition-all focus:outline-none focus-visible:ring-1
               focus-visible:ring-offset-1 focus-visible:ring-teal-600
-              focus-visible:ring-offset-slate-100 active:scale-110'
+              focus-visible:ring-offset-slate-100 active:scale-110
+              text-base font-medium'
           >
             {{ i + 1 }}
           </button>
@@ -137,7 +163,7 @@
 
         <!-- Page size -->
         <div class='flex flex-row flex-nowrap gap-x-4 items-center justify-end'>
-          <p class='text-slate-700 font-normal text-base'>
+          <p class='text-slate-700 font-medium text-base'>
             Page size
           </p>
           <select
@@ -173,7 +199,13 @@ import {
   mdiLinkVariant,
   mdiChevronRight,
   mdiChevronLeft,
+  mdiEye,
 } from '@mdi/js';
+import type { DialogMode } from '@/interfaces/dialog';
+
+defineProps<{
+  openDialog: (mode: DialogMode) => void;
+}>();
 
 const totalRows = 10;
 const rowFill = Array(totalRows).fill(null);
@@ -232,7 +264,6 @@ const hToggleSortDirection = (sortD: TableSortDirection) => {
       return undefined;
   }
 };
-
 </script>
 
 <style scoped lang='scss'>
