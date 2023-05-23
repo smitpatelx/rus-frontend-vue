@@ -24,6 +24,9 @@ body, body > * {
 
   @apply bg-teal-50 w-full max-w-lg p-0 rounded-xl shadow-2xl z-[250];
 
+  &[size='md'] { @apply max-w-md; }
+  &[size='xl'] { @apply max-w-xl; }
+
   .rus-modal-header {
     @apply flex flex-nowrap flex-row items-center select-none
       justify-between py-4 px-5 border-b border-teal-500;
@@ -36,7 +39,7 @@ body, body > * {
       }
 
       h3 {
-        @apply text-lg font-medium text-transparent
+        @apply text-lg font-semibold text-transparent
           bg-gradient-to-br from-teal-500 to-teal-800
           bg-clip-text;
       }
@@ -56,13 +59,26 @@ body, body > * {
 
   .rus-modal-footer {
     @apply flex flex-nowrap flex-row items-center
-      justify-end py-4 px-5 border-t border-teal-500;
+      justify-end py-4 px-5 border-t border-teal-500
+      gap-x-2;
     
     .btn {
       @apply flex flex-nowrap flex-row items-center cursor-pointer
         justify-center px-4 py-1 rounded-full focus:outline-none
         select-none focus-visible:ring-1 focus-visible:ring-teal-500
-        text-base font-medium;
+        text-base font-medium duration-200 ease-out;
+      
+      &:has(svg) {
+        @apply pl-4 pr-3;
+      }
+      
+      svg {
+        @apply w-5 h-5 ml-1 text-inherit;
+      }
+
+      &:disabled {
+        @apply opacity-50 cursor-not-allowed hover:bg-teal-500 hover:text-teal-100;
+      }
     }
 
     .close-btn {
@@ -71,8 +87,55 @@ body, body > * {
     }
 
     .save-btn {
-      @apply bg-teal-500/20 text-teal-600 shadow-inner hover:bg-teal-500
-        shadow-teal-500/30 hover:text-teal-100;
+      @apply bg-teal-500 text-teal-100 shadow hover:bg-teal-500/75
+        shadow-teal-800/50 hover:text-teal-100;
+    }
+  }
+
+  // Red color for error
+  &[data-type='delete'] {
+    @apply bg-red-50;
+
+    .rus-modal-header {
+      @apply border-red-500;
+  
+      & > div {
+        svg {
+          @apply text-red-500;
+        }
+  
+        h3 {
+          @apply bg-gradient-to-br from-red-500 to-red-800
+            bg-clip-text;
+        }
+      }
+  
+      button {
+        @apply shadow-red-500/30 bg-red-500/20 text-red-500
+          hover:bg-red-500 hover:text-red-100 focus-visible:ring-red-500;
+      }
+    }
+
+    .rus-modal-body {
+      @apply py-16;
+    }
+
+    .rus-modal-footer {
+      @apply border-red-500;
+      
+      .btn {
+        @apply focus-visible:ring-red-500;
+      }
+  
+      .close-btn {
+        @apply bg-red-500/20 text-red-600 hover:bg-red-500
+          shadow-red-500/30 hover:text-red-100;
+      }
+  
+      .save-btn {
+        @apply bg-red-500/20 text-red-600 hover:bg-red-500
+          shadow-red-500/30 hover:text-red-100;
+      }
     }
   }
 }
@@ -87,17 +150,17 @@ dialog {
 }
 
 .item-display-field {
-  @apply flex flex-col gap-y-1;
+  @apply flex flex-col gap-y-2;
 
   label {
     @apply text-xs font-normal text-slate-500 uppercase
-      leading-4 tracking-wider select-none;
+      leading-none ml-px tracking-wider select-none p-0;
   }
 
   p {
     @apply text-base font-medium text-slate-800
-      whitespace-pre-wrap break-words leading-5
-      select-all;
+      whitespace-pre-wrap break-words leading-none
+      select-all -ml-1 p-0;
   }
 }
 

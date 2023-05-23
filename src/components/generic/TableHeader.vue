@@ -5,7 +5,7 @@
       :key='i'
     >
       <span
-        :class="classnames(
+        :class="classNames(
           'w-full flex flex-nowrap items-center',
           `rus-tb-h-align-${column.align}`,
         )"
@@ -19,7 +19,7 @@
           <div v-if='column.sortActive'>
             <RusIcon
               :icon='mdiMenuUp'
-              :class-name="classnames(
+              :class-name="classNames(
                 'w-5 h-5 text-teal-100',
                 {
                   'rotate-180': column.sortDirection === 'desc',
@@ -40,7 +40,7 @@
 import type { TableHeaderItem, TableSortDirection } from '@/interfaces/table';
 import RusIcon from '@/components/generic/RusIcon.vue';
 import { mdiMenuUp } from '@mdi/js';
-import classnames from 'classnames';
+import classNames from 'classnames';
 
 defineProps<{
   columns: TableHeaderItem[];

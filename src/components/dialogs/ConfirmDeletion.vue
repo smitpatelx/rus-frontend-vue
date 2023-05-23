@@ -1,30 +1,24 @@
 <template>
-  <dialog ref='dialogRef' class='rus-modal'>
+  <dialog ref='dialogRef' data-type='delete' class='rus-modal'>
     <div class='rus-modal-header' @click.stop>
       <div>
-        <RusIcon :icon='mdiAccount' />
-        <h3>View User</h3>
+        <RusIcon :icon='mdiDelete' />
+        <h3>Confirm Deletion</h3>
       </div>
       <button @click='closeDialog' tabindex='0'>
         <RusIcon :icon='mdiClose' />
       </button>
     </div>
     <div class='rus-modal-body' @click.stop>
-      <div class='w-full grid grid-cols-2 gap-y-5 gap-x-2'>
+      <div class='w-full grid grid-cols-1'>
         <div
-          v-for='(item, key) in userDetails'
-          :key='key'
           class='item-display-field'
         >
-          <label>{{item.label}}</label>
-          <p>
-            <span
-              v-if="key === 'phone'"
-              class="mr-1 text-teal-600"
-            >
-              +{{ Number(item.value.slice(0, 3)) }}
-            </span>
-            {{ key === 'phone' ? formatPhone(item.value.slice(3, 14)) : item.value }}
+          <label>
+            This action cannot be undone.
+          </label>
+          <p class='!text-xl'>
+            Are you sure you want to delete this user?
           </p>
         </div>
       </div>
@@ -35,7 +29,15 @@
         @click='closeDialog'
         tabindex='0'
       >
-        Close
+        Cancel
+      </button>
+      <button
+        class='btn close-btn'
+        @click='closeDialog'
+        tabindex='0'
+      >
+        Delete
+        <RusIcon :icon='mdiDelete' />
       </button>
     </div>
   </dialog>
@@ -44,7 +46,7 @@
 <script setup lang='ts'>
 import { onMounted, reactive, ref, watch } from 'vue';
 import RusIcon from '../generic/RusIcon.vue';
-import { mdiAccount, mdiClose } from '@mdi/js';
+import { mdiAccount, mdiClose, mdiDelete } from '@mdi/js';
 
 const props = defineProps<{
   open: { value: boolean };

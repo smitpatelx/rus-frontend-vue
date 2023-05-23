@@ -1,8 +1,6 @@
 <template>
-  <div class='grid grid-cols-1 flex-grow h-full'>
+  <div class='grid grid-cols-1 flex-grow h-full pr-2'>
     <div class='col-span-1 flex flex-nowrap flex-col'>
-      <!-- Filter container -->
-      <FilterContainer />
       <!-- Filtered user list -->
       <UserTable :open-dialog="openDialog"/>
       <!-- All dialogs -->
@@ -10,18 +8,29 @@
         :open="viewDialogState"
         @close="viewDialogState.value = false"
       />
+      <EditUserDialog
+        :open="editDialogState"
+        @close="editDialogState.value = false"
+      />
+      <ConfirmDeletion
+        :open="deleteDialogState"
+        @close="deleteDialogState.value = false"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang='ts'>
-import FilterContainer from './filters/FilterContainer.vue';
 import ViewUserDialog from './dialogs/ViewUserDialog.vue';
+import EditUserDialog from './dialogs/EditUserDialog.vue';
+import ConfirmDeletion from './dialogs/ConfirmDeletion.vue';
 import UserTable from './UserTable.vue';
 import type { DialogMode } from '@/interfaces/dialog';
 import { reactive } from 'vue';
 
 const viewDialogState = reactive({ value: false });
+const editDialogState = reactive({ value: false });
+const deleteDialogState = reactive({ value: false });
 
 const openDialog = (mode: DialogMode) => {
   switch (mode) {
@@ -32,10 +41,16 @@ const openDialog = (mode: DialogMode) => {
       viewDialogState.value = true;
       break;
     case 'edit':
-      console.log('Edit');
+      if (editDialogState.value) {
+        editDialogState.value = false;
+      }
+      editDialogState.value = true;
       break;
     case 'delete':
-      console.log('Delete');
+      if (deleteDialogState.value) {
+        deleteDialogState.value = false;
+      }
+      deleteDialogState.value = true;
       break;
     default:
       break;
