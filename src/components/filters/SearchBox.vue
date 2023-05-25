@@ -19,16 +19,51 @@
 
     <!-- Search input -->
     <input
+      ref='searchInputRef'
       type='text'
       class='w-full py-1.5 pl-10 pr-4 bg-slate-50 text-teal-700
         text-base focus:outline-none focus:ring-0
         placeholder-slate-400 border-0 focus:border-0 placeholder:select-none'
       placeholder='Search (Cmd + /)(Esc to clear)'
+      v-model='search'
+      @keyup.stop.esc="clearSearch"
     >
   </div>
 </template>
 
 <script setup lang='ts'>
+import { onMounted, ref } from 'vue';
 import RusIcon from '../generic/RusIcon.vue';
 import { mdiMagnify } from '@mdi/js';
+
+const search = ref('');
+const searchInputRef = ref<HTMLInputElement | null>(null);
+
+const clearSearch = () => {
+  search.value = '';
+  if (searchInputRef.value) {
+    searchInputRef.value?.focus();
+  }
+}
+
+onMounted(() => {
+  const handleKeys = (e: KeyboardEvent) => {
+    if (e.key === '/' && e.metaKey === true) {
+      e.preventDefault();
+      e.stopPropagation();
+      search.value = '';
+      if (searchInputRef.value) {
+        searchInputRef.value?.focus();
+      }
+    }
+  }
+
+  // Listen globally for Cmd + / to focus the search box
+  window.addEventListener('keydown', handleKeys, true);
+
+  // Unsubscribe from the global listener when the component is unmounted
+  return () => {
+    window.removeEventListener('keydown', handleKeys, true);
+  }
+})
 </script>

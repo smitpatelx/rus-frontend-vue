@@ -98,7 +98,7 @@ tr:nth-child(1) {
     button {
       @apply flex flex-nowrap items-center
         focus:outline-none focus-visible:ring-1 rounded-md
-        focus-visible:ring-teal-200 px-2;
+        focus-visible:ring-teal-200 px-2 leading-5;
     }
   }
 }

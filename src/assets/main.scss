@@ -88,7 +88,8 @@ body, body > * {
 
     .save-btn {
       @apply bg-teal-500 text-teal-100 shadow hover:bg-teal-500/75
-        shadow-teal-800/50 hover:text-teal-100;
+        shadow-teal-800/50 hover:text-teal-100 focus-visible:ring-offset-1
+        focus-visible:ring-offset-slate-100;
     }
   }
 

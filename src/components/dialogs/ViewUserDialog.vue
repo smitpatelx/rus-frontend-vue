@@ -10,7 +10,7 @@
       </button>
     </div>
     <div class='rus-modal-body' @click.stop>
-      <div class='w-full grid grid-cols-2 gap-y-5 gap-x-2'>
+      <div class='w-full grid grid-cols-2 gap-y-7 gap-x-2'>
         <div
           v-for='(item, key) in userDetails'
           :key='key'
