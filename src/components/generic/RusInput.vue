@@ -8,6 +8,7 @@
       },
     )"
     v-maska:[options]
+    :autocomplete='randomAlpha()'
   />
     <!-- :v-maska='mask !=="" ? vMaska : undefined' -->
   <div
@@ -22,15 +23,7 @@
 import { reactive, useAttrs } from 'vue';
 import classNames from 'classnames';
 import { vMaska } from 'maska';
-// import type { MaskaDetail } from 'maska';
-
-// const onMaska = (event: CustomEvent<MaskaDetail>) => {
-//   console.log({
-//     masked: event.detail.masked,
-//     unmasked: event.detail.unmasked,
-//     completed: event.detail.completed
-//   })
-// }
+import { randomAlpha } from '@/lib/helpers';
 
 const attrs = useAttrs();
 const props = defineProps({

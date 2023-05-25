@@ -23,6 +23,11 @@
         >
           {{ attrs.getLabel(attrs.value) || 'Please select one' }}
         </p>
+        <RusIcon
+          :class='{ up: isMenuOpen.value }'
+          class='rus-select-country-icon-down'
+          :icon='mdiChevronDown'
+        />
       </button>
     </div>
 
@@ -35,11 +40,11 @@
         :required='attrs.required'
         id='rus-country-auto-complete'
         name='rus-country-auto-complete'
-        autocomplete="ppowi-skdjs-jwsdl"
         autocorrect="off"
         autocapitalize="off"
         spellcheck="false"
         @keyup.esc.stop='closeMenu()'
+        :autocomplete='randomAlpha()'
       />
       <div
         v-for='(option, key) in filteredOptions'
@@ -63,6 +68,9 @@
 <script setup lang='ts'>
 import { ref, reactive, watch, useAttrs, computed } from 'vue';
 import classNames from 'classnames';
+import { mdiChevronDown } from '@mdi/js';
+import RusIcon from './RusIcon.vue';
+import { randomAlpha } from '@/lib/helpers';
 
 export type Options = {
   name: string,
@@ -80,7 +88,6 @@ const attrs = useAttrs() as {
   error: string | undefined,
   getLabel: (key: string) => string;
   getValue: (key: string) => string;
-  getImageName: (key: string) => string;
   // onBlur: () => Promise<void>;
   // onChange: (value: string) => void;
 };
@@ -90,8 +97,8 @@ const emits = defineEmits({
   blur: () => true,
 });
 
-const getImageSrc = reactive(() => {
-  const imageName = attrs.getImageName(attrs.value);
+const getImageSrc = ref(() => {
+  const imageName = attrs.value;
   if (!imageName) {
     return '/flags/default.svg';
   }
@@ -267,17 +274,17 @@ const handleContainerKeydown = (e: KeyboardEvent) => {
 
   & > div {
     @apply pl-4 pr-10 py-3 cursor-pointer hover:bg-teal-500 text-sm font-medium
-      text-teal-900 hover:text-teal-100 bg-teal-500/30 leading-none flex flex-nowrap items-center justify-start
-      transition-all duration-100 ease-out focus:outline-none focus-visible:bg-teal-500
+      text-teal-900 hover:text-teal-100 bg-teal-500/30 leading-none flex flex-nowrap 
+      items-center justify-start focus:outline-none focus-visible:bg-teal-500
       focus-visible:text-teal-100;
   }
 
   & > input {
     @apply w-full h-full bg-teal-600 border-0 outline-none
-      placeholder-teal-100/60 placeholder:font-light py-2 px-3
+      placeholder-teal-100/60 placeholder:font-light py-2.5 px-3
       focus:placeholder-transparent focus:ring-0 focus:border-0
       leading-none whitespace-nowrap overflow-hidden overflow-ellipsis
-      text-base font-medium text-teal-100;
+      text-base font-normal text-teal-100 sticky top-0 left-0;
   }
 }
 
@@ -293,15 +300,26 @@ const handleContainerKeydown = (e: KeyboardEvent) => {
     relative text-left;
   
   & > p {
-    @apply w-[calc(100%-0.25rem)] whitespace-nowrap overflow-hidden overflow-ellipsis select-none;
+    @apply w-[calc(100%-0.5rem)] whitespace-nowrap overflow-hidden overflow-ellipsis select-none;
   }
 
   & > span {
     @apply absolute top-1/2 left-0 -translate-y-1/2 w-12 h-full 
-      mr-2 flex items-center justify-center p-[2px] select-none;
+      mr-2 flex items-center justify-center p-[3px] select-none;
 
     & > img {
-      @apply object-cover h-full overflow-hidden rounded p-px aspect-[1.5] select-none;
+      @apply object-cover h-full overflow-hidden rounded
+        aspect-[1.5] select-none border border-teal-500
+        origin-center transition-all duration-300 ease-in-out;
+    }
+  }
+
+  & > .rus-select-country-icon-down {
+    @apply w-4 h-4 ml-2 absolute right-2 top-1/2 transform -translate-y-1/2
+      text-slate-500 transition-all duration-300 ease-out;
+    
+    &.up {
+      @apply transform rotate-180;
     }
   }
 }

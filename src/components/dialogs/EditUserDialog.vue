@@ -241,7 +241,6 @@ const getSelectCountryProps = (key: EditFormFieldName) => {
     disabled: false,
     required: false,
     getLabel: (key: string) => usableCountries[key]?.name || '',
-    getImageName: (key: string) => String(key || '').toLowerCase(),
     getValue: (key: string) => usableCountries[key]?.callingCodes[0] || '',
     error: (formMeta.value.dirty
       && touchedIndividually[key]
@@ -279,7 +278,7 @@ const getInputProps = (key: EditFormFieldName) => {
 }
 
 // Loading state
-const isLoading = ref(true);
+const isLoading = ref(false);
 
 // Dialog
 const dialogRef = ref<HTMLDialogElement | null>(null);
@@ -293,17 +292,14 @@ const closeDialog = () => {
 }
 
 // React on props.open
-watch([props.open], async () => {
+watch([props.open], () => {
   if (props.open.value) {
     openDialog();
     isLoading.value = true;
 
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        isLoading.value = false;
-        resolve(true);
-      }, 1000);
-    }); 
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
   } else {
     dialogRef.value?.close();
   }
