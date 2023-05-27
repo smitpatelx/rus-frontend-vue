@@ -16,17 +16,17 @@
           @click='toggleBetweenSortDirections(column)'
         >
           {{ column.label }}
-          <div v-if='column.sortActive'>
+          <span v-if='column.sortActive'>
             <RusIcon
               :icon='mdiMenuUp'
               :class-name="classNames(
-                'w-5 h-5 text-teal-100',
+                'w-5 h-5 inline-block text-teal-600',
                 {
                   'rotate-180': column.sortDirection === 'desc',
                 }
               )"
             />
-          </div>
+          </span>
         </button>
         <span v-else>
           {{ column.label }}
@@ -89,16 +89,16 @@ const toggleBetweenSortDirections = (col: TableHeaderItem) => {
 
 // Header
 tr:nth-child(1) {
-  @apply bg-teal-500 w-full py-0 border-b border-slate-300
+  @apply bg-teal-200/30 w-full py-0 border-b border-slate-300
     z-10 sticky top-0 left-0;
 
   th {
-    @apply text-lg font-medium text-teal-50 pr-3 py-2;
+    @apply text-lg font-medium text-teal-800 pr-2 pl-1 py-2;
 
     button {
-      @apply flex flex-nowrap items-center
+      @apply flex flex-nowrap items-center flex-row
         focus:outline-none focus-visible:ring-1 rounded-md
-        focus-visible:ring-teal-200 px-2 leading-5;
+        focus-visible:ring-teal-600 px-2 leading-5;
     }
   }
 }

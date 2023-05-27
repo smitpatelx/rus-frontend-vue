@@ -81,7 +81,7 @@
           size='md'
           className='!mr-0'
         />
-        <RusIcon v-else :icon='mdiFloppy' />
+        <RusIconF v-else icon='save' className='stroke-2' />
       </button>
     </div>
   </dialog>
@@ -99,6 +99,7 @@ import * as zod from 'zod';
 import { editFormFields, type EditFormFieldName } from '@/interfaces/user';
 import RusSelectCountry from '../generic/RusSelectCountry.vue';
 import { usableCountries } from '@/interfaces/countries';
+import RusIconF from '../generic/RusIconF.vue';
 
 // Zod form validation
 const formValidation = zod.object({
@@ -299,7 +300,7 @@ watch([props.open], () => {
 
     setTimeout(() => {
       isLoading.value = false;
-    }, 1000);
+    }, 500);
   } else {
     dialogRef.value?.close();
   }

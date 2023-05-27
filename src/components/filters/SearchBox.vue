@@ -10,10 +10,10 @@
       font-medium text-center text-slate-500
       group-focus-within:text-teal-500 rounded-l-md flex flex-wrap items-center
       justify-center'>
-      <RusIcon
-        :icon='mdiMagnify'
+      <RusIconF
+        icon='search'
         className='w-6 h-6 group-focus-within:animate-pulse transition-all
-          duration-200 ease-in-out origin-center'
+          duration-200 ease-in-out origin-center stroke-2'
       />
     </span>
 
@@ -33,8 +33,7 @@
 
 <script setup lang='ts'>
 import { onMounted, ref } from 'vue';
-import RusIcon from '../generic/RusIcon.vue';
-import { mdiMagnify } from '@mdi/js';
+import RusIconF from '../generic/RusIconF.vue';
 
 const search = ref('');
 const searchInputRef = ref<HTMLInputElement | null>(null);

@@ -44,6 +44,7 @@
             </span>
           </td>
           <td>Demo company name LTD.</td>
+          <td>{{ new Date().toLocaleDateString() }}</td>
           <!-- Actions -->
           <td>
             <div class='w-full flex flex-nowrap flex-row items-center justify-end
@@ -57,8 +58,9 @@
                   focus-visible:ring-offset-1 focus-visible:ring-teal-600
                   focus-visible:ring-offset-slate-100 active:scale-110'
               >
-                <RusIcon
-                  :icon='mdiLinkVariant'
+                <RusIconF
+                  icon='external-link'
+                  className='w-5 h-5 group-focus-within:animate-pulse origin-center stroke-2'
                 />
               </button>
 
@@ -121,6 +123,19 @@
         
         <div class='flex flex-row flex-nowrap gap-x-2'>
           <button
+            title='First page'
+            class='w-9 h-9 flex items-center justify-center rounded-full bg-transparent
+              hover:bg-teal-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
+              duration-300 ease-in-out transition-all focus:outline-none focus-visible:ring-1
+              focus-visible:ring-offset-1 focus-visible:ring-teal-600
+              focus-visible:ring-offset-slate-100 active:scale-110'
+          >
+            <RusIcon
+              :icon='mdiChevronDoubleLeft'
+            />
+          </button>
+
+          <button
             title='Previous page'
             class='w-9 h-9 flex items-center justify-center rounded-full bg-transparent
               hover:bg-teal-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
@@ -134,17 +149,15 @@
           </button>
 
           <button
-            v-for='(item, i) in Array(5)'
-            :key='i'
-            :title='`Page: ${i + 1}`'
-            class='w-9 h-9 flex items-center justify-center rounded-full bg-transparent
-              hover:bg-teal-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
-              duration-300 ease-in-out transition-all focus:outline-none focus-visible:ring-1
-              focus-visible:ring-offset-1 focus-visible:ring-teal-600
+            :title='`Current Page: 1`'
+            disabled
+            class='w-9 h-9 flex items-center justify-center rounded-full bg-slate-500/20
+              text-slate-500 duration-300 ease-in-out transition-all focus:outline-none
+              focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-teal-600
               focus-visible:ring-offset-slate-100 active:scale-110
               text-base font-medium'
           >
-            {{ i + 1 }}
+            1
           </button>
           
           <button
@@ -159,6 +172,19 @@
               :icon='mdiChevronRight'
             />
           </button>
+
+          <button
+            title='Last page'
+            class='w-9 h-9 flex items-center justify-center rounded-full bg-transparent
+              hover:bg-teal-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
+              duration-300 ease-in-out transition-all focus:outline-none focus-visible:ring-1
+              focus-visible:ring-offset-1 focus-visible:ring-teal-600
+              focus-visible:ring-offset-slate-100 active:scale-110'
+          >
+            <RusIcon
+              :icon='mdiChevronDoubleRight'
+            />
+          </button>
         </div>
 
         <!-- Page size -->
@@ -169,12 +195,12 @@
           <select
             value='10'
             name='page-size'
-            class='rounded-md bg-slate-200 text-slate-500
-              hover:bg-slate-400 hover:text-teal-100 active:bg-opacity-30
-              duration-300 ease-in-out transition-all focus:outline-none
-              focus:ring-1 focus:ring-offset-1 focus:ring-teal-600
-              focus:ring-offset-slate-100 flex flex-wrap items-center justify-center
-              leading-none form-select fill-current stroke-current'
+            class='rounded-md text-teal-800 select-none
+              bg-teal-200/20 hover:bg-teal-300/40 hover:text-teal-800 group
+              focus:outline-none ring-1 ring-teal-400 focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-teal-600
+              focus-visible:ring-offset-slate-100 focus:border-0 transition-all duration-300 ease-in-out
+              rounded-l-md flex flex-wrap items-center justify-center
+              leading-none border-0'
             placeholder='Page size'
           >
             <option>10</option>
@@ -200,8 +226,12 @@ import {
   mdiChevronRight,
   mdiChevronLeft,
   mdiEye,
+mdiChevronDoubleRight,
+mdiChevronDoubleLeft,
 } from '@mdi/js';
 import type { DialogMode } from '@/interfaces/dialog';
+import { USER_TABLE_HEADER } from '@/lib/data/user-table';
+import RusIconF from './generic/RusIconF.vue';
 
 defineProps<{
   openDialog: (mode: DialogMode) => void;
@@ -210,48 +240,7 @@ defineProps<{
 const totalRows = 20;
 const rowFill = Array(totalRows).fill(null);
 const rowHeaders: TableHeaderItems = [
-  {
-    label: 'Username',
-    align: 'left',
-    sortable: true,
-    sortActive: false,
-  },
-  {
-    label: 'First name',
-    align: 'left',
-    sortable: true,
-    sortActive: true,
-  },
-  {
-    label: 'Last name',
-    align: 'left',
-    sortable: true,
-    sortActive: false,
-  },
-  {
-    label: 'Phone',
-    align: 'left',
-    sortable: true,
-    sortActive: false,
-  },
-  {
-    label: 'Email',
-    align: 'left',
-    sortable: true,
-    sortActive: false,
-  },
-  {
-    label: 'Company Name',
-    align: 'left',
-    sortable: true,
-    sortActive: false,
-  },
-  {
-    label: 'Actions',
-    align: 'right',
-    sortable: false,
-    sortActive: false,
-  },
+  ...USER_TABLE_HEADER,
 ];
 
 const hToggleSortDirection = (sortD: TableSortDirection) => {
