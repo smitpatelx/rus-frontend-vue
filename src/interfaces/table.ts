@@ -7,6 +7,7 @@ export interface TableHeaderItem {
   align: TableAlign;
   sortable: boolean;
   sortActive: boolean;
+  canHide: boolean;
   sortDirection?: 'asc' | 'desc';
 }
 

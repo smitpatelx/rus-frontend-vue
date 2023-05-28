@@ -7,11 +7,12 @@
     </div>
 
     <!-- Select Menu -->
-    <div v-if='isMenuOpen.value' class='rus-select-menu'>
+    <div v-if='isMenuOpen.value' :class='`rus-select-menu`' :data-uid='randomId'>
       <div
         v-for='(option, oi) in options'
         :key='option.value'
         @click='selectOption(option.value)'
+        :data-uid='randomId'
         @keyup='handleContainerKeydown'
         @keyup.enter='selectOption(option.value)'
         @keyup.space='selectOption(option.value)'
@@ -31,16 +32,28 @@
           class='form-checkbox rounded mr-2 bg-teal-100 text-teal-700 cursor-pointer
             group-hover:text-teal-300'
           tabindex='-1'
+          :data-uid='randomId'
         >
         <label
           v-if='multiple'
           @click.stop
           :for='`rus-select-option-c-${oi}`'
           class='cursor-pointer'
+          :data-uid='randomId'
         >
           {{ option.name }}
         </label>
-        <span v-if='!multiple'>{{ option.name }}</span>
+        <span v-if='!multiple' :data-uid='randomId'>
+          <p :data-uid='randomId'>{{ option.name }}</p>
+          <RusIconF
+            v-if='isValueSelected(option.value)'
+            icon='check'
+            :data-uid='randomId'
+            class='w-4 h-4 text-current stroke-2
+              absolute right-0 top-1/2 -translate-x-0.5
+              -translate-y-1/2'
+          />
+        </span>
       </div>
     </div>
   </div>
@@ -48,6 +61,10 @@
 
 <script setup lang='ts'>
 import { ref, reactive, watch } from 'vue';
+import RusIconF from './RusIconF.vue';
+import { randomAlpha } from '@/lib/helpers';
+
+const randomId = ref(randomAlpha());
 
 export type Options = {
   name: string,
@@ -112,9 +129,10 @@ const handleClickOutside = (e: MouseEvent) => {
     return;
   };
   const wrapper = selectRef.value?.getBoundingClientRect()
-  const id = (e.target as unknown as { id: string })?.id;
+  const id = (e.target as unknown as { dataset: { uid: string } })?.dataset?.uid;
+  console.log(id, randomId.value);
   if (
-    !id.startsWith('rus-select') &&
+    id !== randomId.value &&
     (e.clientX < wrapper.left ||
     e.clientX > wrapper.right ||
     e.clientY < wrapper.top ||
@@ -258,9 +276,9 @@ const handleContainerKeydown = (e: KeyboardEvent) => {
 
 <style scoped lang='scss'>
 .rus-select-menu {
-  @apply absolute top-full mt-1 right-0 z-50 w-52 bg-white rounded-md shadow-lg
-    overflow-hidden transition-all duration-300 ease-in-out shadow-teal-700/20
-    ring-1 ring-teal-200 ring-offset-1 ring-offset-slate-50 border-0;
+  @apply absolute top-full mt-1 right-0 z-50 w-52 bg-teal-50 rounded-md shadow-lg
+    overflow-hidden transition-all duration-300 ease-in-out shadow-teal-900/20
+    border border-teal-500;
   
   & input[type='checkbox'] {
     @apply focus-visible:ring-0 focus-visible:border-0
@@ -272,14 +290,18 @@ const handleContainerKeydown = (e: KeyboardEvent) => {
   }
 
   & > div {
-    @apply pl-4 pr-10 py-2.5 cursor-pointer hover:bg-teal-500 text-base font-medium
-      text-teal-900 hover:text-teal-100 bg-teal-500/30 leading-none flex flex-nowrap items-center justify-start
+    @apply px-4 py-2.5 cursor-pointer hover:bg-teal-500 text-base font-medium
+      text-teal-900 hover:text-teal-100 bg-teal-300/10 leading-none flex flex-nowrap items-center justify-start
       transition-all duration-100 ease-out focus:outline-none focus-visible:bg-teal-500
       focus-visible:text-teal-100;
 
     & {
       label, span {
-        @apply pointer-events-none select-none;
+        @apply pointer-events-none select-none relative;
+      }
+
+      span {
+        @apply w-full flex flex-row flex-nowrap items-center justify-start;
       }
     }
   }

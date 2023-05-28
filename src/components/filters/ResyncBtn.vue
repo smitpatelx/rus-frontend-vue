@@ -35,7 +35,7 @@ const handleButtonClick = () => {
 <style scoped lang='scss'>
 .rotate-360 {
   & > svg {
-    animation: rotate 1s ease-out 1;
+    animation: rotate 0.7s ease-out 1;
     transform-origin: center;
 
     @keyframes rotate {

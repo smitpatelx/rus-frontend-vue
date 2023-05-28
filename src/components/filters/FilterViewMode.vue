@@ -43,7 +43,7 @@ import { mdiClose } from '@mdi/js';
 import { computed, reactive } from 'vue';
 
 const options: Options = USER_TABLE_HEADER.filter((header) => {
-  return header.sortable;
+  return header.canHide;
 }).map((header) => {
   return {
     name: header.label,
@@ -51,7 +51,7 @@ const options: Options = USER_TABLE_HEADER.filter((header) => {
   };
 });
 
-const value = reactive({ value: '' as string | Options });
+const value = reactive({ value: options });
 
 const selectedOption = computed(() => {
   if (typeof value.value === 'string') {
