@@ -63,13 +63,9 @@
 import { ref, reactive, watch } from 'vue';
 import RusIconF from './RusIconF.vue';
 import { randomAlpha } from '@/lib/helpers';
+import type { Options } from '@/interfaces/table';
 
 const randomId = ref(randomAlpha());
-
-export type Options = {
-  name: string,
-  value: string,
-}[];
 
 const props = defineProps<{
   value: string | Options,

@@ -1,6 +1,6 @@
 <template>
   <RusSelect
-    :options='options'
+    :options='optionsForView'
     :disabled='false'
     :required='false'
     :error='false'
@@ -14,7 +14,7 @@
   >
     <div class='flex flex-row flex-nowrap'>
       <ViewModeBtn
-        :options='options'
+        :options='optionsForView'
         :selectedOptions='selectedOption || undefined'
       />
       <button
@@ -37,35 +37,29 @@
 import ViewModeBtn from '@/components/filters/ViewModeBtn.vue';
 import RusIcon from '@/components/generic/RusIcon.vue';
 import RusSelect from '@/components/generic/RusSelect.vue';
-import type { Options } from '@/components/generic/RusSelect.vue';
-import { USER_TABLE_HEADER } from '@/lib/data/user-table';
+import type { Options } from '@/interfaces/table';
+import { optionsForView as allOptions } from '@/lib/data/user-table';
 import { mdiClose } from '@mdi/js';
 import { computed, reactive } from 'vue';
 
-const options: Options = USER_TABLE_HEADER.filter((header) => {
-  return header.canHide;
-}).map((header) => {
-  return {
-    name: header.label,
-    value: header.label,
-  };
-});
+const optionsForView = allOptions;
 
-const value = reactive({ value: options });
+const value = reactive({ value: optionsForView });
 
 const selectedOption = computed(() => {
   if (typeof value.value === 'string') {
     return null;
   }
   const selectedArray = value.value.map((value) => value.value);
-  return options.filter((option) => selectedArray.includes(option.value)) || null;
+  return optionsForView.filter((option) => selectedArray.includes(option.value)) || null;
 });
 
 const handleValueChange = (val: string | Options) => {
+  if (typeof val === 'string') return;
   value.value = val;
 }
 
 const handleClear = () => {
-  value.value = '';
+  value.value = optionsForView;
 }
 </script>

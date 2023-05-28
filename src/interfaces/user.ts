@@ -1,47 +1,60 @@
 import { usableCountries } from "./countries";
 
-export type InputTypes = 'text' | 'select';
+export enum InputTypeEnums {
+  Text = 'text',
+  Select = 'select',
+};
+
 export type FormField = {
   label: string;
-  inputType: InputTypes;
+  inputType: InputTypeEnums;
   options?: Record<string, unknown>;
   getLabel?: (key: string) => string;
   getValue?: (key: string) => string;
 };
 
-export const editFormFields = {
-  country: {
+export enum EditFormKeys {
+  Country = 'country',
+  Phone = 'phone',
+  FirstName = 'firstName',
+  LastName = 'lastName',
+  Username = 'username',
+  Email = 'email',
+  Company = 'company',
+};
+
+export const editFormFields: Record<EditFormKeys, FormField> = {
+  [EditFormKeys.Country]: {
     label: 'Country',
-    inputType: 'select',
+    inputType: InputTypeEnums.Select,
     options: usableCountries,
     getLabel: (code: string) => usableCountries[code]?.name,
     getValue: (code: string) => code,
   },
-  phone: {
+  [EditFormKeys.Phone]: {
     label: 'Phone',
-    inputType: 'text',
+    inputType: InputTypeEnums.Text,
   },
-  firstName: {
+  [EditFormKeys.FirstName]: {
     label: 'First name',
-    inputType: 'text',
+    inputType: InputTypeEnums.Text,
   },
-  lastName: {
+  [EditFormKeys.LastName]: {
     label: 'Last name',
-    inputType: 'text',
+    inputType: InputTypeEnums.Text,
   },
-  username: {
+  [EditFormKeys.Username]: {
     label: 'Username',
-    inputType: 'text',
+    inputType: InputTypeEnums.Text,
   },
-  email: {
+  [EditFormKeys.Email]: {
     label: 'Email',
-    inputType: 'text',
+    inputType: InputTypeEnums.Text,
   },
-  company: {
+  [EditFormKeys.Company]: {
     label: 'Company',
-    inputType: 'text',
+    inputType: InputTypeEnums.Text,
   },
-} as const;
+};
 
-export type EditFormFieldName = keyof typeof editFormFields;
-export type EditFormField = Record<EditFormFieldName, string>;
+export type EditFormField = Record<EditFormKeys, string>;

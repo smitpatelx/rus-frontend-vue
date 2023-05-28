@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang='ts'>
-import type { TableHeaderItem, TableSortDirection } from '@/interfaces/table';
+import { TableSortDirection, type TableHeaderItem } from '@/interfaces/table';
 import RusIcon from '@/components/generic/RusIcon.vue';
 import { mdiMenuUp } from '@mdi/js';
 import classNames from 'classnames';
@@ -55,14 +55,14 @@ const toggleBetweenSortDirections = (col: TableHeaderItem) => {
   if (!col.sortable) return;
 
   if (col.sortDirection === undefined) {
-    emit('toggleSortDirection', 'asc');
+    emit('toggleSortDirection', TableSortDirection.Asc);
     return;
   }
-  if (col.sortDirection === 'asc') {
-    emit('toggleSortDirection', 'desc');
+  if (col.sortDirection === TableSortDirection.Asc) {
+    emit('toggleSortDirection', TableSortDirection.Desc);
     return;
   }
-  if (col.sortDirection === 'desc') {
+  if (col.sortDirection === TableSortDirection.Desc) {
     emit('isSortActive', false);
   }
 }

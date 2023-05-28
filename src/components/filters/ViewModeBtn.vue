@@ -29,10 +29,10 @@
 
 <script setup lang='ts'>
 import RusIcon from '@/components/generic/RusIcon.vue';
+import type { Options } from '@/interfaces/table';
 import { mdiTableHeadersEye } from '@mdi/js';
-import type { Options } from '../generic/RusSelect.vue';
 
-const props = defineProps<{
+defineProps<{
   options: Options;
   selectedOptions?: Options;
 }>();

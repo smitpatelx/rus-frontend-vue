@@ -54,7 +54,7 @@
 <script setup lang='ts'>
 import RusIcon from '@/components/generic/RusIcon.vue';
 import RusSelect from '@/components/generic/RusSelect.vue';
-import type { Options } from '@/components/generic/RusSelect.vue';
+import type { Options } from '@/interfaces/table';
 import { mdiClose, mdiFilter } from '@mdi/js';
 import { computed, reactive } from 'vue';
 
@@ -72,7 +72,8 @@ const selectedOption = computed(() => {
   return options.find((option) => option.value === value.value) || null;
 });
 
-const handleValueChange = (val: string) => {
+const handleValueChange = (val: string | Options) => {
+  if (typeof val !== 'string') return;
   value.value = val;
 }
 

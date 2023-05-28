@@ -96,7 +96,7 @@ import RusInput from '@/components/generic/RusInput.vue';
 import RusSpinner from '@/components/generic/RusSpinner.vue';
 import { toTypedSchema } from '@vee-validate/zod';
 import * as zod from 'zod';
-import { editFormFields, type EditFormFieldName } from '@/interfaces/user';
+import { editFormFields, EditFormKeys } from '@/interfaces/user';
 import RusSelectCountry from '../generic/RusSelectCountry.vue';
 import { usableCountries } from '@/interfaces/countries';
 import RusIconF from '../generic/RusIconF.vue';
@@ -223,7 +223,7 @@ const htmlInputTypes = {
   country: 'text',
 }
 
-const getSelectCountryProps = (key: EditFormFieldName) => {
+const getSelectCountryProps = (key: EditFormKeys) => {
   const selectCountryProps = {
     id: `rus-acc-d-${key}`,
     value: formValues?.[key] || '',
@@ -252,7 +252,7 @@ const getSelectCountryProps = (key: EditFormFieldName) => {
   return selectCountryProps;
 }
 
-const getInputProps = (key: EditFormFieldName) => {
+const getInputProps = (key: EditFormKeys) => {
   const inputProps = {
     id: `rus-acc-d-${key}`,
     value: formValues?.[key],
