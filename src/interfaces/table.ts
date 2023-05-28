@@ -10,4 +10,4 @@ export interface TableHeaderItem {
   sortDirection?: 'asc' | 'desc';
 }
 
-export type TableHeaderItems = TableHeaderItem[];s
+export type TableHeaderItems = TableHeaderItem[];

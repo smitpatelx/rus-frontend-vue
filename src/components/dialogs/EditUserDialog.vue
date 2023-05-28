@@ -91,7 +91,7 @@
 import { onMounted, reactive, ref, watch } from 'vue';
 import { useForm } from 'vee-validate';
 import RusIcon from '@/components/generic/RusIcon.vue';
-import { mdiClose, mdiFloppy, mdiPencil, mdiRestore } from '@mdi/js';
+import { mdiClose, mdiPencil, mdiRestore } from '@mdi/js';
 import RusInput from '@/components/generic/RusInput.vue';
 import RusSpinner from '@/components/generic/RusSpinner.vue';
 import { toTypedSchema } from '@vee-validate/zod';

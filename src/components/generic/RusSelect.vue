@@ -20,7 +20,27 @@
         :id='`rus-select-option-${oi}`'
         v-bind="options.length - 1 === oi ? { ref: 'lastOptionRef' } : {}"
       >
-        <span>{{ option.name }}</span>
+        <input
+          v-if='multiple'
+          :checked='isValueSelected(option.value)'
+          @click.stop
+          @change='selectOption(option.value)'
+          @keyup.space='selectOption(option.value)'
+          :id='`rus-select-option-c-${oi}`'
+          type='checkbox'
+          class='form-checkbox rounded mr-2 bg-teal-100 text-teal-700 cursor-pointer
+            group-hover:text-teal-300'
+          tabindex='-1'
+        >
+        <label
+          v-if='multiple'
+          @click.stop
+          :for='`rus-select-option-c-${oi}`'
+          class='cursor-pointer'
+        >
+          {{ option.name }}
+        </label>
+        <span v-if='!multiple'>{{ option.name }}</span>
       </div>
     </div>
   </div>
@@ -35,7 +55,7 @@ export type Options = {
 }[];
 
 const props = defineProps<{
-  value: string,
+  value: string | Options,
   options: Options,
   label: string,
   placeholder: string,
@@ -43,10 +63,11 @@ const props = defineProps<{
   required: boolean,
   error: boolean,
   errorMessage: string,
+  multiple?: boolean,
 }>();
 
 const emit = defineEmits({
-  'updateValue': (val: string) => !!val,
+  'updateValue': (val: string | Options) => true,
 });
 
 const selectRef = ref<HTMLElement | null>(null);
@@ -84,6 +105,36 @@ watch([lastOptionRef], () => {
   });
 });
 
+// Handle click outside
+const handleClickOutside = (e: MouseEvent) => {
+  if (!selectRef.value) {
+    closeMenu();
+    return;
+  };
+  const wrapper = selectRef.value?.getBoundingClientRect()
+  const id = (e.target as unknown as { id: string })?.id;
+  if (
+    !id.startsWith('rus-select') &&
+    (e.clientX < wrapper.left ||
+    e.clientX > wrapper.right ||
+    e.clientY < wrapper.top ||
+    e.clientY > wrapper.bottom)
+  ) {
+    closeMenu();
+  }
+}
+
+watch([isMenuOpen], () => {
+  if (isMenuOpen.value) {
+    document.addEventListener('click', handleClickOutside);
+  } else {
+    document.removeEventListener('click', handleClickOutside);
+  }
+  () => {
+    document.removeEventListener('click', handleClickOutside);
+  }
+});
+
 // Handle other events
 watch([selectRef], () => {
   const selectWrapper = selectRef.value;
@@ -92,15 +143,44 @@ watch([selectRef], () => {
     return;
   }
 
-  selectWrapper?.addEventListener('click', (e) => {
+  const handleClick = (e: MouseEvent) => {
     modifyEvent(e);
     isMenuOpen.value = !isMenuOpen.value;
-  });
+  };
+
+  selectWrapper?.addEventListener('click', handleClick);
+
+  return () => {
+    selectWrapper?.removeEventListener('click', handleClick);
+  };
 });
 
+const isValueSelected = (value: string) => {
+  if (props.multiple) {
+    return Array.isArray(props.value) && props.value.some((val) => val.value === value);
+  } else {
+    return props.value === value;
+  }
+}
+
 const selectOption = (value: string) => {
-  emit('updateValue', value);
-  closeMenu();
+  if (props.multiple) {
+    const newValue = props.options.find((opt) => opt.value === value);
+    const alreadySelected = isValueSelected(value);
+    if (newValue && !alreadySelected) {
+      // Add to array
+      emit('updateValue', [
+        ...(Array.isArray(props.value) ? props.value : []),
+        newValue,
+      ]);
+    } else {
+      // Remove from array
+      emit('updateValue', (props.value as Options).filter((val) => val.value !== value));
+    }
+  } else {
+    emit('updateValue', value);
+    closeMenu();
+  }
 }
 
 const preventDefaultKeyA = () => {
@@ -178,15 +258,30 @@ const handleContainerKeydown = (e: KeyboardEvent) => {
 
 <style scoped lang='scss'>
 .rus-select-menu {
-  @apply absolute top-full mt-1 left-0 z-50 w-auto bg-white rounded-md shadow-lg
+  @apply absolute top-full mt-1 right-0 z-50 w-52 bg-white rounded-md shadow-lg
     overflow-hidden transition-all duration-300 ease-in-out shadow-teal-700/20
     ring-1 ring-teal-200 ring-offset-1 ring-offset-slate-50 border-0;
+  
+  & input[type='checkbox'] {
+    @apply focus-visible:ring-0 focus-visible:border-0
+      focus:ring-0 focus:border-0
+      focus:outline-none focus-visible:outline-none
+      focus-visible:ring-offset-0 focus-visible:ring-offset-transparent
+      focus:ring-offset-0 focus:ring-offset-transparent
+      pointer-events-none;
+  }
 
   & > div {
-    @apply pl-4 pr-10 py-3 cursor-pointer hover:bg-teal-500 text-base font-medium
+    @apply pl-4 pr-10 py-2.5 cursor-pointer hover:bg-teal-500 text-base font-medium
       text-teal-900 hover:text-teal-100 bg-teal-500/30 leading-none flex flex-nowrap items-center justify-start
       transition-all duration-100 ease-out focus:outline-none focus-visible:bg-teal-500
       focus-visible:text-teal-100;
+
+    & {
+      label, span {
+        @apply pointer-events-none select-none;
+      }
+    }
   }
 }
 </style>

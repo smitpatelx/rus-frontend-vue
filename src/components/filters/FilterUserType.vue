@@ -30,7 +30,7 @@
         </span>
         <span
           v-if='!!selectedOption?.name'
-          class='font-normal border-l border-l-teal-500 group-hover:border-l-teal-400 pl-3 ml-1.5 py-1.5'
+          class='font-normal border-l border-l-teal-500 group-hover:border-l-teal-400 pl-3 ml-1.5'
         >
           {{ selectedOption?.name }}
         </span>

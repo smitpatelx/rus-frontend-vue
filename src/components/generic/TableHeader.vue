@@ -100,6 +100,10 @@ tr:nth-child(1) {
         focus:outline-none focus-visible:ring-1 rounded-md
         focus-visible:ring-teal-600 px-2 leading-5;
     }
+
+    &:nth-last-child(1) {
+      @apply pl-3 pr-8;
+    }
   }
 }
 </style>

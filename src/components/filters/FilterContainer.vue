@@ -5,10 +5,11 @@
   >
     <SearchBox />
     
-    <div class='flex flex-row flex-wrap items-center justify-end gap-1.5 md:gap-y-0 md:gap-x-2 xl:gap-x-4'>
+    <div class='flex flex-row flex-wrap items-center justify-end
+      gap-1.5 md:gap-y-2 md:gap-x-2 xl:gap-x-4'>
       <ResyncBtn />
       <FilterUserType />
-      <ViewModeBtn />
+      <FilterViewMode />
     </div>
   </div>
 </template>
@@ -17,5 +18,5 @@
 import SearchBox from '@/components/filters/SearchBox.vue';
 import FilterUserType from '@/components/filters/FilterUserType.vue';
 import ResyncBtn from '@/components/filters/ResyncBtn.vue';
-import ViewModeBtn from '@/components/filters/ViewModeBtn.vue';
+import FilterViewMode from './FilterViewMode.vue';
 </script>
