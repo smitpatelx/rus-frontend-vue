@@ -258,13 +258,14 @@ const hToggleSortDirection = (sortD: TableSortDirection) => {
 
 <style scoped lang='scss'>
 .rus-table-wrap {
-  @apply w-full flex-initial overflow-x-auto overflow-y-hidden relative
-    rounded-t-md border border-b-0 border-teal-500 flex flex-col;
+  @apply w-full flex-initial overflow-x-auto overflow-y-auto relative
+    rounded-t-md border border-b-0 border-teal-500 flex flex-col
+    h-full max-h-[calc(100vh-14rem)];
 }
 
 .rus-table {
-  @apply w-full flex-1 leading-none rounded-t-md
-    overflow-y-hidden overflow-x-hidden relative table table-auto;
+  @apply w-full flex-1 leading-none rounded-t-md h-auto
+    overflow-y-auto overflow-x-auto relative table table-auto;
 
   & > tbody {
     @apply w-full overflow-y-auto overflow-x-hidden;
