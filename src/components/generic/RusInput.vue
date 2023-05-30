@@ -46,8 +46,8 @@ const options = reactive({
     ring-1 ring-teal-500/30 focus:ring-1 focus:ring-teal-500
     focus:ring-offset-1 focus:ring-offset-teal-100
     focus:outline-none focus:border-0 border-0
-    placeholder-teal-500/60 placeholder:font-light
-    transition duration-200 ease-in-out;
+    placeholder-teal-500/60 placeholder:font-normal
+    transition duration-200 ease-in-out tracking-wide;
   
   &.rus-input-error {
     @apply ring-red-500/30 focus:ring-red-500;
