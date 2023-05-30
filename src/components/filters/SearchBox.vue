@@ -24,16 +24,26 @@
       class='w-full py-1.5 pl-10 pr-4 bg-slate-50 text-teal-700
         text-base focus:outline-none focus:ring-0
         placeholder-slate-400 border-0 focus:border-0 placeholder:select-none'
-      placeholder='Search (Cmd + /)(Esc to clear)'
+      placeholder='Search Accounts'
       v-model='search'
       @keyup.stop.esc="clearSearch"
     >
+
+    <!-- Shortcut Icons -->
+    <span
+      v-if='search?.length === 0'
+      class='absolute right-0 top-1/2 transform -translate-x-1 -translate-y-1/2
+        bg-transparent p-0 m-0'
+    >
+      <Shortcuts />
+    </span>
   </div>
 </template>
 
 <script setup lang='ts'>
 import { onMounted, ref } from 'vue';
 import RusIconF from '../generic/RusIconF.vue';
+import Shortcuts from '../generic/Shortcuts.vue';
 
 const search = ref('');
 const searchInputRef = ref<HTMLInputElement | null>(null);

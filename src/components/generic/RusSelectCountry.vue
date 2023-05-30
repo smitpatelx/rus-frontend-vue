@@ -221,7 +221,7 @@ const handleUpArrow = (e: Event) => {
 
     type FocusableElement = { focus: (e?: FocusEvent) => void };
     const { previousElementSibling } = currentFocused;
-    if (previousElementSibling) {
+    if (previousElementSibling && previousElementSibling.id.startsWith('rus-select-option-')) {
       (previousElementSibling as unknown as FocusableElement).focus();
       preventDefaultKeyR();
       return;
@@ -279,12 +279,12 @@ const handleContainerKeydown = (e: KeyboardEvent) => {
       focus-visible:text-teal-100;
   }
 
-  & > input {
+  #rus-country-auto-complete {
     @apply w-full h-full bg-teal-600 border-0 outline-none
-      placeholder-teal-100/60 placeholder:font-light py-2.5 px-3
+      placeholder-teal-100/60 placeholder:font-normal py-2.5 px-3
       focus:placeholder-transparent focus:ring-0 focus:border-0
       leading-none whitespace-nowrap overflow-hidden overflow-ellipsis
-      text-base font-normal text-teal-100 sticky top-0 left-0;
+      text-base font-normal text-teal-100 sticky top-0 left-0 tracking-wide;
   }
 }
 

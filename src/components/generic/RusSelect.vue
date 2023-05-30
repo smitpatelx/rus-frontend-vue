@@ -286,7 +286,7 @@ const handleContainerKeydown = (e: KeyboardEvent) => {
   }
 
   & > div {
-    @apply px-4 py-2.5 cursor-pointer hover:bg-teal-500 text-base font-medium
+    @apply px-4 py-3 cursor-pointer hover:bg-teal-500 text-base font-medium
       text-teal-900 hover:text-teal-100 bg-teal-300/10 leading-none flex flex-nowrap items-center justify-start
       transition-all duration-100 ease-out focus:outline-none focus-visible:bg-teal-500
       focus-visible:text-teal-100;

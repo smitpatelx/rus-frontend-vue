@@ -112,9 +112,17 @@ const formValidation = zod.object({
     .email('Please enter a valid email address.'),
   firstName: zod.string().trim()
     .nonempty('First name is required.')
+    .regex(new RegExp(
+      /^[a-zA-Z]+$/,
+      'g'
+    ), 'First name must be letters only.')
     .max(40, 'First name must be less than 40 characters.'),
   lastName: zod.string().trim()
     .nonempty('Last name is required.')
+    .regex(new RegExp(
+      /^[a-zA-Z]+$/,
+      'g'
+    ), 'Last name must be letters only.')
     .max(40, 'Last name must be less than 40 characters.'),
   phone: zod.string().trim()
     .nonempty('Phone number is required.')
@@ -300,7 +308,7 @@ watch([props.open], () => {
 
     setTimeout(() => {
       isLoading.value = false;
-    }, 500);
+    }, 1500);
   } else {
     dialogRef.value?.close();
   }
