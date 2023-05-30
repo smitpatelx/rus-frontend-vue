@@ -7,7 +7,11 @@
       @keyup.stop='handleContainerKeydown'
       @keyup.esc.stop='closeMenu()'
     >
-      <button class='rus-select-country group-[rus-c]'>
+      <button
+        class='rus-select-country group-[rus-c]'
+        @keyup.enter.stop
+        @keyup.space.stop
+      >
         <span>
           <img
             :src='getImageSrc()'
