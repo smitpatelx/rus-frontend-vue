@@ -32,36 +32,38 @@
     </div>
 
     <!-- Select Menu -->
-    <div v-if='isMenuOpen.value && Object.keys(filteredOptions).length > 0' class='rus-select-menu'>
-      <input
-        v-model='autoCompleteInput'
-        placeholder='Search for a country'
-        :disabled='attrs.disabled'
-        :required='attrs.required'
-        id='rus-country-auto-complete'
-        name='rus-country-auto-complete'
-        autocorrect="off"
-        autocapitalize="off"
-        spellcheck="false"
-        @keyup.esc.stop='closeMenu()'
-        :autocomplete='randomAlpha()'
-      />
-      <div
-        v-for='(option, key) in filteredOptions'
-        :key='key'
-        @click='selectOption(key)'
-        @keyup.stop='handleContainerKeydown'
-        @keyup.enter.stop='selectOption(key)'
-        @keyup.space.stop='selectOption(key)'
-        @keyup.esc.stop.prevent='closeMenu()'
-        tabindex='0'
-        :id='`rus-select-option-${key}`'
-        v-bind='key === lastOptionKey ? { ref: "lastOptionRef" } : {}'
-      >
-        <span v-if='attrs.getLabel(key)'>{{ attrs.getLabel(key) }}</span>
-        <span v-else>No results found.</span>
+    <Transition name='swing-in-top-fwd'>
+      <div v-if='isMenuOpen.value && Object.keys(filteredOptions).length > 0' class='rus-select-menu'>
+        <input
+          v-model='autoCompleteInput'
+          placeholder='Search for a country'
+          :disabled='attrs.disabled'
+          :required='attrs.required'
+          id='rus-country-auto-complete'
+          name='rus-country-auto-complete'
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+          @keyup.esc.stop='closeMenu()'
+          :autocomplete='randomAlpha()'
+        />
+        <div
+          v-for='(option, key) in filteredOptions'
+          :key='key'
+          @click='selectOption(key)'
+          @keyup.stop='handleContainerKeydown'
+          @keyup.enter.stop='selectOption(key)'
+          @keyup.space.stop='selectOption(key)'
+          @keyup.esc.stop.prevent='closeMenu()'
+          tabindex='0'
+          :id='`rus-select-option-${key}`'
+          v-bind='key === lastOptionKey ? { ref: "lastOptionRef" } : {}'
+        >
+          <span v-if='attrs.getLabel(key)'>{{ attrs.getLabel(key) }}</span>
+          <span v-else>No results found.</span>
+        </div>
       </div>
-    </div>
+    </Transition>
   </div>
 </template>
 

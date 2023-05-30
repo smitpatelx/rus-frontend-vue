@@ -7,55 +7,57 @@
     </div>
 
     <!-- Select Menu -->
-    <div v-if='isMenuOpen.value' :class='`rus-select-menu`' :data-uid='randomId'>
-      <div
-        v-for='(option, oi) in options'
-        :key='option.value'
-        @click='selectOption(option.value)'
-        :data-uid='randomId'
-        @keyup='handleContainerKeydown'
-        @keyup.enter='selectOption(option.value)'
-        @keyup.space='selectOption(option.value)'
-        @keyup.esc='closeMenu()'
-        tabindex='0'
-        :id='`rus-select-option-${oi}`'
-        v-bind="options.length - 1 === oi ? { ref: 'lastOptionRef' } : {}"
-      >
-        <input
-          v-if='multiple'
-          :checked='isValueSelected(option.value)'
-          @click.stop
-          @change='selectOption(option.value)'
+    <Transition name='swing-in-top-fwd'>
+      <div v-if='isMenuOpen.value' :class='`rus-select-menu`' :data-uid='randomId'>
+        <div
+          v-for='(option, oi) in options'
+          :key='option.value'
+          @click='selectOption(option.value)'
+          :data-uid='randomId'
+          @keyup='handleContainerKeydown'
+          @keyup.enter='selectOption(option.value)'
           @keyup.space='selectOption(option.value)'
-          :id='`rus-select-option-c-${oi}`'
-          type='checkbox'
-          class='form-checkbox rounded mr-2 bg-teal-100 text-teal-700 cursor-pointer
-            group-hover:text-teal-300'
-          tabindex='-1'
-          :data-uid='randomId'
+          @keyup.esc='closeMenu()'
+          tabindex='0'
+          :id='`rus-select-option-${oi}`'
+          v-bind="options.length - 1 === oi ? { ref: 'lastOptionRef' } : {}"
         >
-        <label
-          v-if='multiple'
-          @click.stop
-          :for='`rus-select-option-c-${oi}`'
-          class='cursor-pointer'
-          :data-uid='randomId'
-        >
-          {{ option.name }}
-        </label>
-        <span v-if='!multiple' :data-uid='randomId'>
-          <p :data-uid='randomId'>{{ option.name }}</p>
-          <RusIconF
-            v-if='isValueSelected(option.value)'
-            icon='check'
+          <input
+            v-if='multiple'
+            :checked='isValueSelected(option.value)'
+            @click.stop
+            @change='selectOption(option.value)'
+            @keyup.space='selectOption(option.value)'
+            :id='`rus-select-option-c-${oi}`'
+            type='checkbox'
+            class='form-checkbox rounded mr-2 bg-teal-100 text-teal-700 cursor-pointer
+              group-hover:text-teal-300'
+            tabindex='-1'
             :data-uid='randomId'
-            class='w-4 h-4 text-current stroke-2
-              absolute right-0 top-1/2 -translate-x-0.5
-              -translate-y-1/2'
-          />
-        </span>
+          >
+          <label
+            v-if='multiple'
+            @click.stop
+            :for='`rus-select-option-c-${oi}`'
+            class='cursor-pointer'
+            :data-uid='randomId'
+          >
+            {{ option.name }}
+          </label>
+          <span v-if='!multiple' :data-uid='randomId'>
+            <p :data-uid='randomId'>{{ option.name }}</p>
+            <RusIconF
+              v-if='isValueSelected(option.value)'
+              icon='check'
+              :data-uid='randomId'
+              class='w-4 h-4 text-current stroke-2
+                absolute right-0 top-1/2 -translate-x-0.5
+                -translate-y-1/2'
+            />
+          </span>
+        </div>
       </div>
-    </div>
+    </Transition>
   </div>
 </template>
 

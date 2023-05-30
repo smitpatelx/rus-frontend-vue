@@ -1,0 +1,68 @@
+/*
+  Enter and leave animations can use different
+  durations and timing functions.
+*/
+.swing-in-top-fwd {
+  &-enter-active {
+    animation: swing-in-top-fwd 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) forwards;
+  }
+
+  &-leave-active {
+    animation: swing-in-top-fwd 0.3s ease-out reverse;
+  }
+
+  @keyframes swing-in-top-fwd {
+    0% {
+      transform: rotateX(-100deg);
+      transform-origin: top;
+      opacity: 0;
+    }
+    100% {
+      transform: rotateX(0deg);
+      transform-origin: top;
+      opacity: 1;
+    }
+  }
+}
+
+.zoom-up {
+  &-enter-active {
+    animation: zoom-up 0.5s ease-in-out;
+  }
+
+  &-leave-active {
+    animation: zoom-up 0.3s reverse ease-out;
+  }
+
+  @keyframes zoom-up {
+    0% {
+      transform: scale(0) translateY(-200px);
+      filter: blur(10px);
+      transform-origin: center;
+      opacity: 0;
+    }
+  
+    100% {
+      transform: scale(1) translateY(0px);
+      filter: blur(0);
+      transform-origin: center;
+      opacity: 1;
+    }
+  }
+}
+
+/*
+  Fade enter and leave animations use the same
+  duration and timing function.
+*/
+.fade-in-enter-active,
+.fade-in-leave-active {
+  transition: all 0.4s ease-out;
+  opacity: 1;
+}
+
+.fade-in-enter-from,
+.fade-in-leave-to {
+  transition: all 0.2s ease-out;
+  opacity: 0;
+}

@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+// Custom Animations
+@import './animations.scss';
+
 @font-face {
   font-family: 'Inter';
   src: url('./Inter-roman-latin.woff2') format('woff2');
@@ -163,42 +166,4 @@ dialog {
       whitespace-pre-wrap break-words leading-none
       select-all -ml-1 p-0;
   }
-}
-
-/*
-  Enter and leave animations can use different
-  durations and timing functions.
-*/
-.zoom-up-enter-active {
-  animation: zoom-up 0.5s ease-out;
-}
-.zoom-up-leave-active {
-  animation: zoom-up 0.5s reverse ease-in-out;
-}
-@keyframes zoom-up {
-  0% {
-    transform: scale(0) translateY(-200px);
-    filter: blur(10px);
-    transform-origin: center;
-    opacity: 0;
-  }
-
-  100% {
-    transform: scale(1) translateY(0px);
-    filter: blur(0);
-    transform-origin: center;
-    opacity: 1;
-  }
-}
-
-.fade-in-enter-active,
-.fade-in-leave-active {
-  transition: all 0.4s ease-out;
-  opacity: 1;
-}
-
-.fade-in-enter-from,
-.fade-in-leave-to {
-  transition: all 0.2s ease-out;
-  opacity: 0;
 }
