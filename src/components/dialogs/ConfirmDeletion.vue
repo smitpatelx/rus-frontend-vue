@@ -14,12 +14,12 @@
         <div
           class='item-display-field'
         >
-          <label>
-            This action cannot be undone.
-          </label>
           <p class='!text-xl'>
             Are you sure you want to delete this user?
           </p>
+          <label>
+            This action cannot be undone.
+          </label>
         </div>
       </div>
     </div>

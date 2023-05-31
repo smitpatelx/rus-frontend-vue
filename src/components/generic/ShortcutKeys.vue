@@ -1,21 +1,16 @@
 <template>
   <div class='shortcut-container'>
     <slot>
-      <span class='shortcut-text'>
+      <kbd>
         <RusIconF
           icon='command'
         />
-        <RusIconF
-          icon='plus'
-          className='w-6 h-6 group-focus-within:animate-pulse transition-all
-            duration-200 ease-in-out origin-center stroke-2'
-        />
         <span>/</span>
-      </span>
+      </kbd>
 
-      <span class='shortcut-text'>
+      <kbd>
         Esc
-      </span>
+      </kbd>
     </slot>
   </div>
 </template>
@@ -23,10 +18,9 @@
 <script setup lang='ts'>
 import RusIconF from './RusIconF.vue';
 
-const slots = defineSlots<{
+defineSlots<{
   default: (props: unknown) => any[]
 }>();
-
 </script>
 
 <style scoped lang='scss'>
@@ -35,10 +29,10 @@ const slots = defineSlots<{
     text-slate-700 flex flex-nowrap flex-row items-center justify-center
     gap-x-1 font-medium text-sm text-center select-none;
 
-  .shortcut-text {
+  kbd {
     @apply w-auto px-2 py-1 first-letter:capitalize rounded-md bg-teal-600/20
       leading-none align-middle flex flex-nowrap flex-row items-center justify-center
-      gap-x-1 text-teal-700 select-none;
+      gap-x-2.5 text-teal-700 select-none;
 
     svg {
       @apply w-3.5 h-3.5 group-focus-within:animate-pulse transition-all

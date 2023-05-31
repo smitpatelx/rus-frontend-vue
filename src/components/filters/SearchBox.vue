@@ -31,11 +31,12 @@
 
     <!-- Shortcut Icons -->
     <span
-      v-if='search?.length === 0'
       class='absolute right-0 top-1/2 transform -translate-x-1 -translate-y-1/2
         bg-transparent p-0 m-0'
     >
-      <Shortcuts />
+      <Transition name='slide-in-blurred-right'>
+        <ShortcutKeys v-if='search?.length === 0' />
+      </Transition>
     </span>
   </div>
 </template>
@@ -43,7 +44,7 @@
 <script setup lang='ts'>
 import { onMounted, ref } from 'vue';
 import RusIconF from '../generic/RusIconF.vue';
-import Shortcuts from '../generic/Shortcuts.vue';
+import ShortcutKeys from '../generic/ShortcutKeys.vue';
 
 const search = ref('');
 const searchInputRef = ref<HTMLInputElement | null>(null);

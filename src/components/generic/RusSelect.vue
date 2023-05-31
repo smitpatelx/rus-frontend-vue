@@ -8,7 +8,7 @@
 
     <!-- Select Menu -->
     <Transition name='swing-in-top-fwd'>
-      <div v-if='isMenuOpen.value' :class='`rus-select-menu`' :data-uid='randomId'>
+      <div v-if='isMenuOpen.value' class='rus-select-menu' :data-uid='randomId'>
         <div
           v-for='(option, oi) in options'
           :key='option.value'
