@@ -18,7 +18,8 @@
           bg-teal-600 hover:bg-teal-200 hover:text-teal-800 group
           focus:outline-none ring-1 ring-teal-500 focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-teal-600
           focus-visible:ring-offset-slate-100 focus:border-0 transition-all duration-300 ease-in-out
-          rounded-l-md gap-x-1.5 leading-none flex flex-nowrap items-center justify-center z-10'
+          rounded-l-md gap-x-1.5 leading-none flex flex-nowrap items-center justify-center z-10
+          overflow-hidden'
       >
         <span class='py-1.5'>
           <RusIcon
@@ -28,12 +29,19 @@
         <span class='py-1.5'>
           Filter user type
         </span>
-        <span
-          v-if='!!selectedOption?.name'
-          class='font-normal border-l border-l-teal-500 group-hover:border-l-teal-400 pl-3 ml-1.5'
-        >
-          {{ selectedOption?.name }}
-        </span>
+        <Transition name='slide-in-blurred-right'>
+          <span
+            :key='selectedOption?.name'
+            :class="{
+              'pl-3 ml-1.5': !!selectedOption?.name,
+              'pl-0 ml-0': !selectedOption?.name,
+            }"
+            class='font-normal border-l border-l-teal-500 group-hover:border-l-teal-400'
+          >
+            <span v-if='!!selectedOption?.name'>{{ selectedOption?.name }}</span>
+            <span v-else class='opacity-0'>{{ selectedOption?.name }}</span>
+          </span>
+        </Transition>
       </button>
       <button
         @click.capture.stop='handleClear'
