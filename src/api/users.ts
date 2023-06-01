@@ -36,7 +36,7 @@ const getUser = async (id: number) => axios
 
 const deleteUser = async (id: number) => axios
   .delete(
-    `/wp-json/v2/users/${id}`,
+    `/wp-json/rus/v1/users/${id}`,
     {
       ...getHeaders(),
     }
@@ -44,7 +44,7 @@ const deleteUser = async (id: number) => axios
 
 const getAllRoles = async (): Promise<AxiosResponse<GetAllRoleRes, unknown>> => axios
   .get(
-    `/wp-json/rus/v2/roles`,
+    `/wp-json/rus/v1/roles`,
     {
       ...getHeaders(),
     }
