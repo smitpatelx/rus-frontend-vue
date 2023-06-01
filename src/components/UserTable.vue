@@ -234,6 +234,7 @@ import type { DialogMode } from '@/interfaces/dialog';
 import { USER_TABLE_HEADER } from '@/lib/data/user-table';
 import RusIconF from './generic/RusIconF.vue';
 import useGetAllUsers from '@/lib/hooks/useGetAllUsers';
+import useGetAllRoles from '@/lib/hooks/useGetAllRoles';
 
 defineProps<{
   openDialog: (mode: DialogMode) => void;
@@ -263,7 +264,10 @@ const { getAllUsersQ } = useGetAllUsers({
   sort: 'asc',
   sortBy: 'id',
 });
-console.log('allUserData', getAllUsersQ?.data);
+console.log('allUserData', getAllUsersQ?.data?.value);
+
+const { getAllRolesQ } = useGetAllRoles();
+console.log('allRoles', getAllRolesQ?.data?.value);
 </script>
 
 <style scoped lang='scss'>
