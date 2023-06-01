@@ -1,4 +1,7 @@
+import type { GetAllRoleRes } from '@/interfaces/roles';
+import type { GetAllUserRes } from '@/interfaces/user';
 import axios, { rusN } from '@/lib/axios';
+import type { AxiosResponse } from 'axios';
 
 const getHeaders = () => ({
   headers: {
@@ -15,7 +18,7 @@ const editUser = async (data: any) => axios
     }
   );
 
-const getAllUsers = async (data: any) => axios
+const getAllUsers = async (data: any): Promise<AxiosResponse<GetAllUserRes, unknown>> => axios
   .get(
     '/wp-json/rsu/v1/all',
     {
@@ -33,7 +36,15 @@ const getUser = async (id: number) => axios
 
 const deleteUser = async (id: number) => axios
   .delete(
-    `/wp/v2/users/${id}`,
+    `/wp-json/v2/users/${id}`,
+    {
+      ...getHeaders(),
+    }
+  );
+
+const getAllRoles = async (): Promise<AxiosResponse<GetAllRoleRes, unknown>> => axios
+  .get(
+    `/wp-json/rus/v2/roles`,
     {
       ...getHeaders(),
     }
@@ -44,4 +55,5 @@ export default {
   getAllUsers,
   getUser,
   deleteUser,
+  getAllRoles,
 }

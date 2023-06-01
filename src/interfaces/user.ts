@@ -58,3 +58,22 @@ export const editFormFields: Record<EditFormKeys, FormField> = {
 };
 
 export type EditFormField = Record<EditFormKeys, string>;
+
+export interface User {
+  roles: string[];
+  username: string;
+  id: number;
+  first_name: string;
+  last_name: string;
+  user_registered: string;
+  email: string;
+  billing_company: string;
+  billing_address_1: string;
+  billing_city: string;
+  billing_state: string;
+  billing_postcode: string;
+  billing_country: string;
+  billing_phone: string;
+}
+
+export type GetAllUserRes = User[];
