@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const rusN = (window as any).rusN as {
+export const rusN = (window as any).rusN as {
   nonce: string;
   rootapiurl: string;
 };

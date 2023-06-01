@@ -15,6 +15,10 @@ const useGetAllUsers = (data: unknown) => {
     onError: (error: any) => {
       console.log(error);
     },
+    refetchOnReconnect: true,
+    refetchOnWindowFocus: true,
+    retry: 0,
+    refetchOnMount: false,
   });
 
   return {

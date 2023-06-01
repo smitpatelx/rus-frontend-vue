@@ -227,12 +227,13 @@ import {
   mdiChevronRight,
   mdiChevronLeft,
   mdiEye,
-mdiChevronDoubleRight,
-mdiChevronDoubleLeft,
+  mdiChevronDoubleRight,
+  mdiChevronDoubleLeft,
 } from '@mdi/js';
 import type { DialogMode } from '@/interfaces/dialog';
 import { USER_TABLE_HEADER } from '@/lib/data/user-table';
 import RusIconF from './generic/RusIconF.vue';
+import useGetAllUsers from '@/lib/hooks/useGetAllUsers';
 
 defineProps<{
   openDialog: (mode: DialogMode) => void;
@@ -254,6 +255,15 @@ const hToggleSortDirection = (sortD: TableSortDirection) => {
       return undefined;
   }
 };
+
+// Handle APIs
+const { getAllUsersQ } = useGetAllUsers({
+  page: 1,
+  pageSize: 10,
+  sort: 'asc',
+  sortBy: 'id',
+});
+console.log('allUserData', getAllUsersQ?.data);
 </script>
 
 <style scoped lang='scss'>

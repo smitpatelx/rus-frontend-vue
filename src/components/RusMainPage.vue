@@ -1,5 +1,5 @@
 <template>
-  <div class='grid grid-cols-1 flex-grow h-full pr-2'>
+  <div class='grid grid-cols-1 flex-grow h-full'>
     <div class='col-span-1 flex flex-nowrap flex-col'>
       <!-- Filtered user list -->
       <UserTable :open-dialog="openDialog"/>
