@@ -14,6 +14,7 @@ export enum TableHeaderItemKey {
   Username = 'username',
   FirstName = 'first_name',
   LastName = 'last_name',
+  Roles = 'roles',
   Phone = 'phone',
   Email = 'email',
   CompanyName = 'company_name',

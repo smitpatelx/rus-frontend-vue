@@ -27,6 +27,14 @@ export const USER_TABLE_HEADER: TableHeaderItem[] = [
     canHide: true,
   },
   {
+    key: TableHeaderItemKey.Roles,
+    label: 'Roles',
+    align: TableAlign.Left,
+    sortable: false,
+    sortActive: false,
+    canHide: true,
+  },
+  {
     key: TableHeaderItemKey.Phone,
     label: 'Phone',
     align: TableAlign.Left,

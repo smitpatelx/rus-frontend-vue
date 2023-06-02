@@ -104,12 +104,17 @@ thead {
       h-full;
 
     th {
-      @apply text-lg font-medium text-teal-800 pr-2 pl-1 py-2;
+      @apply text-lg font-medium text-teal-800 pr-2 pl-2 py-2
+        whitespace-nowrap;
 
       button {
         @apply flex flex-nowrap items-center flex-row
           focus:outline-none focus-visible:ring-1 rounded-md
-          focus-visible:ring-teal-600 px-2 leading-5;
+          focus-visible:ring-teal-600 leading-5 px-1;
+      }
+
+      & > span > span {
+        @apply px-1;
       }
 
       &:nth-last-child(1) {

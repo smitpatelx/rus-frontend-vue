@@ -19,6 +19,17 @@
             <td>Smit</td>
             <td>Patel</td>
             <td>
+              <!-- Chip -->
+              <span
+                class='inline-flex items-center px-2 py-0.5 rounded-full
+                  text-xs font-medium bg-gradient-to-br from-teal-400 to-teal-800
+                  text-teal-100 ring-1 ring-teal-400 ring-offset-1 ring-offset-sky-100
+                  select-none'
+              >
+                Author
+              </span>
+            </td>
+            <td>
               <span class='w-full flex flex-row items-center justify-start'>
                 <a
                   href='tel:+918892982637'
