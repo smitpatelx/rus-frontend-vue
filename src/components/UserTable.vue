@@ -56,7 +56,7 @@
               </span>
             </td>
             <td>Demo company name LTD.</td>
-            <td>{{ new Date().toLocaleDateString() }}</td>
+            <td>{{ formatDateToDDMMYYYY(new Date()) }}</td>
             <!-- Actions -->
             <td>
               <div class='w-full flex flex-nowrap flex-row items-center justify-end
@@ -246,6 +246,7 @@ import { USER_TABLE_HEADER } from '@/lib/data/user-table';
 import RusIconF from './generic/RusIconF.vue';
 import useGetAllUsers from '@/lib/hooks/useGetAllUsers';
 import useGetAllRoles from '@/lib/hooks/useGetAllRoles';
+import { formatDateToDDMMYYYY } from '@/lib/helpers';
 
 defineProps<{
   openDialog: (mode: DialogMode) => void;

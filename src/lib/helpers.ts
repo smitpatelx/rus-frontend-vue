@@ -11,3 +11,13 @@ export const randomAlpha = (): string => {
   }
   return result;
 }
+
+export const formatDateToDDMMYYYY = (date: Date): string => {
+  const newDate = date.toLocaleString('en-CA', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  });
+  return newDate;
+}
+
