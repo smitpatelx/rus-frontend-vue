@@ -48,10 +48,10 @@ defineProps<{
   columns: TableHeaderItem[];
 }>();
 
-const emit = defineEmits({
-  toggleSortDirection: (val: TableSortDirection) => true,
-  isSortActive: (val: boolean) => true
-});
+const emit = defineEmits<{
+  toggleSortDirection: (val: TableSortDirection) => boolean,
+  isSortActive: (val: boolean) => boolean,
+}>();
 
 const toggleBetweenSortDirections = (col: TableHeaderItem) => {
   if (!col.sortable) return;
@@ -96,7 +96,7 @@ thead {
 
   &::after {
     content: '';
-    @apply absolute bottom-0 left-0 w-full h-px bg-teal-500;
+    @apply absolute bottom-0 left-0 w-full h-[0.5px] bg-teal-500;
   }
 
   tr {
