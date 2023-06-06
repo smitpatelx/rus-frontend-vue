@@ -62,9 +62,9 @@ const props = defineProps<{
   open: { value: boolean };
 }>();
 
-const emit = defineEmits({
-  close: () => true,
-});
+const emit = defineEmits<{
+  close: []
+}>();
 
 // Display data
 const userDetails = reactive({

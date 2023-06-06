@@ -92,9 +92,9 @@ const props = defineProps<{
   multiple?: boolean,
 }>();
 
-const emit = defineEmits({
-  'updateValue': (val: string | Options) => true,
-});
+const emit = defineEmits<{
+  updateValue: [val: string | Options]
+}>();
 
 const selectRef = ref<HTMLElement | null>(null);
 const lastOptionRef = ref<HTMLElement | null>(null);

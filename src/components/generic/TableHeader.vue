@@ -49,8 +49,8 @@ defineProps<{
 }>();
 
 const emit = defineEmits<{
-  toggleSortDirection: (val: TableSortDirection) => boolean,
-  isSortActive: (val: boolean) => boolean,
+  toggleSortDirection: [val: TableSortDirection],
+  isSortActive: [val: boolean],
 }>();
 
 const toggleBetweenSortDirections = (col: TableHeaderItem) => {

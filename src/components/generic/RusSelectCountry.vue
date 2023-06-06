@@ -101,10 +101,10 @@ const attrs = useAttrs() as {
   // onChange: (value: string) => void;
 };
 
-const emits = defineEmits({
-  change: (value: string) => true,
-  blur: () => true,
-});
+const emits = defineEmits<{
+  change: [value: string],
+  blur: [],
+}>();
 
 const getImageSrc = ref(() => {
   const imageName = attrs.value;
