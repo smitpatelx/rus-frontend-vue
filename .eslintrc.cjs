@@ -13,4 +13,22 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
   },
+  rules: {
+    'prettier/prettier': [
+      'error',
+      {
+        tabWidth: 2,
+        singleQuote: true,
+        printWidth: 100,
+        trailingComma: 'all',
+        semi: true,
+        arrowParens: 'always',
+        jsxBracketSameLine: true,
+        bracketSpacing: true,
+        bracketSameLine: false,
+        singleAttributePerLine: true,
+        embeddedLanguageFormatting: 'off',
+      },
+    ],
+  },
 };
