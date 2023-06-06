@@ -1,9 +1,9 @@
-import { usableCountries } from "./countries";
+import { usableCountries } from './countries';
 
 export enum InputTypeEnums {
   Text = 'text',
   Select = 'select',
-};
+}
 
 export type FormField = {
   label: string;
@@ -21,7 +21,7 @@ export enum EditFormKeys {
   Username = 'username',
   Email = 'email',
   Company = 'company',
-};
+}
 
 export const editFormFields: Record<EditFormKeys, FormField> = {
   [EditFormKeys.Country]: {

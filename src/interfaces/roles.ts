@@ -1,4 +1,3 @@
-
 export interface GetAllRoleRes {
   [key: string]: {
     name: string;

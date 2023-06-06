@@ -1,4 +1,3 @@
-
 export enum TableAlign {
   Left = 'left',
   Center = 'center',
@@ -35,6 +34,6 @@ export interface TableHeaderItem {
 export type TableHeaderItems = TableHeaderItem[];
 
 export type Options = {
-  name: string,
-  value: string,
+  name: string;
+  value: string;
 }[];

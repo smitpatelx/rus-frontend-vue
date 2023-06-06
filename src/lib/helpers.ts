@@ -1,16 +1,15 @@
-
 export const randomAlpha = (): string => {
-  const length=9;
-  const characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const length = 9;
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const charactersLength = characters.length;
 
-  let result           = '';
+  let result = '';
 
   for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
-}
+};
 
 export const formatDateToDDMMYYYY = (date: Date): string => {
   const newDate = date.toLocaleString('en-CA', {
@@ -19,5 +18,4 @@ export const formatDateToDDMMYYYY = (date: Date): string => {
     year: 'numeric',
   });
   return newDate;
-}
-
+};

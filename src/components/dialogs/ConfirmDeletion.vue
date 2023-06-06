@@ -1,49 +1,59 @@
 <template>
-  <dialog ref='dialogRef' data-type='delete' class='rus-modal'>
-    <div class='rus-modal-header' @click.stop>
+  <dialog
+    ref="dialogRef"
+    data-type="delete"
+    class="rus-modal"
+  >
+    <div
+      class="rus-modal-header"
+      @click.stop
+    >
       <div>
-        <RusIcon :icon='mdiDelete' />
+        <RusIcon :icon="mdiDelete" />
         <h3>Confirm Deletion</h3>
       </div>
-      <button @click='closeDialog' tabindex='0'>
-        <RusIcon :icon='mdiClose' />
+      <button
+        @click="closeDialog"
+        tabindex="0"
+      >
+        <RusIcon :icon="mdiClose" />
       </button>
     </div>
-    <div class='rus-modal-body' @click.stop>
-      <div class='w-full grid grid-cols-1'>
-        <div
-          class='item-display-field'
-        >
-          <p class='!text-xl'>
-            Are you sure you want to delete this user?
-          </p>
-          <label>
-            This action cannot be undone.
-          </label>
+    <div
+      class="rus-modal-body"
+      @click.stop
+    >
+      <div class="w-full grid grid-cols-1">
+        <div class="item-display-field">
+          <p class="!text-xl">Are you sure you want to delete this user?</p>
+          <label> This action cannot be undone. </label>
         </div>
       </div>
     </div>
-    <div class='rus-modal-footer' @click.stop>
+    <div
+      class="rus-modal-footer"
+      @click.stop
+    >
       <button
-        class='btn close-btn'
-        @click='closeDialog'
-        tabindex='0'
+        class="btn close-btn"
+        @click="closeDialog"
+        tabindex="0"
       >
         Cancel
       </button>
       <button
-        class='btn close-btn'
-        @click='closeDialog'
-        tabindex='0'
+        class="btn close-btn"
+        @click="closeDialog"
+        tabindex="0"
       >
         Delete
-        <RusIcon :icon='mdiDelete' />
+        <RusIcon :icon="mdiDelete" />
       </button>
     </div>
   </dialog>
 </template>
 
-<script setup lang='ts'>
+<script setup lang="ts">
 import { onMounted, reactive, ref, watch } from 'vue';
 import RusIcon from '../generic/RusIcon.vue';
 import { mdiAccount, mdiClose, mdiDelete } from '@mdi/js';

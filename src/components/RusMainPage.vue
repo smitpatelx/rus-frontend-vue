@@ -1,8 +1,8 @@
 <template>
-  <div class='grid grid-cols-1 flex-grow h-full'>
-    <div class='col-span-1 flex flex-nowrap flex-col'>
+  <div class="grid grid-cols-1 flex-grow h-full">
+    <div class="col-span-1 flex flex-nowrap flex-col">
       <!-- Filtered user list -->
-      <UserTable :open-dialog="openDialog"/>
+      <UserTable :open-dialog="openDialog" />
       <!-- All dialogs -->
       <ViewUserDialog
         :open="viewDialogState"
@@ -20,7 +20,7 @@
   </div>
 </template>
 
-<script setup lang='ts'>
+<script setup lang="ts">
 import ViewUserDialog from './dialogs/ViewUserDialog.vue';
 import EditUserDialog from './dialogs/EditUserDialog.vue';
 import ConfirmDeletion from './dialogs/ConfirmDeletion.vue';

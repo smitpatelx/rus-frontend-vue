@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/vue-query'
+import { useQuery } from '@tanstack/vue-query';
 import UserApi from '@/api/users';
 
 const useGetUser = (data: unknown) => {

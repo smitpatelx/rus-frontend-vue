@@ -10,7 +10,8 @@
   src: url('./Inter-roman-latin.woff2') format('woff2');
 }
 
-body, body > * {
+body,
+body > * {
   @apply antialiased;
 }
 
@@ -21,14 +22,17 @@ body, body > * {
   }
 }
 
-
 .rus-modal {
   animation: zoom-up 0.5s ease-in-out;
 
   @apply bg-teal-50 w-full max-w-lg p-0 rounded-xl shadow-2xl z-[250];
 
-  &[size='md'] { @apply max-w-md; }
-  &[size='xl'] { @apply max-w-xl; }
+  &[size='md'] {
+    @apply max-w-md;
+  }
+  &[size='xl'] {
+    @apply max-w-xl;
+  }
 
   .rus-modal-header {
     @apply flex flex-nowrap flex-row items-center select-none
@@ -64,17 +68,17 @@ body, body > * {
     @apply flex flex-nowrap flex-row items-center
       justify-end py-4 px-5 border-t border-teal-500
       gap-x-2;
-    
+
     .btn {
       @apply flex flex-nowrap flex-row items-center cursor-pointer
         justify-center px-4 py-1 rounded-full focus:outline-none
         select-none focus-visible:ring-1 focus-visible:ring-teal-500
         text-base font-medium duration-200 ease-out;
-      
+
       &:has(svg) {
         @apply pl-4 pr-3;
       }
-      
+
       svg {
         @apply w-5 h-5 ml-1 text-inherit;
       }
@@ -102,18 +106,18 @@ body, body > * {
 
     .rus-modal-header {
       @apply border-red-500;
-  
+
       & > div {
         svg {
           @apply text-red-500;
         }
-  
+
         h3 {
           @apply bg-gradient-to-br from-red-500 to-red-800
             bg-clip-text;
         }
       }
-  
+
       button {
         @apply shadow-red-500/30 bg-red-500/20 text-red-500
           hover:bg-red-500 hover:text-red-100 focus-visible:ring-red-500;
@@ -126,16 +130,16 @@ body, body > * {
 
     .rus-modal-footer {
       @apply border-red-500;
-      
+
       .btn {
         @apply focus-visible:ring-red-500;
       }
-  
+
       .close-btn {
         @apply bg-red-500/20 text-red-600 hover:bg-red-500
           shadow-red-500/30 hover:text-red-100;
       }
-  
+
       .save-btn {
         @apply bg-red-500/20 text-red-600 hover:bg-red-500
           shadow-red-500/30 hover:text-red-100;

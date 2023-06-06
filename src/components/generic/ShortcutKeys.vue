@@ -1,21 +1,17 @@
 <template>
-  <div class='shortcut-container'>
+  <div class="shortcut-container">
     <slot>
       <kbd>
-        <RusIconF
-          icon='command'
-        />
+        <RusIconF icon="command" />
         <span>/</span>
       </kbd>
 
-      <kbd>
-        Esc
-      </kbd>
+      <kbd> Esc </kbd>
     </slot>
   </div>
 </template>
 
-<script setup lang='ts'>
+<script setup lang="ts">
 import RusIconF from './RusIconF.vue';
 
 defineSlots<{
@@ -23,7 +19,7 @@ defineSlots<{
 }>();
 </script>
 
-<style scoped lang='scss'>
+<style scoped lang="scss">
 .shortcut-container {
   @apply w-auto py-0.5 px-1 bg-slate-100/20 border-0 rounded
     text-slate-700 flex flex-nowrap flex-row items-center justify-center

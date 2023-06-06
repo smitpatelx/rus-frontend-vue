@@ -1,5 +1,5 @@
-import { TableHeaderItemKey, TableAlign, type Options } from "@/interfaces/table";
-import type { TableHeaderItem } from "@/interfaces/table";
+import { TableHeaderItemKey, TableAlign, type Options } from '@/interfaces/table';
+import type { TableHeaderItem } from '@/interfaces/table';
 
 export const USER_TABLE_HEADER: TableHeaderItem[] = [
   {

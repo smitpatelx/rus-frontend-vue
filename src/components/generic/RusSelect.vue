@@ -1,58 +1,69 @@
 <template>
   <!-- Select Wrapper Element -->
-  <div class='relative bg-transparent'>
+  <div class="relative bg-transparent">
     <!-- Select Input -->
-    <div ref='selectRef' @keyup='handleContainerKeydown' @keyup.esc='closeMenu()'>
+    <div
+      ref="selectRef"
+      @keyup="handleContainerKeydown"
+      @keyup.esc="closeMenu()"
+    >
       <slot />
     </div>
 
     <!-- Select Menu -->
-    <Transition name='swing-in-top-fwd'>
-      <div v-if='isMenuOpen.value' class='rus-select-menu' :data-uid='randomId'>
+    <Transition name="swing-in-top-fwd">
+      <div
+        v-if="isMenuOpen.value"
+        class="rus-select-menu"
+        :data-uid="randomId"
+      >
         <div
-          v-for='(option, oi) in options'
-          :key='option.value'
-          @click='selectOption(option.value)'
-          :data-uid='randomId'
-          @keyup='handleContainerKeydown'
-          @keyup.enter='selectOption(option.value)'
-          @keyup.space='selectOption(option.value)'
-          @keyup.esc='closeMenu()'
-          tabindex='0'
-          :id='`rus-select-option-${oi}`'
+          v-for="(option, oi) in options"
+          :key="option.value"
+          @click="selectOption(option.value)"
+          :data-uid="randomId"
+          @keyup="handleContainerKeydown"
+          @keyup.enter="selectOption(option.value)"
+          @keyup.space="selectOption(option.value)"
+          @keyup.esc="closeMenu()"
+          tabindex="0"
+          :id="`rus-select-option-${oi}`"
           v-bind="options.length - 1 === oi ? { ref: 'lastOptionRef' } : {}"
         >
           <input
-            v-if='multiple'
-            :checked='isValueSelected(option.value)'
+            v-if="multiple"
+            :checked="isValueSelected(option.value)"
             @click.stop
-            @change='selectOption(option.value)'
-            @keyup.space='selectOption(option.value)'
-            :id='`rus-select-option-c-${oi}`'
-            type='checkbox'
-            class='form-checkbox rounded mr-2 bg-teal-100 text-teal-700 cursor-pointer
-              group-hover:text-teal-300'
-            tabindex='-1'
-            :data-uid='randomId'
-          >
+            @change="selectOption(option.value)"
+            @keyup.space="selectOption(option.value)"
+            :id="`rus-select-option-c-${oi}`"
+            type="checkbox"
+            class="form-checkbox rounded mr-2 bg-teal-100 text-teal-700 cursor-pointer
+              group-hover:text-teal-300"
+            tabindex="-1"
+            :data-uid="randomId"
+          />
           <label
-            v-if='multiple'
+            v-if="multiple"
             @click.stop
-            :for='`rus-select-option-c-${oi}`'
-            class='cursor-pointer'
-            :data-uid='randomId'
+            :for="`rus-select-option-c-${oi}`"
+            class="cursor-pointer"
+            :data-uid="randomId"
           >
             {{ option.name }}
           </label>
-          <span v-if='!multiple' :data-uid='randomId'>
-            <p :data-uid='randomId'>{{ option.name }}</p>
+          <span
+            v-if="!multiple"
+            :data-uid="randomId"
+          >
+            <p :data-uid="randomId">{{ option.name }}</p>
             <RusIconF
-              v-if='isValueSelected(option.value)'
-              icon='check'
-              :data-uid='randomId'
-              class='w-4 h-4 text-current stroke-2
+              v-if="isValueSelected(option.value)"
+              icon="check"
+              :data-uid="randomId"
+              class="w-4 h-4 text-current stroke-2
                 absolute right-0 top-1/2 -translate-x-0.5
-                -translate-y-1/2'
+                -translate-y-1/2"
             />
           </span>
         </div>
@@ -61,7 +72,7 @@
   </div>
 </template>
 
-<script setup lang='ts'>
+<script setup lang="ts">
 import { ref, reactive, watch } from 'vue';
 import RusIconF from './RusIconF.vue';
 import { randomAlpha } from '@/lib/helpers';
@@ -115,7 +126,7 @@ watch([lastOptionRef], () => {
         return;
       }
     }
-    
+
     closeMenu();
   });
 });
@@ -272,12 +283,12 @@ const handleContainerKeydown = (e: KeyboardEvent) => {
 }
 </script>
 
-<style scoped lang='scss'>
+<style scoped lang="scss">
 .rus-select-menu {
   @apply absolute top-full mt-1 right-0 z-50 w-52 bg-teal-50 rounded-md shadow-lg
     overflow-hidden transition-all duration-300 ease-in-out shadow-teal-900/20
     border border-teal-500;
-  
+
   & input[type='checkbox'] {
     @apply focus-visible:ring-0 focus-visible:border-0
       focus:ring-0 focus:border-0

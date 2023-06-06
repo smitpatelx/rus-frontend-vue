@@ -1,8 +1,7 @@
-
 export const DIALOG_MODE = {
   view: 'view',
   edit: 'edit',
-  delete: 'delete'
+  delete: 'delete',
 } as const;
 
-export type DialogMode = keyof typeof DIALOG_MODE
+export type DialogMode = keyof typeof DIALOG_MODE;

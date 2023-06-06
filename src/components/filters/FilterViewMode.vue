@@ -1,39 +1,37 @@
 <template>
   <RusSelect
-    :options='optionsForView'
-    :disabled='false'
-    :required='false'
-    :error='false'
-    :value='value.value'
-    class=''
-    label='Filter user type'
-    errorMessage=''
-    placeholder=''
-    @updateValue='handleValueChange'
+    :options="optionsForView"
+    :disabled="false"
+    :required="false"
+    :error="false"
+    :value="value.value"
+    class=""
+    label="Filter user type"
+    errorMessage=""
+    placeholder=""
+    @updateValue="handleValueChange"
     multiple
   >
-    <div class='flex flex-row flex-nowrap'>
+    <div class="flex flex-row flex-nowrap">
       <ViewModeBtn
-        :options='optionsForView'
-        :selectedOptions='selectedOption || undefined'
+        :options="optionsForView"
+        :selectedOptions="selectedOption || undefined"
       />
       <button
-        @click.capture.stop='handleClear'
-        class='px-3 py-0.5 text-base font-medium text-teal-50 select-none
+        @click.capture.stop="handleClear"
+        class="px-3 py-0.5 text-base font-medium text-teal-50 select-none
           bg-teal-500 hover:bg-teal-200 hover:text-teal-800 group
           focus:outline-none ring-1 ring-teal-500 focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-teal-600
           focus-visible:ring-offset-slate-100 focus:border-0 transition-all duration-300 ease-in-out
-          rounded-r-md gap-x-1.5 leading-none flex flex-nowrap items-center justify-center'
+          rounded-r-md gap-x-1.5 leading-none flex flex-nowrap items-center justify-center"
       >
-        <RusIcon
-          :icon='mdiClose'
-        />
+        <RusIcon :icon="mdiClose" />
       </button>
     </div>
   </RusSelect>
 </template>
 
-<script setup lang='ts'>
+<script setup lang="ts">
 import ViewModeBtn from '@/components/filters/ViewModeBtn.vue';
 import RusIcon from '@/components/generic/RusIcon.vue';
 import RusSelect from '@/components/generic/RusSelect.vue';

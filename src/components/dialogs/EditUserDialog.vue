@@ -1,93 +1,109 @@
 <template>
-  <dialog ref='dialogRef' class='rus-modal' size='xl'>
-    <div class='rus-modal-header' @click.stop>
+  <dialog
+    ref="dialogRef"
+    class="rus-modal"
+    size="xl"
+  >
+    <div
+      class="rus-modal-header"
+      @click.stop
+    >
       <div>
-        <RusIcon :icon='mdiPencil' />
+        <RusIcon :icon="mdiPencil" />
         <h3>Edit User</h3>
       </div>
-      <button @click='closeDialog' tabindex='0'>
-        <RusIcon :icon='mdiClose' />
+      <button
+        @click="closeDialog"
+        tabindex="0"
+      >
+        <RusIcon :icon="mdiClose" />
       </button>
     </div>
-    <div class='rus-modal-body' @click.stop>
+    <div
+      class="rus-modal-body"
+      @click.stop
+    >
       <div
-        v-if='isLoading'
-        class='w-full flex flex-col justify-center items-center py-6'
+        v-if="isLoading"
+        class="w-full flex flex-col justify-center items-center py-6"
       >
         <RusSpinner
-          color='teal'
-          :show='isLoading'
-          size='xl'
+          color="teal"
+          :show="isLoading"
+          size="xl"
         />
 
-        <h4 class='text-base font-medium text-center pt-5 pb-3 text-teal-600'>
+        <h4 class="text-base font-medium text-center pt-5 pb-3 text-teal-600">
           Loading Account Details ...
         </h4>
       </div>
       <form
         v-else
-        class='w-full grid grid-cols-2 gap-y-5 gap-x-2'
-        @submit.prevent.stop='submitForm'
+        class="w-full grid grid-cols-2 gap-y-5 gap-x-2"
+        @submit.prevent.stop="submitForm"
       >
         <div
-          v-for='(item, key) in editFormFields'
-          :key='key'
-          class='item-display-field'
+          v-for="(item, key) in editFormFields"
+          :key="key"
+          class="item-display-field"
         >
           <template v-if="item.inputType === 'text'">
-            <label :for='`rus-acc-d-${key}`'>{{ item?.label }}</label>
-            <RusInput
-              v-bind="getInputProps(key)"
-            />
+            <label :for="`rus-acc-d-${key}`">{{ item?.label }}</label>
+            <RusInput v-bind="getInputProps(key)" />
           </template>
           <template v-else-if="item.inputType === 'select'">
-            <label :for='`rus-acc-d-${key}`'>{{ item?.label }}</label>
-            <RusSelectCountry
-              v-bind="getSelectCountryProps(key)"
-            />
+            <label :for="`rus-acc-d-${key}`">{{ item?.label }}</label>
+            <RusSelectCountry v-bind="getSelectCountryProps(key)" />
           </template>
         </div>
       </form>
     </div>
-    <div class='rus-modal-footer' @click.stop>
+    <div
+      class="rus-modal-footer"
+      @click.stop
+    >
       <button
-        class='btn close-btn'
-        @click='closeDialog'
-        tabindex='0'
+        class="btn close-btn"
+        @click="closeDialog"
+        tabindex="0"
       >
         Cancel
       </button>
       <button
-        class='btn close-btn'
-        @click='restoreForm'
-        tabindex='0'
-        title='Restore to default values.'
-        :disabled='isLoading'
+        class="btn close-btn"
+        @click="restoreForm"
+        tabindex="0"
+        title="Restore to default values."
+        :disabled="isLoading"
       >
         Restore
-        <RusIcon :icon='mdiRestore' />
+        <RusIcon :icon="mdiRestore" />
       </button>
       <button
-        class='btn save-btn'
-        @click='submitForm'
-        tabindex='0'
-        :disabled='(isLoading || isSubmitting || !formMeta.dirty || !formMeta.valid)'
+        class="btn save-btn"
+        @click="submitForm"
+        tabindex="0"
+        :disabled="(isLoading || isSubmitting || !formMeta.dirty || !formMeta.valid)"
       >
         Save
         <RusSpinner
-          v-if='isLoading || isSubmitting'
-          color='teal'
-          :show='isLoading || isSubmitting'
-          size='md'
-          className='!mr-0'
+          v-if="isLoading || isSubmitting"
+          color="teal"
+          :show="isLoading || isSubmitting"
+          size="md"
+          className="!mr-0"
         />
-        <RusIconF v-else icon='save' className='stroke-2' />
+        <RusIconF
+          v-else
+          icon="save"
+          className="stroke-2"
+        />
       </button>
     </div>
   </dialog>
 </template>
 
-<script setup lang='ts'>
+<script setup lang="ts">
 import { onMounted, reactive, ref, watch } from 'vue';
 import { useForm } from 'vee-validate';
 import RusIcon from '@/components/generic/RusIcon.vue';
@@ -180,7 +196,7 @@ const {
   },
   keepValuesOnUnmount: false,
   validateOnMount: false,
-  validationSchema: toTypedSchema(formValidation), 
+  validationSchema: toTypedSchema(formValidation),
 });
 
 const restoreForm = () => {

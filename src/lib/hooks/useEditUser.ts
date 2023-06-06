@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/vue-query'
+import { useMutation } from '@tanstack/vue-query';
 import UserApi from '@/api/users';
 
 const useEditUser = () => {

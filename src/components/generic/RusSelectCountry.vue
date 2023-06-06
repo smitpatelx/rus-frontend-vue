@@ -1,21 +1,21 @@
 <template>
   <!-- Select Wrapper Element -->
-  <div class='relative bg-transparent'>
+  <div class="relative bg-transparent">
     <!-- Select Input -->
     <div
-      ref='selectCountryRef'
-      @keyup.stop='handleContainerKeydown'
-      @keyup.esc.stop='closeMenu()'
+      ref="selectCountryRef"
+      @keyup.stop="handleContainerKeydown"
+      @keyup.esc.stop="closeMenu()"
     >
       <button
-        class='rus-select-country group-[rus-c]'
+        class="rus-select-country group-[rus-c]"
         @keyup.enter.stop
         @keyup.space.stop
       >
         <span>
           <img
-            :src='getImageSrc()'
-            :alt='attrs.label'
+            :src="getImageSrc()"
+            :alt="attrs.label"
           />
         </span>
         <p
@@ -28,42 +28,45 @@
           {{ attrs.getLabel(attrs.value) || 'Please select one' }}
         </p>
         <RusIcon
-          :class='{ up: isMenuOpen.value }'
-          class='rus-select-country-icon-down'
-          :icon='mdiChevronDown'
+          :class="{ up: isMenuOpen.value }"
+          class="rus-select-country-icon-down"
+          :icon="mdiChevronDown"
         />
       </button>
     </div>
 
     <!-- Select Menu -->
-    <Transition name='swing-in-top-fwd'>
-      <div v-if='isMenuOpen.value && Object.keys(filteredOptions).length > 0' class='rus-select-menu'>
+    <Transition name="swing-in-top-fwd">
+      <div
+        v-if="isMenuOpen.value && Object.keys(filteredOptions).length > 0"
+        class="rus-select-menu"
+      >
         <input
-          v-model='autoCompleteInput'
-          placeholder='Search for a country'
-          :disabled='attrs.disabled'
-          :required='attrs.required'
-          id='rus-country-auto-complete'
-          name='rus-country-auto-complete'
+          v-model="autoCompleteInput"
+          placeholder="Search for a country"
+          :disabled="attrs.disabled"
+          :required="attrs.required"
+          id="rus-country-auto-complete"
+          name="rus-country-auto-complete"
           autocorrect="off"
           autocapitalize="off"
           spellcheck="false"
-          @keyup.esc.stop='closeMenu()'
-          :autocomplete='randomAlpha()'
+          @keyup.esc.stop="closeMenu()"
+          :autocomplete="randomAlpha()"
         />
         <div
-          v-for='(option, key) in filteredOptions'
-          :key='key'
-          @click='selectOption(key)'
-          @keyup.stop='handleContainerKeydown'
-          @keyup.enter.stop='selectOption(key)'
-          @keyup.space.stop='selectOption(key)'
-          @keyup.esc.stop.prevent='closeMenu()'
-          tabindex='0'
-          :id='`rus-select-option-${key}`'
+          v-for="(option, key) in filteredOptions"
+          :key="key"
+          @click="selectOption(key)"
+          @keyup.stop="handleContainerKeydown"
+          @keyup.enter.stop="selectOption(key)"
+          @keyup.space.stop="selectOption(key)"
+          @keyup.esc.stop.prevent="closeMenu()"
+          tabindex="0"
+          :id="`rus-select-option-${key}`"
           v-bind='key === lastOptionKey ? { ref: "lastOptionRef" } : {}'
         >
-          <span v-if='attrs.getLabel(key)'>{{ attrs.getLabel(key) }}</span>
+          <span v-if="attrs.getLabel(key)">{{ attrs.getLabel(key) }}</span>
           <span v-else>No results found.</span>
         </div>
       </div>
@@ -71,7 +74,7 @@
   </div>
 </template>
 
-<script setup lang='ts'>
+<script setup lang="ts">
 import { ref, reactive, watch, useAttrs, computed } from 'vue';
 import classNames from 'classnames';
 import { mdiChevronDown } from '@mdi/js';
@@ -171,7 +174,7 @@ watch([lastOptionRef], () => {
         return;
       }
     }
-    
+
     closeMenu();
   });
 });
@@ -271,7 +274,7 @@ const handleContainerKeydown = (e: KeyboardEvent) => {
 }
 </script>
 
-<style scoped lang='scss'>
+<style scoped lang="scss">
 .rus-select-menu {
   @apply absolute top-full mt-1 left-0 z-[99999] w-full bg-white rounded-md shadow-lg
     overflow-hidden transition-all duration-300 ease-in-out shadow-teal-700/20
@@ -280,7 +283,7 @@ const handleContainerKeydown = (e: KeyboardEvent) => {
 
   & > div {
     @apply pl-4 pr-10 py-3 cursor-pointer hover:bg-teal-500 text-sm font-medium
-      text-teal-900 hover:text-teal-100 bg-teal-500/30 leading-none flex flex-nowrap 
+      text-teal-900 hover:text-teal-100 bg-teal-500/30 leading-none flex flex-nowrap
       items-center justify-start focus:outline-none focus-visible:bg-teal-500
       focus-visible:text-teal-100;
   }
@@ -304,14 +307,14 @@ const handleContainerKeydown = (e: KeyboardEvent) => {
     transition duration-200 ease-in-out w-full
     flex items-center justify-start select-none
     relative text-left;
-  
+
   & > p {
     @apply w-[calc(100%-0.5rem)] whitespace-nowrap overflow-hidden overflow-ellipsis select-none
       bg-transparent py-2.5 text-teal-900;
   }
 
   & > span {
-    @apply absolute top-1/2 left-0 -translate-y-1/2 w-12 h-full 
+    @apply absolute top-1/2 left-0 -translate-y-1/2 w-12 h-full
       mr-2 flex items-center justify-center p-[3px] select-none;
 
     & > img {
@@ -324,7 +327,7 @@ const handleContainerKeydown = (e: KeyboardEvent) => {
   & > .rus-select-country-icon-down {
     @apply w-4 h-4 ml-2 absolute right-2 top-1/2 transform -translate-y-1/2
       text-slate-500 transition-all duration-300 ease-out;
-    
+
     &.up {
       @apply transform rotate-180;
     }
