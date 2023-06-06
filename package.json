@@ -5,7 +5,7 @@
   "scripts": {
     "w": "NODE_ENV=development vite build --watch",
     "dev": "vite",
-    "build": "run-p type-check build-only",
+    "build": "prettier --write src/ && run-p type-check build-only",
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",
