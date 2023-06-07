@@ -4,6 +4,7 @@
 
 // Custom Animations
 @import './animations.scss';
+@import './settings-page.scss';
 
 @font-face {
   font-family: 'Inter';
@@ -12,7 +13,15 @@
 
 body,
 body > * {
-  @apply antialiased;
+  @apply antialiased #{!important};
+}
+
+#wpcontent {
+  padding-left: 0px !important;
+}
+
+#wpbody-content {
+  @apply pb-0;
 }
 
 // Custom select color
@@ -170,4 +179,12 @@ dialog {
       whitespace-pre-wrap break-words leading-none
       select-all -ml-1 p-0;
   }
+}
+
+// WP Checkbox styles overrides
+input[type='checkbox']:checked::before {
+  content: '' !important;
+  margin: 0rem !important;
+  height: 0rem !important;
+  width: 0rem !important;
 }

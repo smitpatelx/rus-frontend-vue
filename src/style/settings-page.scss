@@ -1,0 +1,76 @@
+#rusSettings {
+  @apply flex flex-wrap antialiased relative font-sans w-full;
+
+  & > form {
+    @apply w-full flex flex-wrap flex-col mt-2 p-4;
+
+    & > p {
+      @apply text-2xl text-gray-800 font-medium flex flex-wrap items-center justify-center;
+
+      & > svg {
+        @apply h-8 w-8 inline-block ml-3;
+      }
+    }
+
+    .error-rus-settings {
+      @apply w-full flex flex-wrap flex-col justify-center items-center text-base mt-6 mb-4 pb-3;
+
+      & > span {
+        @apply bg-red-200 border-l-4 border-red-700 text-red-700 py-2 px-4 w-full my-1;
+      }
+    }
+
+    .rus-settings-header {
+      @apply w-full flex flex-wrap justify-start items-center text-xl mt-6 mb-4 border-b border-gray-400 pb-3;
+
+      & > a {
+        @apply text-gray-400 hover:text-gray-600 no-underline hover:underline transition-all duration-300 focus:underline focus:shadow-none focus:border-none;
+      }
+
+      & > span {
+        @apply text-gray-700 ml-2;
+      }
+    }
+
+    .rus-settings-checkboxes {
+      @apply w-full max-w-sm flex flex-nowrap flex-col mt-3;
+
+      & > div {
+        @apply w-full flex flex-nowrap flex-row bg-teal-100 py-3
+          px-3 hover:bg-gray-200 items-center justify-stretch;
+
+        // Label
+        & > div:nth-child(1) {
+          @apply w-full;
+
+          & > label {
+            @apply capitalize mr-4 text-gray-700 text-base select-none;
+          }
+        }
+
+        // Checkbox Input
+        & > div:nth-child(2) {
+          @apply flex flex-wrap justify-end items-center;
+
+          input[type='checkbox'] {
+            @apply form-checkbox rounded mr-2 bg-teal-100 text-teal-700 cursor-pointer
+              focus-visible:border-0
+              focus:ring-1 focus:ring-teal-700 focus:border-0
+              focus:outline-none focus-visible:outline-none
+              focus:ring-offset-1 focus:ring-offset-teal-100 #{!important};
+          }
+        }
+      }
+    }
+
+    .rus-save-btn-container {
+      @apply w-full flex flex-wrap justify-start items-center mt-6;
+
+      & > button {
+        @apply bg-teal-500 duration-300 transition-all flex flex-wrap justify-center items-center shadow-md py-2 px-4
+          focus:outline-none focus:ring-1 focus:ring-teal-500 focus:ring-offset-1
+          select-none hover:bg-teal-400 text-white text-base font-medium rounded;
+      }
+    }
+  }
+}
