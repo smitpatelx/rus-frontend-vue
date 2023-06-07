@@ -2,7 +2,7 @@
   <div class="shortcut-container">
     <slot>
       <kbd>
-        <RusIconF icon="command" />
+        <RusIcon :icon="mdiAppleKeyboardCommand" />
         <span>/</span>
       </kbd>
 
@@ -12,7 +12,8 @@
 </template>
 
 <script setup lang="ts">
-import RusIconF from './RusIconF.vue';
+import { mdiAppleKeyboardCommand } from '@mdi/js';
+import RusIcon from './RusIcon.vue';
 
 defineSlots<{
   default: (props: unknown) => any[]
@@ -32,7 +33,7 @@ defineSlots<{
 
     svg {
       @apply w-3.5 h-3.5 group-focus-within:animate-pulse transition-all
-        duration-200 ease-in-out origin-center stroke-2 pointer-events-none;
+        duration-200 ease-in-out origin-center pointer-events-none;
     }
   }
 }

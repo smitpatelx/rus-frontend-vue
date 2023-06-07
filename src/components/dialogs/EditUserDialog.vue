@@ -93,10 +93,9 @@
           size="md"
           className="!mr-0"
         />
-        <RusIconF
+        <RusIcon
           v-else
-          icon="save"
-          className="stroke-2"
+          :icon="mdiCloudCheckVariant"
         />
       </button>
     </div>
@@ -107,7 +106,7 @@
 import { onMounted, reactive, ref, watch } from 'vue';
 import { useForm } from 'vee-validate';
 import RusIcon from '@/components/generic/RusIcon.vue';
-import { mdiClose, mdiPencil, mdiRestore } from '@mdi/js';
+import { mdiClose, mdiCloudCheckVariant, mdiPencil, mdiRestore } from '@mdi/js';
 import RusInput from '@/components/generic/RusInput.vue';
 import RusSpinner from '@/components/generic/RusSpinner.vue';
 import { toTypedSchema } from '@vee-validate/zod';
@@ -115,7 +114,6 @@ import * as zod from 'zod';
 import { editFormFields, EditFormKeys } from '@/interfaces/user';
 import RusSelectCountry from '../generic/RusSelectCountry.vue';
 import { usableCountries } from '@/interfaces/countries';
-import RusIconF from '../generic/RusIconF.vue';
 
 // Zod form validation
 const formValidation = zod.object({

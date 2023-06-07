@@ -57,11 +57,11 @@
             :data-uid="randomId"
           >
             <p :data-uid="randomId">{{ option.name }}</p>
-            <RusIconF
+            <RusIcon
               v-if="isValueSelected(option.value)"
-              icon="check"
+              :icon="mdiCheck"
               :data-uid="randomId"
-              class="w-4 h-4 text-current stroke-2
+              class="w-4 h-4 text-current
                 absolute right-0 top-1/2 -translate-x-0.5
                 -translate-y-1/2"
             />
@@ -74,9 +74,10 @@
 
 <script setup lang="ts">
 import { ref, reactive, watch } from 'vue';
-import RusIconF from './RusIconF.vue';
+import RusIcon from './RusIcon.vue';
 import { randomAlpha } from '@/lib/helpers';
 import type { Options } from '@/interfaces/table';
+import { mdiCheck } from '@mdi/js';
 
 const randomId = ref(randomAlpha());
 

@@ -79,9 +79,9 @@
                     focus-visible:ring-offset-1 focus-visible:ring-teal-600
                     focus-visible:ring-offset-slate-100 active:scale-110"
                 >
-                  <RusIconF
-                    icon="external-link"
-                    className="w-5 h-5 group-focus-within:animate-pulse origin-center stroke-2"
+                  <RusIcon
+                    :icon="mdiOpenInNew"
+                    className="w-5 h-5 group-focus-within:animate-pulse origin-center"
                   />
                 </button>
 
@@ -231,10 +231,10 @@ import {
   mdiEye,
   mdiChevronDoubleRight,
   mdiChevronDoubleLeft,
+  mdiOpenInNew,
 } from '@mdi/js';
 import type { DialogMode } from '@/interfaces/dialog';
 import { USER_TABLE_HEADER } from '@/lib/data/user-table';
-import RusIconF from './generic/RusIconF.vue';
 import useGetAllUsers from '@/lib/hooks/useGetAllUsers';
 import useGetAllRoles from '@/lib/hooks/useGetAllRoles';
 import { formatDateToDDMMYYYY } from '@/lib/helpers';
@@ -277,7 +277,7 @@ console.log('allRoles', getAllRolesQ?.data?.value);
 .rus-table-wrap {
   @apply w-full flex-initial overflow-x-auto overflow-y-auto relative
     rounded-t-md border border-b-0 border-teal-500 flex flex-col
-    h-full max-h-[calc(100vh-14rem)];
+    h-full max-h-[calc(100vh-18rem)] md:max-h-[calc(100vh-16rem)];
 }
 
 .rus-table {

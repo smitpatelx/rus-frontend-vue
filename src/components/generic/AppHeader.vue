@@ -23,7 +23,7 @@
 
     <div class="w-auto flex flex-row flex-nowrap items-center justify-end gap-x-4 p-1">
       <a
-        href="/setting"
+        href="/wp-admin/admin.php?page=rus-settings"
         class="text-teal-800 text-base font-medium rounded-md
           flex flex-row flex-nowrap items-center justify-center
           gap-x-1.5 hover:text-teal-600 pl-1 pr-1.5 py-0.5
