@@ -277,7 +277,7 @@ console.log('allRoles', getAllRolesQ?.data?.value);
 .rus-table-wrap {
   @apply w-full flex-initial overflow-x-auto overflow-y-auto relative
     rounded-t-md border border-b-0 border-teal-500 flex flex-col
-    h-full max-h-[calc(100vh-18rem)] md:max-h-[calc(100vh-16rem)];
+    h-full max-h-[calc(100vh-18rem)] lg:max-h-[calc(100vh-16rem)];
 }
 
 .rus-table {

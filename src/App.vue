@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-screen overflow-y-hidden bg-slate-50 flex flex-col flex-nowrap">
+  <div class="w-full h-full max-h-screen overflow-y-hidden bg-slate-50 flex flex-col flex-nowrap">
     <AppHeader />
     <!-- Filter container -->
     <FilterContainer />
