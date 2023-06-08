@@ -25,8 +25,8 @@
     >
       <div class="w-full grid grid-cols-1">
         <div class="item-display-field">
-          <p class="!text-xl">Are you sure you want to delete this user?</p>
-          <label> This action cannot be undone. </label>
+          <p class="!text-xl !ml-0">Are you sure you want to delete this user?</p>
+          <label class="!cursor-text">This action cannot be undone.</label>
         </div>
       </div>
     </div>
@@ -54,9 +54,9 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import RusIcon from '../generic/RusIcon.vue';
-import { mdiAccount, mdiClose, mdiDelete } from '@mdi/js';
+import { mdiClose, mdiDelete } from '@mdi/js';
 
 const props = defineProps<{
   open: { value: boolean };
@@ -65,47 +65,6 @@ const props = defineProps<{
 const emit = defineEmits<{
   close: []
 }>();
-
-// Display data
-const userDetails = reactive({
-  username: {
-    label: 'Username',
-    value: 'smitpatelx',
-  },
-  email: {
-    label: 'Email',
-    value: 'smitpatel.dev@gmail.com',
-  },
-  firstName: {
-    label: 'First Name',
-    value: 'Smit',
-  },
-  lastName: {
-    label: 'Last Name',
-    value: 'Patel',
-  },
-  phone: {
-    label: 'Phone',
-    value: '0912345367886',
-  },
-  company: {
-    label: 'Company',
-    value: 'Demo company LTD.',
-  }
-});
-
-/**
- * Format phone number
- * From: 2345367886
- * To: 234-536-7886
- */
-const formatPhone = (phone: string) => {
-  const areaCode = phone.slice(0, 3);
-  const firstThree = phone.slice(3, 6);
-  const lastFour = phone.slice(6, 10);
-
-  return `${areaCode}-${firstThree}-${lastFour}`;
-}
 
 // Dialog
 const dialogRef = ref<HTMLDialogElement | null>(null);
