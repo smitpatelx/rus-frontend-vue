@@ -16,7 +16,7 @@
               <code
                 class="text-sm font-normal font-mono
                 leading-none bg-teal-500/20 text-teal-900
-                px-1 py-0.5 rounded overflow-hidden"
+                px-1 py-0.5 rounded overflow-hidden whitespace-nowrap"
               >
                 smitpatelx
               </code>
