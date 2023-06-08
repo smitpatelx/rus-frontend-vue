@@ -5,6 +5,7 @@
     :required="false"
     :error="false"
     :value="value.value"
+    :random-id="randomId"
     class=""
     label="Filter user type"
     errorMessage=""
@@ -61,8 +62,11 @@
 import RusIcon from '@/components/generic/RusIcon.vue';
 import RusSelect from '@/components/generic/RusSelect.vue';
 import type { Options } from '@/interfaces/table';
+import { randomAlpha } from '@/lib/helpers';
 import { mdiClose, mdiFilter } from '@mdi/js';
-import { computed, reactive } from 'vue';
+import { computed, reactive, ref } from 'vue';
+
+const randomId = ref(randomAlpha());
 
 const options: Options = [
   { name: 'Admin', value: 'admin' },

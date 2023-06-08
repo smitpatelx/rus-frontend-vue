@@ -74,11 +74,8 @@
 <script setup lang="ts">
 import { ref, reactive, watch } from 'vue';
 import RusIcon from './RusIcon.vue';
-import { randomAlpha } from '@/lib/helpers';
 import type { Options } from '@/interfaces/table';
 import { mdiCheck } from '@mdi/js';
-
-const randomId = ref(randomAlpha());
 
 const props = defineProps<{
   value: string | Options,
@@ -89,6 +86,7 @@ const props = defineProps<{
   required: boolean,
   error: boolean,
   errorMessage: string,
+  randomId: string,
   multiple?: boolean,
 }>();
 
@@ -113,22 +111,32 @@ const closeMenu = () => {
 watch([lastOptionRef], () => {
   const lastOpt = lastOptionRef.value;
 
-  if (!lastOpt || !lastOpt?.addEventListener) {
-    return;
-  }
-
-  lastOpt.addEventListener('focusout', (e) => {
-    modifyEvent(e);
-    if (!e.relatedTarget) return;
+  const handleLastItemBlur = (ev: FocusEvent) => {
+    modifyEvent(ev);
+    if (!ev.relatedTarget) return;
     // Detect if focus shift was clicked or if its due to up/down arrow
-    if (e.relatedTarget instanceof HTMLElement) {
-      if (e.relatedTarget.id.startsWith('rus-select-option-')) {
+    if (ev.relatedTarget instanceof HTMLElement) {
+      if (ev.relatedTarget.id.startsWith('rus-select-option-')) {
         return;
       }
     }
 
     closeMenu();
+  };
+
+  if (!lastOpt || !lastOpt?.addEventListener) {
+    return () => {
+      lastOpt?.removeEventListener('focusout', handleLastItemBlur);
+    }
+  }
+
+  lastOpt.addEventListener('focusout', handleLastItemBlur, {
+    passive: true,
   });
+
+  return () => {
+    lastOpt.removeEventListener('focusout', handleLastItemBlur);
+  }
 });
 
 // Handle click outside
@@ -139,9 +147,9 @@ const handleClickOutside = (e: MouseEvent) => {
   };
   const wrapper = selectRef.value?.getBoundingClientRect()
   const id = (e.target as unknown as { dataset: { uid: string } })?.dataset?.uid;
-  console.log(id, randomId.value);
+
   if (
-    id !== randomId.value &&
+    id !== props.randomId &&
     (e.clientX < wrapper.left ||
     e.clientX > wrapper.right ||
     e.clientY < wrapper.top ||
