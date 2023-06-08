@@ -14,7 +14,7 @@
     <Transition name="swing-in-top-fwd">
       <div
         v-if="isMenuOpen.value"
-        class="rus-select-menu"
+        id="rus-select-menu"
         :data-uid="randomId"
       >
         <div
@@ -38,8 +38,7 @@
             @keyup.space="selectOption(option.value)"
             :id="`rus-select-option-c-${oi}`"
             type="checkbox"
-            class="form-checkbox rounded mr-2 bg-teal-100 text-teal-700 cursor-pointer
-              group-hover:text-teal-300"
+            class="group-hover:text-teal-300"
             tabindex="-1"
             :data-uid="randomId"
           />
@@ -284,20 +283,11 @@ const handleContainerKeydown = (e: KeyboardEvent) => {
 }
 </script>
 
-<style scoped lang="scss">
-.rus-select-menu {
+<style lang="scss">
+#rus-select-menu {
   @apply absolute top-full mt-1 right-0 z-50 w-52 bg-teal-50 rounded-md shadow-lg
     overflow-hidden transition-all duration-300 ease-in-out shadow-teal-900/20
     border border-teal-500;
-
-  & input[type='checkbox'] {
-    @apply focus-visible:ring-0 focus-visible:border-0
-      focus:ring-0 focus:border-0
-      focus:outline-none focus-visible:outline-none
-      focus-visible:ring-offset-0 focus-visible:ring-offset-transparent
-      focus:ring-offset-0 focus:ring-offset-transparent
-      pointer-events-none;
-  }
 
   & > div {
     @apply px-4 py-3 cursor-pointer hover:bg-teal-500 text-base font-medium
@@ -305,14 +295,27 @@ const handleContainerKeydown = (e: KeyboardEvent) => {
       transition-all duration-100 ease-out focus:outline-none focus-visible:bg-teal-500
       focus-visible:text-teal-100;
 
-    & {
-      label, span {
-        @apply pointer-events-none select-none relative;
-      }
+    &:not(:has(input[type='checkbox'])) {
+      @apply py-2;
+    }
 
-      span {
-        @apply w-full flex flex-row flex-nowrap items-center justify-start;
-      }
+    span > p {
+      @apply text-base font-medium p-0;
+    }
+
+    label, span {
+      @apply pointer-events-none select-none relative m-0 p-0
+        w-full flex flex-row flex-nowrap items-center justify-start;
+    }
+
+    & > input[type='checkbox'] {
+      @apply form-checkbox rounded m-0 mr-2 bg-teal-100 text-teal-700 cursor-pointer
+        focus-visible:ring-0 focus-visible:border-0
+        focus:ring-0 focus:border-0
+        focus:outline-none focus-visible:outline-none
+        focus-visible:ring-offset-0 focus-visible:ring-offset-transparent
+        focus:ring-offset-0 focus:ring-offset-transparent
+        pointer-events-none bg-origin-content #{!important};
     }
   }
 }
