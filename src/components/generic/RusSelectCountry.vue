@@ -81,6 +81,8 @@ import { mdiChevronDown } from '@mdi/js';
 import RusIcon from './RusIcon.vue';
 import { randomAlpha } from '@/lib/helpers';
 
+const ASSET_URL = import.meta.env.VITE_ASSET_URL as string;
+
 export type Options = {
   name: string,
   value: string,
@@ -109,9 +111,9 @@ const emits = defineEmits<{
 const getImageSrc = ref(() => {
   const imageName = attrs.value;
   if (!imageName) {
-    return '/flags/default.svg';
+    return `${ASSET_URL}/default.svg`;
   }
-  return `/flags/${imageName}.svg`
+  return `${ASSET_URL}/${imageName}.svg`
 });
 
 const autoCompleteInput = ref('');
