@@ -8,7 +8,6 @@ export const rusN = (window as any).rusN as {
 const instance = axios.create({
   baseURL: rusN.rootapiurl,
   timeout: 1000,
-  headers: { 'X-WP-Nonce': rusN.nonce },
 });
 
 export default instance;
