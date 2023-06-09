@@ -92,7 +92,7 @@
                 <button
                   @click.stop.capture.passive="openDialog('view')"
                   type="button"
-                  title="View - user name"
+                  :title="`View - ${item.username}`"
                   class="w-9 h-9 flex items-center justify-center rounded-full bg-transparent
                     hover:bg-teal-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
                     duration-300 ease-in-out transition-all focus:outline-none focus-visible:ring-1
@@ -105,7 +105,7 @@
                 <button
                   @click.stop.capture.passive="openDialog('edit')"
                   type="button"
-                  title="Edit - user name"
+                  :title="`Edit - ${item.username}`"
                   class="w-9 h-9 flex items-center justify-center rounded-full bg-transparent
                     hover:bg-teal-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
                     duration-300 ease-in-out transition-all focus:outline-none focus-visible:ring-1
@@ -118,7 +118,7 @@
                 <button
                   @click.stop.capture.passive="openDialog('delete')"
                   type="button"
-                  title="Delete - user name"
+                  :title="`Delete - ${item.username}`"
                   class="w-9 h-9 flex items-center justify-center rounded-full bg-transparent
                     hover:bg-red-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
                     duration-300 ease-in-out transition-all focus:outline-none focus-visible:ring-1
