@@ -33,7 +33,7 @@
                     text-sm font-semibold bg-gradient-to-br from-teal-400 to-teal-800
                     text-teal-100 ring-1 ring-teal-400 ring-offset-1 ring-offset-sky-100
                     select-none leading-none pb-1 hover:from-teal-400/50 hover:to-teal-800/50
-                    hover:text-teal-800 transition-all ease-in-out duration-300 cursor-help"
+                    hover:text-teal-800 transition-all ease-in-out duration-300 cursor-help capitalize"
                   title="User role"
                 >
                   {{ role }}
