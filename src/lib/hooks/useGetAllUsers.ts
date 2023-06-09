@@ -1,18 +1,18 @@
 import { useQuery } from '@tanstack/vue-query';
 import UserApi from '@/api/users';
 
-const useGetAllUsers = (data: unknown) => {
+const useGetAllUsers = (filters: unknown) => {
   const getAllUsersQ = useQuery({
-    queryKey: ['get-all-user', data],
+    queryKey: ['get-all-user', filters],
     queryFn: async () => {
-      const res = UserApi.getAllUsers(data);
+      const res = UserApi.getAllUsers(filters);
       return res;
     },
     enabled: true,
-    onSuccess: (data: any) => {
-      // console.log(data);
+    onSuccess: (res) => {
+      console.log(res);
     },
-    onError: (error: any) => {
+    onError: (error) => {
       // console.log(error);
     },
     refetchOnReconnect: true,
@@ -21,9 +21,7 @@ const useGetAllUsers = (data: unknown) => {
     refetchOnMount: false,
   });
 
-  return {
-    getAllUsersQ,
-  };
+  return getAllUsersQ;
 };
 
 export default useGetAllUsers;

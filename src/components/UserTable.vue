@@ -6,11 +6,11 @@
           :columns="rowHeaders"
           @toggleSortDirection="hToggleSortDirection"
         />
-
-        <tbody>
+        <!-- User Table Data -->
+        <tbody v-if="data !== undefined && data.data?.length > 0">
           <tr
-            v-for="(item, i) in rowFill"
-            :key="i"
+            v-for="item in data.data"
+            :key="item.username"
           >
             <td>
               <code
@@ -18,51 +18,55 @@
                 leading-none bg-teal-500/20 text-teal-900
                 px-1 py-0.5 rounded overflow-hidden whitespace-nowrap"
               >
-                smitpatelx
+                {{ item.username }}
               </code>
             </td>
-            <td>Smit</td>
-            <td>Patel</td>
+            <td>{{ item.first_name }}</td>
+            <td>{{ item.last_name }}</td>
             <td>
               <!-- Chip -->
-              <span
-                class="inline-flex items-center px-2 py-0.5 rounded-full
-                  text-sm font-semibold bg-gradient-to-br from-teal-400 to-teal-800
-                  text-teal-100 ring-1 ring-teal-400 ring-offset-1 ring-offset-sky-100
-                  select-none leading-none pb-1 hover:from-teal-400/50 hover:to-teal-800/50
-                  hover:text-teal-800 transition-all ease-in-out duration-300 cursor-help"
-                title="User role"
-              >
-                Author
-              </span>
+              <div v-if="item.roles.length > 0">
+                <span
+                  v-for="role in item.roles"
+                  :key="role"
+                  class="inline-flex items-center px-2 py-0.5 rounded-full
+                    text-sm font-semibold bg-gradient-to-br from-teal-400 to-teal-800
+                    text-teal-100 ring-1 ring-teal-400 ring-offset-1 ring-offset-sky-100
+                    select-none leading-none pb-1 hover:from-teal-400/50 hover:to-teal-800/50
+                    hover:text-teal-800 transition-all ease-in-out duration-300 cursor-help"
+                  title="User role"
+                >
+                  {{ role }}
+                </span>
+              </div>
             </td>
             <td>
               <span class="w-full flex flex-row items-center justify-start">
                 <a
-                  href="tel:+918892982637"
+                  :href="`tel:${item.billing_phone}`"
                   class="flex flex-nowrap flex-row items-center justify-start
                     hover:text-sky-500 gap-x-1 cursor-pointer whitespace-nowrap
                     focus:outline-none focus:ring-1 focus:ring-teal-500 focus:ring-offset-1
                     focus:ring-offset-teal-100 -ml-2 px-2 rounded-md"
                 >
-                  <span>+91</span>
-                  <span>889-298-2637</span>
+                  <span>{{ item.billing_country }}</span>
+                  <span>{{ item.billing_phone }}</span>
                 </a>
               </span>
             </td>
             <td>
               <span class="w-full flex flex-row flex-nowrap items-center justify-start">
                 <a
-                  href="mailto:smitpatel.dev@gmail.com"
+                  :href="`mailto:${item.email}`"
                   class="inline-block h-full hover:text-sky-500 whitespace-pre md:whitespace-nowrap
                     focus:outline-none focus:ring-1 focus:ring-teal-500 focus:ring-offset-1
                     focus:ring-offset-teal-100 -ml-2 px-2 rounded-md cursor-pointer"
                 >
-                  smitpatel.dev@gmail.com
+                  {{ item.email }}
                 </a>
               </span>
             </td>
-            <td>Demo company name LTD.</td>
+            <td>{{ item.billing_company || '--' }}</td>
             <td>{{ formatDateToDDMMYYYY(new Date()) }}</td>
             <!-- Actions -->
             <td>
@@ -123,6 +127,27 @@
                 >
                   <RusIcon :icon="mdiDelete" />
                 </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <!-- No Results -->
+        <tbody v-else>
+          <tr>
+            <td :colspan="rowHeaders.length || 0">
+              <div
+                class="w-full flex flex-col items-center justify-center gap-y-2
+                  text-lg font-medium py-10 bg-transparent"
+              >
+                <RusIcon
+                  :icon="mdiEmoticonSadOutline"
+                  className="w-12 h-12 text-teal-600"
+                />
+                <span
+                  class="bg-gradient-to-br from-teal-500 to-teal-800 bg-clip-text text-transparent select-none"
+                >
+                  No results found
+                </span>
               </div>
             </td>
           </tr>
@@ -232,6 +257,7 @@ import {
   mdiChevronDoubleRight,
   mdiChevronDoubleLeft,
   mdiOpenInNew,
+mdiEmoticonSadOutline,
 } from '@mdi/js';
 import type { DialogMode } from '@/interfaces/dialog';
 import { USER_TABLE_HEADER } from '@/lib/data/user-table';
@@ -262,14 +288,14 @@ const hToggleSortDirection = (sortD: TableSortDirection) => {
 };
 
 // Handle APIs
-const { getAllUsersQ } = useGetAllUsers({
+const { data } = useGetAllUsers({
   page: 1,
   pageSize: 10,
   sort: 'asc',
   sortBy: 'id',
 });
-watch([getAllUsersQ.data], () => {
-  console.log('getAllUsersQ', getAllUsersQ?.data?.value);
+watch([data], () => {
+  console.log('getAllUsersQ', data.value?.data);
 });
 
 const { getAllRolesQ } = useGetAllRoles();
