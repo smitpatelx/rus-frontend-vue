@@ -10,17 +10,17 @@ const getHeaders = () => ({
 });
 
 const editUser = async (data: any) =>
-  axios.put(`rsu/v1/user/${data.id}`, data, {
+  axios.put(`rus/v1/user/${data.id}`, data, {
     ...getHeaders(),
   });
 
 const getAllUsers = async (data: any): Promise<AxiosResponse<GetAllUserRes, unknown>> =>
-  axios.get('rsu/v1/all', {
+  axios.get('rus/v1/all', {
     ...getHeaders(),
   });
 
 const getUser = async (id: number) =>
-  axios.get(`rsu/v1/user/${id}`, {
+  axios.get(`rus/v1/user/${id}`, {
     ...getHeaders(),
   });
 
