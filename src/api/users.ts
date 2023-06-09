@@ -10,27 +10,27 @@ const getHeaders = () => ({
 });
 
 const editUser = async (data: any) =>
-  axios.put(`/wp-json/rsu/v1/user/${data.id}`, data, {
+  axios.put(`rsu/v1/user/${data.id}`, data, {
     ...getHeaders(),
   });
 
 const getAllUsers = async (data: any): Promise<AxiosResponse<GetAllUserRes, unknown>> =>
-  axios.get('/wp-json/rsu/v1/all', {
+  axios.get('rsu/v1/all', {
     ...getHeaders(),
   });
 
 const getUser = async (id: number) =>
-  axios.get(`/wp-json/rsu/v1/user/${id}`, {
+  axios.get(`rsu/v1/user/${id}`, {
     ...getHeaders(),
   });
 
 const deleteUser = async (id: number) =>
-  axios.delete(`/wp-json/rus/v1/users/${id}`, {
+  axios.delete(`rus/v1/users/${id}`, {
     ...getHeaders(),
   });
 
 const getAllRoles = async (): Promise<AxiosResponse<GetAllRoleRes, unknown>> =>
-  axios.get(`/wp-json/rus/v1/roles`, {
+  axios.get(`rus/v1/roles`, {
     ...getHeaders(),
   });
 
