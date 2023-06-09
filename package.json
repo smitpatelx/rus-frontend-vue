@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "w": "NODE_ENV=development vite build --watch",
+    "w": "vite build --watch",
     "dev": "vite",
     "build": "prettier --write src/ && run-p type-check build-only",
     "preview": "vite preview",
