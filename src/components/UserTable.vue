@@ -93,7 +93,7 @@
                 </a>
 
                 <button
-                  @click.stop.capture.passive="openDialog('view')"
+                  @click.stop.capture.passive="openDialog('view', item)"
                   type="button"
                   :title="`View - ${item.username}`"
                   class="w-9 h-9 flex items-center justify-center rounded-full bg-transparent
@@ -106,7 +106,7 @@
                 </button>
 
                 <button
-                  @click.stop.capture.passive="openDialog('edit')"
+                  @click.stop.capture.passive="openDialog('edit', item)"
                   type="button"
                   :title="`Edit - ${item.username}`"
                   class="w-9 h-9 flex items-center justify-center rounded-full bg-transparent
@@ -119,7 +119,7 @@
                 </button>
 
                 <button
-                  @click.stop.capture.passive="openDialog('delete')"
+                  @click.stop.capture.passive="openDialog('delete', item)"
                   type="button"
                   :title="`Delete - ${item.username}`"
                   class="w-9 h-9 flex items-center justify-center rounded-full bg-transparent
@@ -268,9 +268,10 @@ import useGetAllUsers from '@/lib/hooks/useGetAllUsers';
 import useGetAllRoles from '@/lib/hooks/useGetAllRoles';
 import { IN_DATE } from '@/lib/helpers';
 import { watch } from 'vue';
+import type { User } from '@/interfaces/user';
 
 defineProps<{
-  openDialog: (mode: DialogMode) => void;
+  openDialog: (mode: DialogMode, user: User) => void;
 }>();
 
 const rowHeaders: TableHeaderItems = [
@@ -295,14 +296,14 @@ const { data } = useGetAllUsers({
   sort: 'asc',
   sortBy: 'id',
 });
-watch([data], () => {
-  console.log('getAllUsersQ', data.value?.data);
-});
+// watch([data], () => {
+//   console.log('getAllUsersQ', data.value?.data);
+// });
 
-const { getAllRolesQ } = useGetAllRoles();
-watch([getAllRolesQ.data], () => {
-  console.log('getAllRolesQ', getAllRolesQ?.data?.value);
-});
+// const { getAllRolesQ } = useGetAllRoles();
+// watch([getAllRolesQ.data], () => {
+//   console.log('getAllRolesQ', getAllRolesQ?.data?.value);
+// });
 </script>
 
 <style scoped lang="scss">

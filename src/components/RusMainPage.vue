@@ -6,6 +6,7 @@
       <!-- All dialogs -->
       <ViewUserDialog
         :open="viewDialogState"
+        :user-data="currentUser"
         @close="viewDialogState.value = false"
       />
       <EditUserDialog
@@ -27,29 +28,41 @@ import ConfirmDeletion from './dialogs/ConfirmDeletion.vue';
 import UserTable from './UserTable.vue';
 import type { DialogMode } from '@/interfaces/dialog';
 import { reactive } from 'vue';
+import type { User } from '@/interfaces/user';
 
 const viewDialogState = reactive({ value: false });
 const editDialogState = reactive({ value: false });
 const deleteDialogState = reactive({ value: false });
 
-const openDialog = (mode: DialogMode) => {
+const currentUser = reactive({ value: null as User | null });
+
+const openDialog = (mode: DialogMode, user: User) => {
   switch (mode) {
     case 'view':
       if (viewDialogState.value) {
         viewDialogState.value = false;
+        currentUser.value = null;
+        break;
       }
+      currentUser.value = user;
       viewDialogState.value = true;
       break;
     case 'edit':
       if (editDialogState.value) {
         editDialogState.value = false;
+        currentUser.value = null;
+        break;
       }
+      currentUser.value = user;
       editDialogState.value = true;
       break;
     case 'delete':
       if (deleteDialogState.value) {
         deleteDialogState.value = false;
+        currentUser.value = null;
+        break;
       }
+      currentUser.value = user;
       deleteDialogState.value = true;
       break;
     default:
