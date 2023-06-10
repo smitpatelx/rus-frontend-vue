@@ -67,7 +67,9 @@
               </span>
             </td>
             <td>{{ item.billing_company || '--' }}</td>
-            <td>{{ formatDateToDDMMYYYY(new Date()) }}</td>
+            <td>
+              {{ item.user_registered ? IN_DATE.format(new Date(item.user_registered)) : '--' }}
+            </td>
             <!-- Actions -->
             <td>
               <div
@@ -264,15 +266,13 @@ import type { DialogMode } from '@/interfaces/dialog';
 import { USER_TABLE_HEADER } from '@/lib/data/user-table';
 import useGetAllUsers from '@/lib/hooks/useGetAllUsers';
 import useGetAllRoles from '@/lib/hooks/useGetAllRoles';
-import { formatDateToDDMMYYYY } from '@/lib/helpers';
+import { IN_DATE } from '@/lib/helpers';
 import { watch } from 'vue';
 
 defineProps<{
   openDialog: (mode: DialogMode) => void;
 }>();
 
-const totalRows = 20;
-const rowFill = Array(totalRows).fill(null);
 const rowHeaders: TableHeaderItems = [
   ...USER_TABLE_HEADER,
 ];

@@ -11,11 +11,22 @@ export const randomAlpha = (): string => {
   return result;
 };
 
-export const formatDateToDDMMYYYY = (date: Date): string => {
-  const newDate = date.toLocaleString('en-CA', {
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric',
-  });
-  return newDate;
-};
+/**
+ * Formats given date to Indian Standard Date format.
+ * Use: IN_DATE.format(new Date())
+ */
+export const IN_DATE = Intl.DateTimeFormat('en-IN', {
+  day: '2-digit',
+  month: 'short',
+  year: 'numeric',
+});
+
+/**
+ * Formats given date to US Standard Date format.
+ * Use: US_DATE.format(new Date())
+ */
+export const US_DATE = Intl.DateTimeFormat('en-US', {
+  day: '2-digit',
+  month: 'short',
+  year: 'numeric',
+});
