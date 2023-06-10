@@ -24,19 +24,19 @@
     >
       <div class="w-full grid grid-cols-2 gap-y-7 gap-x-2">
         <div
-          v-for="(item, key) in userDetails"
+          v-for="(data, key) in userDetails"
           :key="key"
           class="item-display-field"
         >
-          <label>{{item.label}}</label>
+          <label>{{data.label}}</label>
           <p>
             <span
               v-if="key === 'phone'"
               class="mr-1 text-teal-600"
             >
-              +{{ Number(item.value.slice(0, 3)) }}
+              +{{ Number(data.value.slice(0, 3)) }}
             </span>
-            {{ key === 'phone' ? formatPhone(item.value.slice(3, 14)) : item.value }}
+            {{ key === 'phone'  ? formatPhone(data.value.slice(3, 14)) : data.value}}
           </p>
         </div>
       </div>
@@ -60,9 +60,11 @@
 import { onMounted, reactive, ref, watch } from 'vue';
 import RusIcon from '../generic/RusIcon.vue';
 import { mdiAccount, mdiClose } from '@mdi/js';
+import type { User } from '@/interfaces/user';
 
 const props = defineProps<{
   open: { value: boolean };
+  userData: { value: User | null };
 }>();
 
 const emit = defineEmits<{
@@ -73,28 +75,42 @@ const emit = defineEmits<{
 const userDetails = reactive({
   username: {
     label: 'Username',
-    value: 'smitpatelx',
+    value: '',
   },
   email: {
     label: 'Email',
-    value: 'smitpatel.dev@gmail.com',
+    value: '',
   },
   firstName: {
     label: 'First Name',
-    value: 'Smit',
+    value: '',
   },
   lastName: {
     label: 'Last Name',
-    value: 'Patel',
+    value: '',
   },
   phone: {
     label: 'Phone',
-    value: '0912345367886',
+    value: '',
   },
   company: {
     label: 'Company',
-    value: 'Demo company LTD.',
+    value: '',
   }
+});
+
+// Change data on edit
+watch([props.userData], () => {
+  console.log('Watching : ', props.userData.value);
+  const data = props.userData.value;
+  if (data === null) return;
+
+  userDetails.username.value = data.username;
+  userDetails.email.value = data.email;
+  userDetails.firstName.value = data.first_name;
+  userDetails.lastName.value = data.last_name;
+  userDetails.phone.value = data.billing_phone;
+  userDetails.company.value = data.billing_company;
 });
 
 /**
