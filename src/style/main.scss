@@ -171,13 +171,13 @@ dialog {
 
   label {
     @apply text-xs font-normal text-slate-500 uppercase
-      leading-none ml-px tracking-wider select-none p-0;
+      leading-none tracking-wider select-none p-0;
   }
 
   p {
     @apply text-base font-medium text-slate-800
-      whitespace-pre-wrap break-words leading-none
-      select-all -ml-1 p-0;
+      break-all leading-none
+      select-all p-0;
   }
 }
 
