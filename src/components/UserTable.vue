@@ -77,6 +77,7 @@
                 <a
                   title="Open wp account page"
                   :href="`/wp-admin/user-edit.php?user_id=${item.id}`"
+                  target="_blank"
                   class="w-9 h-9 flex items-center justify-center rounded-full bg-transparent
                     hover:bg-teal-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
                     duration-300 ease-in-out transition-all focus:outline-none focus-visible:ring-1
