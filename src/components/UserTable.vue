@@ -226,8 +226,8 @@
           value="10"
           name="page-size"
           class="rounded-md text-teal-800 select-none
-            bg-teal-200/20 hover:bg-teal-300/40 hover:text-teal-800 group
-            focus:outline-none ring-1 ring-teal-400 focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-teal-600
+            !bg-teal-200/20 hover:bg-teal-300/40 hover:text-teal-800 group
+            focus:outline-none !ring-1 !ring-teal-400 focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-teal-600
             focus-visible:ring-offset-slate-100 focus:border-0 transition-all duration-300 ease-in-out
             rounded-l-md flex flex-wrap items-center justify-center
             leading-none border-0"
