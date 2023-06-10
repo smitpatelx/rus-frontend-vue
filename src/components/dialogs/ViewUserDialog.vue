@@ -101,7 +101,6 @@ const userDetails = reactive({
 
 // Change data on edit
 watch([props.userData], () => {
-  console.log('Watching : ', props.userData.value);
   const data = props.userData.value;
   if (data === null) return;
 

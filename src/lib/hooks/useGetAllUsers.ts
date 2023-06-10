@@ -10,7 +10,7 @@ const useGetAllUsers = (filters: unknown) => {
     },
     enabled: true,
     onSuccess: (res) => {
-      console.log(res);
+      // console.log(res);
     },
     onError: (error) => {
       // console.log(error);
