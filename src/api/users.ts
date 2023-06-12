@@ -1,5 +1,5 @@
 import type { GetAllRoleRes } from '@/interfaces/roles';
-import type { GetAllUserRes } from '@/interfaces/user';
+import type { GetAllUserRes, GetUserRes } from '@/interfaces/user';
 import axios, { rusN } from '@/lib/axios';
 import type { AxiosResponse } from 'axios';
 
@@ -19,13 +19,13 @@ const getAllUsers = async (data: any): Promise<AxiosResponse<GetAllUserRes, unkn
     ...getHeaders(),
   });
 
-const getUser = async (id: number) =>
+const getUser = async (id: number): Promise<AxiosResponse<GetUserRes, unknown>> =>
   axios.get(`rus/v1/user/${id}`, {
     ...getHeaders(),
   });
 
 const deleteUser = async (id: number) =>
-  axios.delete(`rus/v1/users/${id}`, {
+  axios.delete(`rus/v1/user/${id}`, {
     ...getHeaders(),
   });
 
