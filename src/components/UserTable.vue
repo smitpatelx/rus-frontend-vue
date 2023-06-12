@@ -267,7 +267,6 @@ import { USER_TABLE_HEADER } from '@/lib/data/user-table';
 import useGetAllUsers from '@/lib/hooks/useGetAllUsers';
 import useGetAllRoles from '@/lib/hooks/useGetAllRoles';
 import { IN_DATE } from '@/lib/helpers';
-import { watch } from 'vue';
 import type { User } from '@/interfaces/user';
 
 defineProps<{

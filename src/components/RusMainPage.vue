@@ -11,6 +11,7 @@
       />
       <EditUserDialog
         :open="editDialogState"
+        :user-data="currentUser"
         @close="editDialogState.value = false"
       />
       <ConfirmDeletion
