@@ -23,6 +23,7 @@
     "maska": "^2.1.9",
     "pinia": "^2.0.36",
     "vee-validate": "^4.9.5",
+    "velocity-animate": "^1.5.2",
     "vue": "^3.3.2",
     "zod": "^3.21.4"
   },
@@ -32,6 +33,7 @@
     "@tsconfig/node18": "^2.0.1",
     "@types/jsdom": "^21.1.1",
     "@types/node": "^18.16.8",
+    "@types/velocity-animate": "^2.0.1",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "@vue/eslint-config-prettier": "^7.1.0",
