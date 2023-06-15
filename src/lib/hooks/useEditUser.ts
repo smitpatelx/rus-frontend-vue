@@ -9,12 +9,6 @@ const useEditUser = () => {
       const res = UserApi.editUser(data);
       return res;
     },
-    onSuccess: (data: any) => {
-      console.log(data);
-    },
-    onError: (error: any) => {
-      console.log(error);
-    },
   });
 
   return {

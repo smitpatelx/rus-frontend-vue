@@ -110,7 +110,8 @@ export const formValidation = zod.object({
     .trim()
     .nonempty('Phone number is required.')
     .min(12, 'Phone number must be 10 digits.')
-    .max(12, 'Phone number must be 10 digits.'),
+    .max(12, 'Phone number must be 10 digits.')
+    .transform((val) => val.replace(/[^0-9]/g, '')),
   company: zod
     .string()
     .trim()
@@ -135,5 +136,5 @@ export interface EditUserReq {
 }
 
 export interface EditUserRes {
-  message: string;
+  me: Record<string, unknown>;
 }

@@ -115,8 +115,11 @@ import RusSelectCountry from '../generic/RusSelectCountry.vue';
 import { usableCountries } from '@/interfaces/countries';
 import useEditUser from '@/lib/hooks/useEditUser';
 import { useNotification } from "@kyvg/vue3-notification";
+import useGetAllUsers from '@/lib/hooks/useGetAllUsers';
 
 const { notify } = useNotification();
+const { editUserM } = useEditUser();
+const getAllUsersQ = useGetAllUsers();
 
 const props = defineProps<{
   open: { value: boolean };
@@ -211,7 +214,6 @@ const touchedIndividually = reactive({
 const submitForm = handleSubmit(async (values) => {
   if (!props.userData.value?.id || props.userData.value?.id === undefined) return;
 
-  const { editUserM } = useEditUser();
   console.log('submitForm', values);
   editUserM.mutate({
     id: props.userData.value.id,
@@ -222,18 +224,29 @@ const submitForm = handleSubmit(async (values) => {
     last_name: values.lastName,
     phone: values.phone,
   }, {
-    onSuccess: () => {
-      emit('close');
+    onSuccess: (data) => {
+      getAllUsersQ.refetch();
       notify({
+        id: 0, // (optional) Avoid duplicate notifications
         title: "Success",
         text: "Account updated successfully.",
+        type: "success",
       });
+      emit('close');
     },
-    onError: (error) => {
-      console.dir("error.data.message :", error);
+    onError: (e) => {
+      const error = e as {
+        response: {
+          data: {
+            message: string;
+          },
+        },
+      };
       notify({
+        id: 1, // (optional) Avoid duplicate notifications
         title: "Error",
-        text: error.data.message || "Something went wrong",
+        text: error?.response?.data?.message || "Something went wrong",
+        type: "error",
       });
     },
   });

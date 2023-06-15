@@ -289,12 +289,7 @@ const hToggleSortDirection = (sortD: TableSortDirection) => {
 };
 
 // Handle APIs
-const { data } = useGetAllUsers({
-  page: 1,
-  pageSize: 10,
-  sort: 'asc',
-  sortBy: 'id',
-});
+const { data } = useGetAllUsers();
 // watch([data], () => {
 //   console.log('getAllUsersQ', data.value?.data);
 // });
