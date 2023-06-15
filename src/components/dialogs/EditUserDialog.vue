@@ -113,6 +113,10 @@ import { toTypedSchema } from '@vee-validate/zod';
 import { editFormFields, EditFormKeys, formValidation, type User } from '@/interfaces/user';
 import RusSelectCountry from '../generic/RusSelectCountry.vue';
 import { usableCountries } from '@/interfaces/countries';
+import useEditUser from '@/lib/hooks/useEditUser';
+import { useNotification } from "@kyvg/vue3-notification";
+
+const { notify } = useNotification();
 
 const props = defineProps<{
   open: { value: boolean };
@@ -205,8 +209,34 @@ const touchedIndividually = reactive({
 });
 
 const submitForm = handleSubmit(async (values) => {
+  if (!props.userData.value?.id || props.userData.value?.id === undefined) return;
+
+  const { editUserM } = useEditUser();
   console.log('submitForm', values);
-  // await onSubmit(values);
+  editUserM.mutate({
+    id: props.userData.value.id,
+    billing_country: values.country,
+    company: values.company,
+    email: values.email,
+    first_name: values.firstName,
+    last_name: values.lastName,
+    phone: values.phone,
+  }, {
+    onSuccess: () => {
+      emit('close');
+      notify({
+        title: "Success",
+        text: "Account updated successfully.",
+      });
+    },
+    onError: (error) => {
+      console.dir("error.data.message :", error);
+      notify({
+        title: "Error",
+        text: error.data.message || "Something went wrong",
+      });
+    },
+  });
 });
 
 const htmlInputTypes = {
