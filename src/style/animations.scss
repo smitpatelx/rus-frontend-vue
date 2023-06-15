@@ -91,3 +91,22 @@
   transition: all 0.2s ease-out;
   opacity: 0;
 }
+
+.vue-notification {
+  opacity: 1 !important;
+  z-index: 99999 !important;
+  @apply px-5 py-3 rounded-lg shadow-md border-none
+    fixed #{!important};
+
+  &.success {
+    @apply bg-teal-500 text-teal-50 border border-teal-900 #{!important};
+  }
+
+  &.error {
+    @apply bg-red-500 text-red-50 border border-red-800 #{!important};
+  }
+
+  &.warn {
+    @apply bg-yellow-500 text-yellow-50 border border-yellow-800 #{!important};
+  }
+}
