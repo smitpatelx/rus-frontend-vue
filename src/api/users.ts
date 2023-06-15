@@ -1,5 +1,5 @@
 import type { GetAllRoleRes } from '@/interfaces/roles';
-import type { GetAllUserRes, GetUserRes } from '@/interfaces/user';
+import type { GetAllUserRes, GetUserRes, EditUserRes, EditUserReq } from '@/interfaces/user';
 import axios, { rusN } from '@/lib/axios';
 import type { AxiosResponse } from 'axios';
 
@@ -9,7 +9,7 @@ const getHeaders = () => ({
   },
 });
 
-const editUser = async (data: any) =>
+const editUser = async (data: EditUserReq): Promise<AxiosResponse<EditUserRes, unknown>> =>
   axios.put(`rus/v1/user/${data.id}`, data, {
     ...getHeaders(),
   });

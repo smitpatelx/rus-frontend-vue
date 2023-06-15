@@ -123,3 +123,17 @@ export const formValidation = zod.object({
     .nonempty('Country code is required.')
     .regex(new RegExp(/^[a-z]{2}$/, 'g'), 'Country code must be 2 lower-case letters.'),
 });
+
+export interface EditUserReq {
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+  phone: string;
+  company: string;
+  billing_country: string;
+}
+
+export interface EditUserRes {
+  message: string;
+}
