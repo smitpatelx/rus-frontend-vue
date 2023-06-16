@@ -26,7 +26,12 @@
         <div
           v-for="(data, key) in userDetails"
           :key="key"
-          class="item-display-field"
+          :class="cn([
+            'flex flex-col gap-y-1 item-display-field',
+            {
+              '!col-span-2': key === 'email',
+            },
+          ])"
         >
           <label>{{data.label}}</label>
           <p>
@@ -57,6 +62,7 @@ import { mdiAccount, mdiClose } from '@mdi/js';
 import type { User } from '@/interfaces/user';
 import { getDialCode, usableCountries } from '@/interfaces/countries';
 import { formatPhone } from '@/lib/helpers';
+import { cn } from '@/lib/utils';
 
 const props = defineProps<{
   open: { value: boolean };
@@ -69,12 +75,12 @@ const emit = defineEmits<{
 
 // Display data
 const userDetails = reactive({
-  username: {
-    label: 'Username',
-    value: '',
-  },
   email: {
     label: 'Email',
+    value: '',
+  },
+  username: {
+    label: 'Username',
     value: '',
   },
   firstName: {
