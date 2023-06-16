@@ -21,7 +21,7 @@
           />
         </span>
         <p
-          :class="classNames(
+          :class="cn(
             {
               '!text-teal-500/60 !font-normal': !attrs.getLabel(attrs.value),
             }
@@ -77,8 +77,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, watch, useAttrs, computed, type Ref } from 'vue';
-import classNames from 'classnames';
+import { ref, reactive, watch, useAttrs, computed } from 'vue';
+import { cn } from '@/lib/utils';
 import { mdiChevronDown } from '@mdi/js';
 import RusIcon from './RusIcon.vue';
 import { randomAlpha } from '@/lib/helpers';

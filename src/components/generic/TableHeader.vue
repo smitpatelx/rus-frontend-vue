@@ -4,14 +4,14 @@
       <th
         v-for="(column, i) in columns"
         :key="i"
-        :class="classNames(
+        :class="cn(
           {
             'sticky right-0 bg-teal-100 after-border': column.sticky,
           }
         )"
       >
         <span
-          :class="classNames(
+          :class="cn(
             'w-full flex flex-nowrap items-center',
             `rus-tb-h-align-${column.align}`,
           )"
@@ -25,7 +25,7 @@
             <span v-if="column.sortActive">
               <RusIcon
                 :icon="mdiMenuUp"
-                :class-name="classNames(
+                :class-name="cn(
                   'w-5 h-5 inline-block text-teal-600',
                   {
                     'rotate-180': column.sortDirection === 'desc',
@@ -47,7 +47,7 @@
 import { TableSortDirection, type TableHeaderItem } from '@/interfaces/table';
 import RusIcon from '@/components/generic/RusIcon.vue';
 import { mdiMenuUp } from '@mdi/js';
-import classNames from 'classnames';
+import { cn } from '@/lib/utils';
 
 defineProps<{
   columns: TableHeaderItem[];

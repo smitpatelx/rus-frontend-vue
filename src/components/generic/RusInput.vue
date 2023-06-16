@@ -1,7 +1,7 @@
 <template>
   <input
     v-bind="attrs"
-    :class="classNames(
+    :class="cn(
       'rus-input',
       {
         'rus-input-error': attrs.error,
@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 import { reactive, useAttrs } from 'vue';
-import classNames from 'classnames';
+import { cn } from '@/lib/utils';
 import { vMaska } from 'maska';
 import { randomAlpha } from '@/lib/helpers';
 
