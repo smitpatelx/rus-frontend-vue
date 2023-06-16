@@ -30,13 +30,7 @@
         >
           <label>{{data.label}}</label>
           <p>
-            <span
-              v-if="key === 'phone'"
-              class="mr-1 text-teal-600"
-            >
-              +{{ Number(data.value.slice(0, 3)) }}
-            </span>
-            {{ key === 'phone'  ? formatPhone(data.value.slice(3, 14)) : data.value}}
+            {{ data.value }}
           </p>
         </div>
       </div>
@@ -61,6 +55,8 @@ import { onMounted, reactive, ref, watch } from 'vue';
 import RusIcon from '../generic/RusIcon.vue';
 import { mdiAccount, mdiClose } from '@mdi/js';
 import type { User } from '@/interfaces/user';
+import { getDialCode, usableCountries } from '@/interfaces/countries';
+import { formatPhone } from '@/lib/helpers';
 
 const props = defineProps<{
   open: { value: boolean };
@@ -96,7 +92,11 @@ const userDetails = reactive({
   company: {
     label: 'Company',
     value: '',
-  }
+  },
+  country: {
+    label: 'Country',
+    value: '',
+  },
 });
 
 // Change data on edit
@@ -108,22 +108,10 @@ watch([props.userData], () => {
   userDetails.email.value = data.email;
   userDetails.firstName.value = data.first_name;
   userDetails.lastName.value = data.last_name;
-  userDetails.phone.value = data.billing_phone;
+  userDetails.phone.value = `${getDialCode(data.billing_country.toLowerCase())}  ${formatPhone(data.billing_phone)}`;
   userDetails.company.value = data.billing_company;
+  userDetails.country.value = usableCountries?.[data.billing_country]?.name || '';
 });
-
-/**
- * Format phone number
- * From: 2345367886
- * To: 234-536-7886
- */
-const formatPhone = (phone: string) => {
-  const areaCode = phone.slice(0, 3);
-  const firstThree = phone.slice(3, 6);
-  const lastFour = phone.slice(6, 10);
-
-  return `${areaCode}-${firstThree}-${lastFour}`;
-}
 
 // Dialog
 const dialogRef = ref<HTMLDialogElement | null>(null);
