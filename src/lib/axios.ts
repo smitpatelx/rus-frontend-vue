@@ -7,7 +7,7 @@ export const rusN = (window as any).rusN as {
 
 const instance = axios.create({
   baseURL: rusN.rootapiurl,
-  timeout: 1000,
+  timeout: 3000,
 });
 
 export default instance;
