@@ -108,14 +108,14 @@
     }
 
     &.rus-success {
-      @apply bg-gradient-to-br from-teal-300 via-teal-500 to-teal-600 border border-teal-500;
+      @apply bg-gradient-to-br from-teal-200 via-teal-300 to-teal-400 border border-teal-500;
 
       .notification-title {
         @apply text-teal-700;
       }
 
       .notification-content {
-        @apply text-teal-50;
+        @apply text-teal-900;
       }
     }
 
