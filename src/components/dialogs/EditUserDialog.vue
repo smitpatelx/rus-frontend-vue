@@ -24,12 +24,12 @@
       @click.stop
     >
       <div
-        v-if="isLoading"
+        v-if="editUserM.isLoading.value"
         class="w-full flex flex-col justify-center items-center py-6"
       >
         <RusSpinner
           color="teal"
-          :show="isLoading"
+          :show="editUserM.isLoading.value"
           size="xl"
         />
 
@@ -74,7 +74,7 @@
         @click="restoreForm"
         tabindex="0"
         title="Restore to default values."
-        :disabled="isLoading"
+        :disabled="editUserM.isLoading.value"
       >
         Restore
         <RusIcon :icon="mdiRestore" />
@@ -83,13 +83,13 @@
         class="btn save-btn"
         @click="submitForm"
         tabindex="0"
-        :disabled="(isLoading || isSubmitting || !formMeta.dirty || !formMeta.valid)"
+        :disabled="(editUserM.isLoading.value || isSubmitting || !formMeta.dirty || !formMeta.valid)"
       >
         Save
         <RusSpinner
-          v-if="isLoading || isSubmitting"
+          v-if="isSubmitting || editUserM.isLoading.value"
           color="teal"
-          :show="isLoading || isSubmitting"
+          :show="isSubmitting || editUserM.isLoading.value"
           size="md"
           className="!mr-0"
         />
@@ -99,6 +99,13 @@
         />
       </button>
     </div>
+
+    <!-- Notifications -->
+    <notifications
+      animation-type="velocity"
+      position="bottom center"
+      :duration="2000"
+    />
   </dialog>
 </template>
 
@@ -227,10 +234,9 @@ const submitForm = handleSubmit(async (values) => {
     onSuccess: (data) => {
       getAllUsersQ.refetch();
       notify({
-        id: 0, // (optional) Avoid duplicate notifications
         title: "Success",
         text: "Account updated successfully.",
-        type: "success",
+        type: "rus-success",
       });
       emit('close');
     },
@@ -242,11 +248,11 @@ const submitForm = handleSubmit(async (values) => {
           },
         },
       };
+      console.log('error', error?.response?.data?.message);
       notify({
-        id: 1, // (optional) Avoid duplicate notifications
         title: "Error",
         text: error?.response?.data?.message || "Something went wrong",
-        type: "error",
+        type: "rus-error",
       });
     },
   });
@@ -317,9 +323,6 @@ const getInputProps = (key: EditFormKeys) => {
   return inputProps;
 }
 
-// Loading state
-const isLoading = ref(false);
-
 // Dialog
 const dialogRef = ref<HTMLDialogElement | null>(null);
 
@@ -335,11 +338,6 @@ const closeDialog = () => {
 watch([props.open], () => {
   if (props.open.value) {
     openDialog();
-    isLoading.value = true;
-
-    setTimeout(() => {
-      isLoading.value = false;
-    }, 1500);
   } else {
     dialogRef.value?.close();
   }

@@ -18,9 +18,6 @@
         :open="deleteDialogState"
         @close="deleteDialogState.value = false"
       />
-
-      <!-- Notifications -->
-      <notifications position="bottom center" />
     </div>
   </div>
 </template>
