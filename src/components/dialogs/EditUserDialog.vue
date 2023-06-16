@@ -127,6 +127,8 @@ import { usableCountries } from '@/interfaces/countries';
 import useEditUser from '@/lib/hooks/useEditUser';
 import { useNotification } from "@kyvg/vue3-notification";
 import useGetAllUsers from '@/lib/hooks/useGetAllUsers';
+import { object } from 'zod';
+import { INITIAL_DATA } from '@/lib/data/edit-dialog';
 
 const { notify } = useNotification();
 const { editUserM } = useEditUser();
@@ -153,24 +155,8 @@ const {
   validateField,
   setValues,
 } = useForm({
-  initialValues: {
-    company: '',
-    country: '',
-    email: '',
-    firstName: '',
-    lastName: '',
-    phone: '',
-    username: '',
-  },
-  initialErrors: {
-    company: '',
-    country: '',
-    email: '',
-    firstName: '',
-    lastName: '',
-    phone: '',
-    username: '',
-  },
+  initialValues: structuredClone(INITIAL_DATA),
+  initialErrors: structuredClone(INITIAL_DATA),
   initialTouched: {
     company: false,
     country: false,
