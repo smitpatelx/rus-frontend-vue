@@ -30,3 +30,16 @@ export const US_DATE = Intl.DateTimeFormat('en-US', {
   month: 'short',
   year: 'numeric',
 });
+
+/**
+ * Format phone number
+ * From: 2345367886
+ * To: 234-536-7886
+ */
+export const formatPhone = (phone: string) => {
+  const areaCode = phone.slice(0, 3);
+  const firstThree = phone.slice(3, 6);
+  const lastFour = phone.slice(6, 10);
+
+  return `${areaCode}-${firstThree}-${lastFour}`;
+};

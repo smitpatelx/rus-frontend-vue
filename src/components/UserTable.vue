@@ -45,12 +45,16 @@
                 <a
                   :href="`tel:${item.billing_phone}`"
                   class="flex flex-nowrap flex-row items-center justify-start
-                    hover:text-sky-500 gap-x-1 cursor-pointer whitespace-nowrap
+                    hover:text-sky-500 gap-x-2 cursor-pointer whitespace-nowrap
                     focus:outline-none focus:ring-1 focus:ring-teal-500 focus:ring-offset-1
                     focus:ring-offset-teal-100 -ml-2 px-2 rounded-md"
                 >
-                  <span>{{ item.billing_country }}</span>
-                  <span>{{ item.billing_phone }}</span>
+                  <span class="text-slate-600">
+                    {{ getDialCode(item.billing_country) }}
+                  </span>
+                  <span>
+                    {{ formatPhone(item.billing_phone) }}
+                  </span>
                 </a>
               </span>
             </td>
@@ -268,6 +272,8 @@ import useGetAllUsers from '@/lib/hooks/useGetAllUsers';
 import useGetAllRoles from '@/lib/hooks/useGetAllRoles';
 import { IN_DATE } from '@/lib/helpers';
 import type { User } from '@/interfaces/user';
+import { getDialCode } from '@/interfaces/countries';
+import { formatPhone } from '@/lib/helpers';
 
 defineProps<{
   openDialog: (mode: DialogMode, user: User) => void;
