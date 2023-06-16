@@ -9,8 +9,10 @@
     >
       <button
         class="rus-select-country group-[rus-c]"
-        @keyup.enter.stop
-        @keyup.space.stop
+        @keyup.enter.stop.capture
+        @keyup.space.stop.capture
+        :id="attrs.id"
+        :tabindex="0"
       >
         <span>
           <img
@@ -46,7 +48,7 @@
           placeholder="Search for a country"
           :disabled="attrs.disabled"
           :required="attrs.required"
-          id="rus-country-auto-complete"
+          :id="attrs.id"
           name="rus-country-auto-complete"
           autocorrect="off"
           autocapitalize="off"
@@ -59,8 +61,8 @@
           :key="key"
           @click="selectOption(key)"
           @keyup.stop="handleContainerKeydown"
-          @keyup.enter.stop="selectOption(key)"
-          @keyup.space.stop="selectOption(key)"
+          @keyup.enter.stop.capture="selectOption(key)"
+          @keyup.space.stop.capture="selectOption(key)"
           @keyup.esc.stop.prevent="closeMenu()"
           tabindex="0"
           :id="`rus-select-option-${key}`"
@@ -75,11 +77,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, watch, useAttrs, computed } from 'vue';
+import { ref, reactive, watch, useAttrs, computed, type Ref } from 'vue';
 import classNames from 'classnames';
 import { mdiChevronDown } from '@mdi/js';
 import RusIcon from './RusIcon.vue';
 import { randomAlpha } from '@/lib/helpers';
+import { onClickOutside } from '@vueuse/core';
 
 const ASSET_URL = import.meta.env.VITE_ASSET_URL as string;
 
@@ -99,8 +102,6 @@ const attrs = useAttrs() as {
   error: string | undefined,
   getLabel: (key: string) => string;
   getValue: (key: string) => string;
-  // onBlur: () => Promise<void>;
-  // onChange: (value: string) => void;
 };
 
 const emits = defineEmits<{
@@ -144,7 +145,7 @@ const filteredOptions = computed(() => {
 const firstOptionKey = computed(() => Object.keys(filteredOptions)[0]);
 const lastOptionKey = computed(() => Object.keys(filteredOptions)[Object.keys(filteredOptions).length - 1]);
 
-const selectCountryRef = ref<HTMLElement | null>(null);
+const selectCountryRef = ref<HTMLDivElement | null>(null);
 const lastOptionRef = ref<HTMLElement | null>(null);
 const isMenuOpen = reactive({ value: false });
 
@@ -274,6 +275,8 @@ const handleContainerKeydown = (e: KeyboardEvent) => {
     handleUpArrow(e);
   }
 }
+
+onClickOutside(selectCountryRef, () => closeMenu());
 </script>
 
 <style scoped lang="scss">
@@ -290,7 +293,7 @@ const handleContainerKeydown = (e: KeyboardEvent) => {
       focus-visible:text-teal-100;
   }
 
-  #rus-country-auto-complete {
+  input[name="rus-country-auto-complete"] {
     @apply w-full h-full bg-teal-600 border-0 outline-none
       placeholder-teal-100/60 placeholder:font-normal py-2.5 px-3
       focus:placeholder-transparent focus:ring-0 focus:border-0
