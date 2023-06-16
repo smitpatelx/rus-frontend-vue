@@ -20,26 +20,30 @@
       </button>
     </div>
     <div
-      class="rus-modal-body"
+      class="rus-modal-body relative"
       @click.stop
     >
       <div
-        v-if="editUserM.isLoading.value"
-        class="w-full flex flex-col justify-center items-center py-6"
+        v-show="editUserM.isLoading.value"
+        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
       >
-        <RusSpinner
-          color="teal"
-          :show="editUserM.isLoading.value"
-          size="xl"
-        />
+        <div class="w-full flex flex-col justify-center items-center py-6">
+          <RusSpinner
+            color="teal"
+            :show="editUserM.isLoading.value"
+            size="xl"
+          />
 
-        <h4 class="text-base font-medium text-center pt-5 pb-3 text-teal-600">
-          Loading Account Details ...
-        </h4>
+          <h4 class="text-base font-medium text-center pt-5 pb-3 text-teal-600">
+            Saving Account Details ...
+          </h4>
+        </div>
       </div>
       <form
-        v-else
-        class="w-full grid grid-cols-2 gap-y-5 gap-x-2"
+        class="w-full grid grid-cols-2 gap-y-5 gap-x-2 transition-opacity duration-300"
+        :class="{
+          'opacity-0': editUserM.isLoading.value
+        }"
         @submit.prevent.stop="submitForm"
       >
         <div
@@ -181,7 +185,7 @@ const {
   validationSchema: toTypedSchema(formValidation),
 });
 
-watch([props.userData], () => {
+const readValues = () => {
   setValues({
     company: props.userData.value?.billing_company || '',
     country: props.userData.value?.billing_country || '',
@@ -190,7 +194,11 @@ watch([props.userData], () => {
     lastName: props.userData.value?.last_name || '',
     phone: props.userData.value?.billing_phone || '',
     username: props.userData.value?.username || '',
-  })
+  });
+};
+
+watch([props.userData, props.open], () => {
+  readValues();
 })
 
 const restoreForm = () => {
@@ -205,7 +213,9 @@ const restoreForm = () => {
     phone: false,
     username: false,
   });
+
   // Restore form values
+  readValues();
 };
 
 const touchedIndividually = reactive({
