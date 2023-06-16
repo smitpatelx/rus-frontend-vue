@@ -76,6 +76,7 @@ import { ref, reactive, watch } from 'vue';
 import RusIcon from './RusIcon.vue';
 import type { Options } from '@/interfaces/table';
 import { mdiCheck } from '@mdi/js';
+import { onClickOutside } from '@vueuse/core';
 
 const props = defineProps<{
   value: string | Options,
@@ -136,37 +137,6 @@ watch([lastOptionRef], () => {
 
   return () => {
     lastOpt.removeEventListener('focusout', handleLastItemBlur);
-  }
-});
-
-// Handle click outside
-const handleClickOutside = (e: MouseEvent) => {
-  if (!selectRef.value) {
-    closeMenu();
-    return;
-  };
-  const wrapper = selectRef.value?.getBoundingClientRect()
-  const id = (e.target as unknown as { dataset: { uid: string } })?.dataset?.uid;
-
-  if (
-    id !== props.randomId &&
-    (e.clientX < wrapper.left ||
-    e.clientX > wrapper.right ||
-    e.clientY < wrapper.top ||
-    e.clientY > wrapper.bottom)
-  ) {
-    closeMenu();
-  }
-}
-
-watch([isMenuOpen], () => {
-  if (isMenuOpen.value) {
-    document.addEventListener('click', handleClickOutside);
-  } else {
-    document.removeEventListener('click', handleClickOutside);
-  }
-  () => {
-    document.removeEventListener('click', handleClickOutside);
   }
 });
 
@@ -289,6 +259,8 @@ const handleContainerKeydown = (e: KeyboardEvent) => {
     handleUpArrow(e);
   }
 }
+
+onClickOutside(selectRef, () => closeMenu());
 </script>
 
 <style lang="scss">
