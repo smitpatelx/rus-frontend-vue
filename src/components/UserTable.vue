@@ -71,7 +71,7 @@
               {{ item.user_registered ? IN_DATE.format(new Date(item.user_registered)) : '--' }}
             </td>
             <!-- Actions -->
-            <td>
+            <td class="sticky right-0 bg-teal-50 after-border">
               <div
                 class="w-full flex flex-nowrap flex-row items-center justify-end
                 gap-x-2"

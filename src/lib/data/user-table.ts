@@ -73,6 +73,7 @@ export const USER_TABLE_HEADER: TableHeaderItem[] = [
     sortable: false,
     sortActive: false,
     canHide: false,
+    sticky: true,
   },
 ];
 

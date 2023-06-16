@@ -1,9 +1,14 @@
 <template>
   <thead>
-    <tr>
+    <tr class="relative">
       <th
         v-for="(column, i) in columns"
         :key="i"
+        :class="classNames(
+          {
+            'sticky right-0 bg-teal-100 after-border': column.sticky,
+          }
+        )"
       >
         <span
           :class="classNames(
@@ -121,6 +126,13 @@ thead {
         @apply pl-3 pr-8;
       }
     }
+  }
+}
+
+.after-border {
+  &::before {
+    content: '';
+    @apply w-[0.5px] h-full bg-teal-500 z-50 absolute top-0 left-0;
   }
 }
 </style>

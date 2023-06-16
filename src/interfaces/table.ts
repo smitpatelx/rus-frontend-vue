@@ -27,6 +27,7 @@ export interface TableHeaderItem {
   align: TableAlign;
   sortable: boolean;
   sortActive: boolean;
+  sticky?: boolean;
   canHide: boolean;
   sortDirection?: TableSortDirection;
 }
