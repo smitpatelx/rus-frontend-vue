@@ -18,6 +18,14 @@
         :open="deleteDialogState"
         @close="deleteDialogState.value = false"
       />
+
+      <!-- Global Notifications -->
+      <notifications
+        animation-type="velocity"
+        position="bottom center"
+        :duration="2000"
+        group="global"
+      />
     </div>
   </div>
 </template>

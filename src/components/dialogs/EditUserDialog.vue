@@ -234,6 +234,7 @@ const submitForm = handleSubmit(async (values) => {
     onSuccess: (data) => {
       getAllUsersQ.refetch();
       notify({
+        group: "global",
         title: "Success",
         text: "Account updated successfully.",
         type: "rus-success",
