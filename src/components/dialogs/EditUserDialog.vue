@@ -127,7 +127,6 @@ import { usableCountries } from '@/interfaces/countries';
 import useEditUser from '@/lib/hooks/useEditUser';
 import { useNotification } from "@kyvg/vue3-notification";
 import useGetAllUsers from '@/lib/hooks/useGetAllUsers';
-import { object } from 'zod';
 import { INITIAL_DATA } from '@/lib/data/edit-dialog';
 
 const { notify } = useNotification();
