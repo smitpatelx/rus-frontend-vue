@@ -57,6 +57,7 @@
 import { onMounted, ref, watch } from 'vue';
 import RusIcon from '../generic/RusIcon.vue';
 import { mdiClose, mdiDelete } from '@mdi/js';
+import { useDialogState } from '@/lib/hooks/useDialogState';
 
 const props = defineProps<{
   open: { value: boolean };
@@ -77,30 +78,10 @@ const closeDialog = () => {
   emit('close');
 }
 
-// React on props.open
-watch([props.open], () => {
-  if (props.open.value) {
-    openDialog();
-  } else {
-    dialogRef.value?.close();
-  }
+useDialogState({
+  dialogRef,
+  isDialogOpen: props.open,
+  closeDialog,
+  openDialog,
 });
-
-onMounted(() => {
-  const overlay = dialogRef.value;
-
-  if (overlay) {
-    overlay.addEventListener('click', () => {
-      closeDialog();
-    });
-  }
-
-  return () => {
-    if (overlay) {
-      overlay.removeEventListener('click', () => {
-        closeDialog();
-      });
-    }
-  }
-})
 </script>

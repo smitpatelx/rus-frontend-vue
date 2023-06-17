@@ -128,6 +128,7 @@ import useEditUser from '@/lib/hooks/useEditUser';
 import { useNotification } from "@kyvg/vue3-notification";
 import useGetAllUsers from '@/lib/hooks/useGetAllUsers';
 import { INITIAL_DATA } from '@/lib/data/edit-dialog';
+import { useDialogState } from '@/lib/hooks/useDialogState';
 
 const { notify } = useNotification();
 const { editUserM } = useEditUser();
@@ -330,30 +331,10 @@ const closeDialog = () => {
   emit('close');
 }
 
-// React on props.open
-watch([props.open], () => {
-  if (props.open.value) {
-    openDialog();
-  } else {
-    dialogRef.value?.close();
-  }
+useDialogState({
+  dialogRef,
+  isDialogOpen: props.open,
+  closeDialog,
+  openDialog,
 });
-
-onMounted(() => {
-  const overlay = dialogRef.value;
-
-  if (overlay) {
-    overlay.addEventListener('click', () => {
-      closeDialog();
-    });
-  }
-
-  return () => {
-    if (overlay) {
-      overlay.removeEventListener('click', () => {
-        closeDialog();
-      });
-    }
-  }
-})
 </script>
