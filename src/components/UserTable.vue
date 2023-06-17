@@ -43,7 +43,7 @@
             <td>
               <span class="w-full flex flex-row items-center justify-start">
                 <a
-                  :href="`tel:${item.billing_phone}`"
+                  :href="`tel:${getDialCode(item.billing_country)} ${item.billing_phone}`"
                   class="flex flex-nowrap flex-row items-center justify-start
                     hover:text-sky-500 gap-x-2 cursor-pointer whitespace-nowrap
                     focus:outline-none focus:ring-1 focus:ring-teal-500 focus:ring-offset-1
