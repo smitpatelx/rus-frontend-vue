@@ -93,9 +93,20 @@
 }
 
 .vue-notification-group {
+  @apply transform -translate-y-2 left-1/2 -translate-x-1/2 #{!important};
+
+  &,
+  & > span {
+    @apply w-full max-w-sm #{!important};
+  }
+
+  .vue-notification-wrapper {
+    @apply overflow-visible;
+  }
+
   .vue-notification {
     @apply px-4 py-2 rounded-lg shadow-md border border-teal-500
-      bg-teal-300 leading-none;
+      bg-teal-300 leading-none w-full #{!important};
 
     // default
     .notification-title {
