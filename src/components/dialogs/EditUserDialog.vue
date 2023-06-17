@@ -130,10 +130,6 @@ import useGetAllUsers from '@/lib/hooks/useGetAllUsers';
 import { INITIAL_DATA } from '@/lib/data/edit-dialog';
 import { useDialogState } from '@/lib/hooks/useDialogState';
 
-const { notify } = useNotification();
-const { editUserM } = useEditUser();
-const getAllUsersQ = useGetAllUsers();
-
 const props = defineProps<{
   open: { value: boolean };
   userData: { value: User | null };
@@ -142,6 +138,12 @@ const props = defineProps<{
 const emit = defineEmits<{
   close: []
 }>();
+
+const { notify } = useNotification();
+
+// Tanstack Query
+const { editUserM } = useEditUser();
+const getAllUsersQ = useGetAllUsers();
 
 const {
   handleSubmit,
@@ -245,10 +247,10 @@ const submitForm = handleSubmit(async (values) => {
           },
         },
       };
-      console.log('error', error?.response?.data?.message);
+
       notify({
         title: "Error",
-        text: error?.response?.data?.message || "Something went wrong",
+        text: error?.response?.data?.message || "Something went wrong.",
         type: "rus-error",
       });
     },

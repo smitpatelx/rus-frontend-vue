@@ -8,12 +8,6 @@ const useDeleteUser = () => {
       const res = UserApi.deleteUser(id);
       return res;
     },
-    onSuccess: (data: any) => {
-      console.log(data);
-    },
-    onError: (error: any) => {
-      console.log(error);
-    },
   });
 
   return {
