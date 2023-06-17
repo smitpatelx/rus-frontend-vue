@@ -110,13 +110,13 @@ watch([props.userData], () => {
   const data = props.userData.value;
   if (data === null) return;
 
-  userDetails.username.value = data.username;
-  userDetails.email.value = data.email;
-  userDetails.firstName.value = data.first_name;
-  userDetails.lastName.value = data.last_name;
+  userDetails.username.value = data.username || '--';
+  userDetails.email.value = data.email || '--';
+  userDetails.firstName.value = data.first_name || '--';
+  userDetails.lastName.value = data.last_name || '--';
   userDetails.phone.value = `${getDialCode(data.billing_country.toLowerCase())}  ${formatPhone(data.billing_phone)}`;
-  userDetails.company.value = data.billing_company;
-  userDetails.country.value = usableCountries?.[data.billing_country]?.name || '';
+  userDetails.company.value = data.billing_company || '--';
+  userDetails.country.value = usableCountries?.[data.billing_country]?.name || '--';
 });
 
 // Dialog
