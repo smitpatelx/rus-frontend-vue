@@ -33,28 +33,30 @@
     }
 
     .rus-settings-checkboxes {
-      @apply w-full max-w-sm flex flex-nowrap flex-col mt-3;
+      @apply w-full max-w-sm flex flex-nowrap flex-col mt-3 gap-y-2;
 
       & > div {
-        @apply w-full flex flex-nowrap flex-row bg-teal-100 py-3
-          px-3 hover:bg-gray-200 items-center justify-stretch;
+        @apply w-full flex flex-nowrap flex-row bg-teal-500 text-teal-50
+          px-3 hover:bg-teal-300 hover:text-teal-900 items-center justify-stretch
+          rounded-md ring-1 ring-teal-400 hover:ring-teal-600 cursor-pointer
+          duration-300 transition-all ease-out;
 
         // Label
         & > div:nth-child(1) {
-          @apply w-full;
+          @apply w-full h-full flex flex-row flex-wrap justify-start items-center #{!important};
 
           & > label {
-            @apply capitalize mr-4 text-gray-700 text-base select-none;
+            @apply capitalize mr-4 text-base font-medium select-none w-full h-full py-3 #{!important};
           }
         }
 
         // Checkbox Input
         & > div:nth-child(2) {
-          @apply flex flex-wrap justify-end items-center;
+          @apply h-full flex flex-row flex-wrap justify-end items-center pr-2 #{!important};
 
           input[type='checkbox'] {
-            @apply form-checkbox rounded mr-2 bg-teal-100 text-teal-700 cursor-pointer
-              focus-visible:border-0
+            @apply form-checkbox m-0 bg-teal-100 text-teal-700 cursor-pointer
+              focus-visible:border-0 w-5 h-5 rounded-full
               focus:ring-1 focus:ring-teal-700 focus:border-0
               focus:outline-none focus-visible:outline-none
               focus:ring-offset-1 focus:ring-offset-teal-100 #{!important};
@@ -67,9 +69,25 @@
       @apply w-full flex flex-wrap justify-start items-center mt-6;
 
       & > button {
-        @apply bg-teal-500 duration-300 transition-all flex flex-wrap justify-center items-center shadow-md py-2 px-4
-          focus:outline-none focus:ring-1 focus:ring-teal-500 focus:ring-offset-1
-          select-none hover:bg-teal-400 text-white text-base font-medium rounded;
+        @apply flex flex-nowrap flex-row items-center cursor-pointer
+          justify-center px-4 py-1 rounded-full focus:outline-none
+          select-none focus-visible:ring-1 focus-visible:ring-teal-500
+          text-base font-medium duration-200 ease-out
+          bg-teal-500 text-teal-100 shadow hover:bg-teal-500/75
+          shadow-teal-800/50 hover:text-teal-100 focus-visible:ring-offset-1
+          focus-visible:ring-offset-slate-100 #{!important};
+
+        &:has(svg) {
+          @apply pl-4 pr-3;
+        }
+
+        svg {
+          @apply w-5 h-5 ml-1 text-inherit;
+        }
+
+        &:disabled {
+          @apply opacity-50 cursor-not-allowed hover:bg-teal-500 hover:text-teal-100;
+        }
       }
     }
   }
