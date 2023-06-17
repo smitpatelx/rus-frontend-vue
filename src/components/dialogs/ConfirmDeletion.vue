@@ -60,6 +60,8 @@ import { mdiClose, mdiDelete } from '@mdi/js';
 import { useDialogState } from '@/lib/hooks/useDialogState';
 import type { User } from '@/interfaces/user';
 import useDeleteUser from '@/lib/hooks/useDeleteUser';
+import useGetAllUsers from '@/lib/hooks/useGetAllUsers';
+import { useNotification } from '@kyvg/vue3-notification';
 
 const props = defineProps<{
   open: { value: boolean };
@@ -70,8 +72,11 @@ const emit = defineEmits<{
   close: []
 }>();
 
-// React Query
+const { notify } = useNotification();
+
+// Tanstack Query
 const { deleteUserM } = useDeleteUser();
+const getAllUsersQ = useGetAllUsers();
 
 // Dialog
 const dialogRef = ref<HTMLDialogElement | null>(null);
@@ -88,7 +93,33 @@ const deleteAndCloseDialog = () => {
   if (props.userData.value?.id === undefined
     || props.userData.value?.id === null) return;
   // Delete given user
-  deleteUserM.mutate(props.userData.value?.id);
+  deleteUserM.mutate(props.userData.value?.id, {
+    onSuccess: (data) => {
+      getAllUsersQ.refetch();
+      notify({
+        group: "global",
+        title: "Success",
+        text: "Account deleted successfully.",
+        type: "rus-success",
+      });
+      emit('close');
+    },
+    onError: (e) => {
+      const error = e as {
+        response: {
+          data: {
+            message: string;
+          },
+        },
+      };
+
+      notify({
+        title: "Error",
+        text: error?.response?.data?.message || "Something went wrong.",
+        type: "rus-error",
+      });
+    },
+  });
   // Close dialog
   emit('close');
 }
