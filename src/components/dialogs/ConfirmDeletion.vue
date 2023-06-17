@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue';
+import { ref } from 'vue';
 import RusIcon from '../generic/RusIcon.vue';
 import { mdiClose, mdiDelete } from '@mdi/js';
 import { useDialogState } from '@/lib/hooks/useDialogState';

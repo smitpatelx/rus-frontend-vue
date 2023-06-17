@@ -114,7 +114,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref, watch } from 'vue';
+import { reactive, ref, watch } from 'vue';
 import { useForm } from 'vee-validate';
 import RusIcon from '@/components/generic/RusIcon.vue';
 import { mdiClose, mdiCloudCheckVariant, mdiPencil, mdiRestore } from '@mdi/js';

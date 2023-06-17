@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref, watch } from 'vue';
+import { reactive, ref, watch } from 'vue';
 import RusIcon from '../generic/RusIcon.vue';
 import { mdiAccount, mdiClose } from '@mdi/js';
 import type { User } from '@/interfaces/user';
