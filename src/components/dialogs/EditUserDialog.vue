@@ -233,7 +233,6 @@ const submitForm = handleSubmit(async (values) => {
       getAllUsersQ.refetch();
       notify({
         group: "global",
-        title: "Success",
         text: "Account updated successfully.",
         type: "rus-success",
       });
@@ -331,6 +330,10 @@ const openDialog = () => {
 
 const closeDialog = () => {
   emit('close');
+  notify({
+    clear: true,
+    clean: true,
+  });
 }
 
 useDialogState({

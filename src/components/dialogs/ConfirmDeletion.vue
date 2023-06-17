@@ -50,6 +50,13 @@
         <RusIcon :icon="mdiDelete" />
       </button>
     </div>
+
+    <!-- Notifications -->
+    <notifications
+      animation-type="velocity"
+      position="bottom center"
+      :duration="2000"
+    />
   </dialog>
 </template>
 
@@ -87,6 +94,10 @@ const openDialog = () => {
 
 const closeDialog = () => {
   emit('close');
+  notify({
+    clear: true,
+    clean: true,
+  });
 }
 
 const deleteAndCloseDialog = () => {
@@ -98,10 +109,11 @@ const deleteAndCloseDialog = () => {
       getAllUsersQ.refetch();
       notify({
         group: "global",
-        title: "Success",
         text: "Account deleted successfully.",
         type: "rus-success",
       });
+
+      // Close dialog
       emit('close');
     },
     onError: (e) => {
@@ -120,8 +132,6 @@ const deleteAndCloseDialog = () => {
       });
     },
   });
-  // Close dialog
-  emit('close');
 }
 
 useDialogState({
