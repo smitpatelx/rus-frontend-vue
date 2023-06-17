@@ -43,7 +43,7 @@
       </button>
       <button
         class="btn close-btn"
-        @click="closeDialog"
+        @click="deleteAndCloseDialog"
         tabindex="0"
       >
         Delete
@@ -58,14 +58,20 @@ import { ref } from 'vue';
 import RusIcon from '../generic/RusIcon.vue';
 import { mdiClose, mdiDelete } from '@mdi/js';
 import { useDialogState } from '@/lib/hooks/useDialogState';
+import type { User } from '@/interfaces/user';
+import useDeleteUser from '@/lib/hooks/useDeleteUser';
 
 const props = defineProps<{
   open: { value: boolean };
+  userData: { value: User | null };
 }>();
 
 const emit = defineEmits<{
   close: []
 }>();
+
+// React Query
+const { deleteUserM } = useDeleteUser();
 
 // Dialog
 const dialogRef = ref<HTMLDialogElement | null>(null);
@@ -75,6 +81,15 @@ const openDialog = () => {
 }
 
 const closeDialog = () => {
+  emit('close');
+}
+
+const deleteAndCloseDialog = () => {
+  if (props.userData.value?.id === undefined
+    || props.userData.value?.id === null) return;
+  // Delete given user
+  deleteUserM.mutate(props.userData.value?.id);
+  // Close dialog
   emit('close');
 }
 

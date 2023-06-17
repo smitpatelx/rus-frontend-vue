@@ -16,6 +16,7 @@
       />
       <ConfirmDeletion
         :open="deleteDialogState"
+        :user-data="currentUser"
         @close="deleteDialogState.value = false"
       />
 
