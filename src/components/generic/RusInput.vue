@@ -10,7 +10,7 @@
     v-maska:[options]
     :autocomplete="randomAlpha()"
   />
-  <!-- :v-maska='mask !=="" ? vMaska : undefined' -->
+
   <div
     v-if="attrs.error"
     class="rus-error-text"
