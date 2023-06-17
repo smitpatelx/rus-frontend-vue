@@ -188,3 +188,8 @@ input[type='checkbox']:checked::before {
   height: 0rem !important;
   width: 0rem !important;
 }
+
+// WP Bg color overrides
+#wpcontent {
+  @apply bg-slate-50;
+}
