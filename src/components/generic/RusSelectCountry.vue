@@ -84,7 +84,7 @@ import RusIcon from './RusIcon.vue';
 import { randomAlpha } from '@/lib/helpers';
 import { onClickOutside } from '@vueuse/core';
 
-const ASSET_URL = import.meta.env.VITE_ASSET_URL as string;
+const FLAG_URL = import.meta.env.VITE_FLAG_URL as string;
 
 export type Options = {
   name: string,
@@ -112,9 +112,9 @@ const emits = defineEmits<{
 const getImageSrc = ref(() => {
   const imageName = attrs.value;
   if (!imageName) {
-    return `${ASSET_URL}/default.svg`;
+    return `${FLAG_URL}/default.svg`;
   }
-  return `${ASSET_URL}/${imageName}.svg`
+  return `${FLAG_URL}/${imageName}.svg`
 });
 
 const autoCompleteInput = ref('');
