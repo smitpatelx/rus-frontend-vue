@@ -4,7 +4,7 @@
     :disabled="false"
     :required="false"
     :error="false"
-    :value="value.value"
+    :value="filterStore.tableView"
     :random-id="randomId"
     class=""
     label="Filter user type"
@@ -39,29 +39,34 @@ import RusSelect from '@/components/generic/RusSelect.vue';
 import type { Options } from '@/interfaces/table';
 import { optionsForView as allOptions } from '@/lib/data/user-table';
 import { randomAlpha } from '@/lib/helpers';
+import { useUserFilter } from '@/stores/user-filters';
 import { mdiClose } from '@mdi/js';
-import { computed, reactive, ref } from 'vue';
+import { computed, ref } from 'vue';
 
+const filterStore = useUserFilter();
 const randomId = ref(randomAlpha());
 
 const optionsForView = allOptions;
 
-const value = reactive({ value: optionsForView });
-
 const selectedOption = computed(() => {
-  if (typeof value.value === 'string') {
+  if (typeof filterStore.tableView === 'string') {
     return null;
   }
-  const selectedArray = value.value.map((value) => value.value);
+  const selectedArray = filterStore.tableView.map((value) => value.value);
   return optionsForView.filter((option) => selectedArray.includes(option.value)) || null;
 });
 
 const handleValueChange = (val: string | Options) => {
   if (typeof val === 'string') return;
-  value.value = val;
+
+  filterStore.$patch({
+    tableView: val,
+  });
 }
 
 const handleClear = () => {
-  value.value = optionsForView;
+  filterStore.$patch({
+    tableView: optionsForView,
+  });
 }
 </script>
