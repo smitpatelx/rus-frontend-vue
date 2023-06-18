@@ -4,7 +4,7 @@
     :disabled="false"
     :required="false"
     :error="false"
-    :value="value.value"
+    :value="filterStore.userType"
     :random-id="randomId"
     class=""
     label="Filter user type"
@@ -64,9 +64,11 @@ import RusSelect from '@/components/generic/RusSelect.vue';
 import type { Options } from '@/interfaces/table';
 import { randomAlpha } from '@/lib/helpers';
 import { mdiClose, mdiFilter } from '@mdi/js';
-import { computed, reactive, ref } from 'vue';
+import { computed, ref } from 'vue';
+import { useUserFilter } from '@/stores/user-filters';
 
 const randomId = ref(randomAlpha());
+const filterStore = useUserFilter();
 
 const options: Options = [
   { name: 'Admin', value: 'admin' },
@@ -76,18 +78,21 @@ const options: Options = [
   { name: 'Reader', value: 'reader' },
 ];
 
-const value = reactive({ value: '' });
-
 const selectedOption = computed(() => {
-  return options.find((option) => option.value === value.value) || null;
+  return options.find((option) => option.value === filterStore.userType) || null;
 });
 
 const handleValueChange = (val: string | Options) => {
   if (typeof val !== 'string') return;
-  value.value = val;
+
+  filterStore.$patch({
+    userType: val,
+  });
 }
 
 const handleClear = () => {
-  value.value = '';
+  filterStore.$patch({
+    userType: 'all',
+  });
 }
 </script>
