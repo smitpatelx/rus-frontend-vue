@@ -1,6 +1,6 @@
 <template>
   <RusSelect
-    :options="options"
+    :options="options.value"
     :disabled="false"
     :required="false"
     :error="false"
@@ -64,22 +64,35 @@ import RusSelect from '@/components/generic/RusSelect.vue';
 import type { Options } from '@/interfaces/table';
 import { randomAlpha } from '@/lib/helpers';
 import { mdiClose, mdiFilter } from '@mdi/js';
-import { computed, ref } from 'vue';
+import { computed, reactive, ref, watch } from 'vue';
 import { useUserFilter } from '@/stores/user-filters';
+import useGetAllRoles from '@/lib/hooks/useGetAllRoles';
 
 const randomId = ref(randomAlpha());
 const filterStore = useUserFilter();
+const { getAllRolesQ } = useGetAllRoles();
 
-const options: Options = [
-  { name: 'Admin', value: 'admin' },
-  { name: 'Editor', value: 'editor' },
-  { name: 'Manager', value: 'manager' },
-  { name: 'Author', value: 'author' },
-  { name: 'Reader', value: 'reader' },
-];
+const options = reactive<{ value: Options }>({ value: [] });
+
+watch([getAllRolesQ.data], () => {
+  options.value = getAllRolesQ.data.value && Object.entries(getAllRolesQ.data.value?.data).length > 0
+    ? Object.entries(getAllRolesQ.data.value.data)?.map<Options[number]>(([key, role]) => ({
+        name: role.name,
+        value: key,
+      }))
+    : [] as Options;
+});
+
+// [
+//   { name: 'Admin', value: 'admin' },
+//   { name: 'Editor', value: 'editor' },
+//   { name: 'Manager', value: 'manager' },
+//   { name: 'Author', value: 'author' },
+//   { name: 'Reader', value: 'reader' },
+// ];
 
 const selectedOption = computed(() => {
-  return options.find((option) => option.value === filterStore.userType) || null;
+  return options.value.find((option) => option.value === filterStore.userType) || null;
 });
 
 const handleValueChange = (val: string | Options) => {
@@ -92,7 +105,7 @@ const handleValueChange = (val: string | Options) => {
 
 const handleClear = () => {
   filterStore.$patch({
-    userType: 'all',
+    userType: '',
   });
 }
 </script>

@@ -269,7 +269,6 @@ mdiEmoticonSadOutline,
 import type { DialogMode } from '@/interfaces/dialog';
 import { USER_TABLE_HEADER } from '@/lib/data/user-table';
 import useGetAllUsers from '@/lib/hooks/useGetAllUsers';
-import useGetAllRoles from '@/lib/hooks/useGetAllRoles';
 import { IN_DATE } from '@/lib/helpers';
 import type { User } from '@/interfaces/user';
 import { getDialCode } from '@/interfaces/countries';
@@ -298,11 +297,6 @@ const hToggleSortDirection = (sortD: TableSortDirection) => {
 const { data } = useGetAllUsers();
 // watch([data], () => {
 //   console.log('getAllUsersQ', data.value?.data);
-// });
-
-const { getAllRolesQ } = useGetAllRoles();
-// watch([getAllRolesQ.data], () => {
-//   console.log('getAllRolesQ', getAllRolesQ?.data?.value);
 // });
 </script>
 
