@@ -25,24 +25,25 @@
         <span class="py-1.5">
           <RusIcon :icon="mdiFilter" />
         </span>
-        <span class="py-1.5"> Filter user type </span>
-        <Transition name="slide-in-blurred-right">
+        <span class="py-1.5">
+          {{ getAllRolesQ.isLoading.value ? 'Loading...' : 'Filter user type' }}
+        </span>
+
+        <span
+          :key="selectedOption?.name"
+          :class="{
+            'pl-3 ml-1.5': !!selectedOption?.name,
+            'pl-0 ml-0': !selectedOption?.name,
+          }"
+          class="font-normal border-l border-l-teal-500 group-hover:border-l-teal-400"
+        >
+          <span v-if="!!selectedOption?.name">{{ selectedOption?.name }}</span>
           <span
-            :key="selectedOption?.name"
-            :class="{
-              'pl-3 ml-1.5': !!selectedOption?.name,
-              'pl-0 ml-0': !selectedOption?.name,
-            }"
-            class="font-normal border-l border-l-teal-500 group-hover:border-l-teal-400"
+            v-else
+            class="opacity-0"
+            >{{ selectedOption?.name }}</span
           >
-            <span v-if="!!selectedOption?.name">{{ selectedOption?.name }}</span>
-            <span
-              v-else
-              class="opacity-0"
-              >{{ selectedOption?.name }}</span
-            >
-          </span>
-        </Transition>
+        </span>
       </button>
       <button
         @click.capture.stop="handleClear"
@@ -67,6 +68,7 @@ import { mdiClose, mdiFilter } from '@mdi/js';
 import { computed, reactive, ref, watch } from 'vue';
 import { useUserFilter } from '@/stores/user-filters';
 import useGetAllRoles from '@/lib/hooks/useGetAllRoles';
+import RusSpinner from '@/components/generic/RusSpinner.vue';
 
 const randomId = ref(randomAlpha());
 const filterStore = useUserFilter();
