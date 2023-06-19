@@ -1,6 +1,9 @@
 <template>
   <!-- Select Wrapper Element -->
-  <div class="relative bg-transparent">
+  <div
+    ref="wrapperRef"
+    class="relative bg-transparent"
+  >
     <!-- Select Input -->
     <div
       ref="selectRef"
@@ -95,6 +98,7 @@ const emit = defineEmits<{
   updateValue: [val: string | Options]
 }>();
 
+const wrapperRef = ref<HTMLElement | null>(null);
 const selectRef = ref<HTMLElement | null>(null);
 const lastOptionRef = ref<HTMLElement | null>(null);
 const isMenuOpen = reactive({ value: false });
@@ -260,7 +264,9 @@ const handleContainerKeydown = (e: KeyboardEvent) => {
   }
 }
 
-onClickOutside(selectRef, () => closeMenu());
+onClickOutside(wrapperRef, () => {
+  closeMenu();
+});
 </script>
 
 <style lang="scss">
