@@ -10,14 +10,16 @@ export const useUserFilter = defineStore('user-filter', () => {
   const tableView = ref(structuredClone(optionsForView));
 
   // Computed
-  const filters = computed(() => ({
-    page: 1,
-    page_size: 10,
-    sort: TableSortDirection.Asc,
-    sort_by: TableHeaderItemKey.CreatedAt,
-    search_text: searchText.value,
-    role: userType.value,
-  }));
+  const filters = computed(() => {
+    return {
+      page: 1,
+      page_size: 10,
+      sort: TableSortDirection.Asc,
+      sort_by: TableHeaderItemKey.CreatedAt,
+      search_text: searchText.value,
+      role: userType.value,
+    };
+  });
 
   return {
     searchText,

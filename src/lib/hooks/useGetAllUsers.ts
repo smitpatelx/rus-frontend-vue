@@ -1,13 +1,18 @@
 import { useQuery } from '@tanstack/vue-query';
 import UserApi from '@/api/users';
 import { useUserFilter } from '@/stores/user-filters';
+import { storeToRefs } from 'pinia';
 
 const useGetAllUsers = () => {
   const filterStore = useUserFilter();
+  const { filters } = storeToRefs(filterStore);
 
   const getAllUsersQ = useQuery({
-    queryKey: ['get-all-user', filterStore.filters],
-    queryFn: () => UserApi.getAllUsers(filterStore.filters),
+    queryKey: ['get-all-user', filters],
+    queryFn: async () => {
+      const res = await UserApi.getAllUsers(filters.value);
+      return res;
+    },
     enabled: true,
     refetchOnReconnect: true,
     refetchOnWindowFocus: true,
