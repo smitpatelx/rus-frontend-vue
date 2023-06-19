@@ -5,7 +5,7 @@ const useGetUser = (data: unknown) => {
   const getUserQ = useQuery({
     queryKey: ['get-user', data],
     queryFn: async (data: any) => {
-      const res = UserApi.getUser(data);
+      const res = await UserApi.getUser(data);
       return res;
     },
     enabled: true,

@@ -5,7 +5,7 @@ const useDeleteUser = () => {
   const deleteUserM = useMutation({
     mutationKey: ['delete-user'],
     mutationFn: async (id: number) => {
-      const res = UserApi.deleteUser(id);
+      const res = await UserApi.deleteUser(id);
       return res;
     },
   });

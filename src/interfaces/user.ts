@@ -1,5 +1,6 @@
 import { usableCountries } from './countries';
 import zod from 'zod';
+import type { TableHeaderItemKey, TableSortDirection } from './table';
 
 export enum InputTypeEnums {
   Text = 'text',
@@ -78,6 +79,15 @@ export interface User {
 }
 
 export type GetAllUserRes = User[];
+
+export type GetAllUserReq = {
+  page: number;
+  page_size: number;
+  sort: TableSortDirection;
+  sort_by: TableHeaderItemKey;
+  search_text: string;
+  role: string;
+};
 
 export type GetUserRes = User;
 
