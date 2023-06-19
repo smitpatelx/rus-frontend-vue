@@ -106,7 +106,7 @@
 
   .vue-notification {
     @apply px-4 py-2 rounded-lg shadow-md border border-teal-500
-      bg-teal-300 leading-none w-full #{!important};
+      bg-teal-300 leading-none w-full my-2 #{!important};
 
     // default
     .notification-title {
