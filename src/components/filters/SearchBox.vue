@@ -52,8 +52,8 @@ onMounted(() => {
     if (e.key === '/' && e.metaKey === true) {
       e.preventDefault();
       e.stopPropagation();
-      search.value = '';
       if (searchInputRef.value) {
+        searchInputRef.value.select();
         searchInputRef.value?.focus();
       }
     }
