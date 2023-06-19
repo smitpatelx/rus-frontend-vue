@@ -12,7 +12,7 @@
             v-for="item in data.data"
             :key="item.username"
           >
-            <td>
+            <td v-if="isColumnAvailable(TableHeaderItemKey.Username)">
               <code
                 class="text-sm font-normal font-mono
                 leading-none bg-teal-500/20 text-teal-900
@@ -21,9 +21,9 @@
                 {{ item.username }}
               </code>
             </td>
-            <td>{{ item.first_name }}</td>
-            <td>{{ item.last_name }}</td>
-            <td>
+            <td v-if="isColumnAvailable(TableHeaderItemKey.FirstName)">{{ item.first_name }}</td>
+            <td v-if="isColumnAvailable(TableHeaderItemKey.LastName)">{{ item.last_name }}</td>
+            <td v-if="isColumnAvailable(TableHeaderItemKey.Roles)">
               <!-- Chip -->
               <div v-if="item.roles.length > 0">
                 <span
@@ -40,7 +40,7 @@
                 </span>
               </div>
             </td>
-            <td>
+            <td v-if="isColumnAvailable(TableHeaderItemKey.Phone)">
               <span class="w-full flex flex-row items-center justify-start">
                 <a
                   :href="`tel:${getDialCode(item.billing_country)} ${item.billing_phone}`"
@@ -58,7 +58,7 @@
                 </a>
               </span>
             </td>
-            <td>
+            <td v-if="isColumnAvailable(TableHeaderItemKey.Email)">
               <span class="w-full flex flex-row flex-nowrap items-center justify-start">
                 <a
                   :href="`mailto:${item.email}`"
@@ -70,12 +70,17 @@
                 </a>
               </span>
             </td>
-            <td>{{ item.billing_company || '--' }}</td>
-            <td>
+            <td v-if="isColumnAvailable(TableHeaderItemKey.CompanyName)">
+              {{ item.billing_company || '--' }}
+            </td>
+            <td v-if="isColumnAvailable(TableHeaderItemKey.CreatedAt)">
               {{ item.user_registered ? IN_DATE.format(new Date(item.user_registered)) : '--' }}
             </td>
             <!-- Actions -->
-            <td class="sticky right-0 bg-teal-50 after-border">
+            <td
+              v-if="isColumnAvailable(TableHeaderItemKey.Actions)"
+              class="sticky right-0 bg-teal-50 after-border"
+            >
               <div
                 class="w-full flex flex-nowrap flex-row items-center justify-end
                 gap-x-2"
@@ -253,7 +258,7 @@
 
 <script setup lang="ts">
 import RusIcon from '@/components/generic/RusIcon.vue';
-import type { TableHeaderItems, TableSortDirection } from '@/interfaces/table';
+import { TableHeaderItemKey, type TableHeaderItems, type TableSortDirection } from '@/interfaces/table';
 import TableHeader from '@/components/generic/TableHeader.vue';
 import {
   mdiPencil,
@@ -273,14 +278,29 @@ import { IN_DATE } from '@/lib/helpers';
 import type { User } from '@/interfaces/user';
 import { getDialCode } from '@/interfaces/countries';
 import { formatPhone } from '@/lib/helpers';
+import { useUserFilter } from '@/stores/user-filters';
+import { computed } from 'vue';
 
 defineProps<{
   openDialog: (mode: DialogMode, user: User) => void;
 }>();
 
-const rowHeaders: TableHeaderItems = [
-  ...USER_TABLE_HEADER,
-];
+const filterStore = useUserFilter();
+
+const rowHeaders = computed<TableHeaderItems>(() => {
+  const allColumns = structuredClone(USER_TABLE_HEADER);
+
+  const filteredColumns = allColumns.filter(
+    (col) => {
+      if (col.canHide) {
+        const isAvailable = filterStore.tableView.find((f) => (f.value === col.key))
+        return isAvailable;
+      }
+      return true;
+    }
+  );
+  return filteredColumns;
+});
 
 const hToggleSortDirection = (sortD: TableSortDirection) => {
   switch (sortD) {
@@ -295,9 +315,10 @@ const hToggleSortDirection = (sortD: TableSortDirection) => {
 
 // Handle APIs
 const { data } = useGetAllUsers();
-// watch([data], () => {
-//   console.log('getAllUsersQ', data.value?.data);
-// });
+
+const isColumnAvailable = (key: TableHeaderItemKey) => {
+  return rowHeaders.value.some((col) => col.key === key);
+}
 </script>
 
 <style scoped lang="scss">
