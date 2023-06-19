@@ -4,15 +4,12 @@ import { optionsForView } from '@/lib/data/user-table';
 import { TableHeaderItemKey, TableSortDirection } from '@/interfaces/table';
 
 export const useUserFilter = defineStore('user-filter', () => {
+  // State
   const searchText = ref('');
   const userType = ref('');
-  const tableView = ref([...optionsForView]);
+  const tableView = ref(structuredClone(optionsForView));
 
-  // const doubleCount = computed(() => count.value * 2)
-  const clearSearchText = () => {
-    searchText.value = '';
-  };
-
+  // Computed
   const filters = computed(() => ({
     page: 1,
     page_size: 10,
@@ -26,7 +23,6 @@ export const useUserFilter = defineStore('user-filter', () => {
     searchText,
     userType,
     tableView,
-    clearSearchText,
     filters,
   };
 });

@@ -83,29 +83,16 @@ watch([getAllRolesQ.data], () => {
     : [] as Options;
 });
 
-// [
-//   { name: 'Admin', value: 'admin' },
-//   { name: 'Editor', value: 'editor' },
-//   { name: 'Manager', value: 'manager' },
-//   { name: 'Author', value: 'author' },
-//   { name: 'Reader', value: 'reader' },
-// ];
-
 const selectedOption = computed(() => {
   return options.value.find((option) => option.value === filterStore.userType) || null;
 });
 
 const handleValueChange = (val: string | Options) => {
   if (typeof val !== 'string') return;
-
-  filterStore.$patch({
-    userType: val,
-  });
+  filterStore.userType = val;
 }
 
 const handleClear = () => {
-  filterStore.$patch({
-    userType: '',
-  });
+  filterStore.userType = '';
 }
 </script>
