@@ -19,14 +19,16 @@
 
 <script setup lang="ts">
 import RusIcon from '@/components/generic/RusIcon.vue';
+import useGetAllUsers from '@/lib/hooks/useGetAllUsers';
 import { mdiRefresh } from '@mdi/js';
 import { reactive } from 'vue';
 
 const renderCount = reactive({ count: 0 });
+const { refetch } = useGetAllUsers();
 
 const handleButtonClick = () => {
   renderCount.count++;
-  console.log('Button clicked');
+  refetch();
 }
 </script>
 
