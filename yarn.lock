@@ -599,13 +599,6 @@
   resolved "https://registry.yarnpkg.com/@types/tough-cookie/-/tough-cookie-4.0.2.tgz#6286b4c7228d58ab7866d19716f3696e03a09397"
   integrity sha512-Q5vtl1W5ue16D+nIaW8JWebSSraJVlK+EthKn7e7UcD4KWsaSJ8BqGPXNaPghgtcn/fhvrN17Tv8ksUsQpiplw==
 
-"@types/velocity-animate@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@types/velocity-animate/-/velocity-animate-2.0.1.tgz#9ec3d72557a97d11e91443082ab45914b82d5d55"
-  integrity sha512-6uo06eV6A8eDFOAnF0DR8krFFzWPE+FiEsXbYJfRE1ZREvOBwuGPBVOPeM0FJfEWylUGXEYT4/slItHtHIgjWQ==
-  dependencies:
-    velocity-animate "*"
-
 "@types/web-bluetooth@^0.0.17":
   version "0.0.17"
   resolved "https://registry.yarnpkg.com/@types/web-bluetooth/-/web-bluetooth-0.0.17.tgz#5c9f3c617f64a9735d7b72a7cc671e166d900c40"
@@ -3467,11 +3460,6 @@ vee-validate@^4.9.5:
   dependencies:
     "@vue/devtools-api" "^6.5.0"
     type-fest "^3.10.0"
-
-velocity-animate@*, velocity-animate@^1.5.2:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/velocity-animate/-/velocity-animate-1.5.2.tgz#5a351d75fca2a92756f5c3867548b873f6c32105"
-  integrity sha512-m6EXlCAMetKztO1ppBhGU1/1MR3IiEevO6ESq6rcrSQ3Q77xYSW13jkfXW88o4xMrkXJhy/U7j4wFR/twMB0Eg==
 
 vite-node@0.31.1:
   version "0.31.1"

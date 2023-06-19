@@ -22,7 +22,7 @@
 
       <!-- Global Notifications -->
       <notifications
-        animation-type="velocity"
+        animation-type="css"
         position="bottom center"
         :duration="2000"
         group="global"
