@@ -1,6 +1,8 @@
 <template>
   <div class="w-full h-full max-h-screen bg-slate-50 flex flex-col flex-nowrap">
+    <!-- App header -->
     <AppHeader />
+
     <!-- Filter container -->
     <FilterContainer />
 
