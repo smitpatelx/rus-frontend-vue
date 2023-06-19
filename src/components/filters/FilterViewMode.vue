@@ -58,15 +58,10 @@ const selectedOption = computed(() => {
 
 const handleValueChange = (val: string | Options) => {
   if (typeof val === 'string') return;
-
-  filterStore.$patch({
-    tableView: val,
-  });
+  filterStore.tableView = val;
 }
 
 const handleClear = () => {
-  filterStore.$patch({
-    tableView: optionsForView,
-  });
+  filterStore.tableView = structuredClone(optionsForView);
 }
 </script>

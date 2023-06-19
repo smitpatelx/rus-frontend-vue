@@ -7,10 +7,7 @@ const useGetAllUsers = () => {
 
   const getAllUsersQ = useQuery({
     queryKey: ['get-all-user', filterStore.filters],
-    queryFn: async () => {
-      const res = await UserApi.getAllUsers(filterStore.filters);
-      return res;
-    },
+    queryFn: () => UserApi.getAllUsers(filterStore.filters),
     enabled: true,
     refetchOnReconnect: true,
     refetchOnWindowFocus: true,
