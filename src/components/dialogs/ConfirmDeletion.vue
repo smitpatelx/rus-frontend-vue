@@ -25,7 +25,11 @@
     >
       <div class="w-full grid grid-cols-1">
         <div class="item-display-field">
-          <p class="!text-xl !ml-0">Are you sure you want to delete this user?</p>
+          <p class="!text-xl !ml-0">
+            Are you sure you want to delete user id:
+            <b class="font-bold !text-red-600">{{ props.userData?.value?.id || '--' }}</b>
+            ?
+          </p>
           <label class="!cursor-text">This action cannot be undone.</label>
         </div>
       </div>
