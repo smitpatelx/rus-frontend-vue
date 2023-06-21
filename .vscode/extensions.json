@@ -1,3 +1,12 @@
 {
-  "recommendations": ["Vue.volar", "Vue.vscode-typescript-vue-plugin"]
+  "recommendations": [
+    "vue.vscode-typescript-vue-plugin",
+    "formulahendry.auto-rename-tag",
+    "dbaeumer.vscode-eslint",
+    "hwencc.html-tag-wrapper",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "hollowtree.vue-snippets",
+    "vue.volar"
+  ]
 }
