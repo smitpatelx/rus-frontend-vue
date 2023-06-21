@@ -1,6 +1,9 @@
 <template>
   <!-- Select Wrapper Element -->
-  <div class="relative bg-transparent">
+  <div
+    ref="countryWrapperRef"
+    class="relative bg-transparent"
+  >
     <!-- Select Input -->
     <div
       ref="selectCountryRef"
@@ -102,6 +105,7 @@ const attrs = useAttrs() as {
   error: string | undefined,
   getLabel: (key: string) => string;
   getValue: (key: string) => string;
+  nextFocusableId: string;
 };
 
 const emits = defineEmits<{
@@ -145,6 +149,7 @@ const filteredOptions = computed(() => {
 const firstOptionKey = computed(() => Object.keys(filteredOptions)[0]);
 const lastOptionKey = computed(() => Object.keys(filteredOptions)[Object.keys(filteredOptions).length - 1]);
 
+const countryWrapperRef = ref<HTMLDivElement | null>(null);
 const selectCountryRef = ref<HTMLDivElement | null>(null);
 const lastOptionRef = ref<HTMLElement | null>(null);
 const isMenuOpen = reactive({ value: false });
@@ -155,7 +160,18 @@ const modifyEvent = (e: Event) => {
 }
 
 const closeMenu = async () => {
+  // Move focus to next focusable element
+  const nextFocusable = attrs.nextFocusableId
+    ? document.getElementById(attrs.nextFocusableId)
+    : document.getElementById(attrs.id)?.nextElementSibling;
+  if (nextFocusable instanceof HTMLElement) {
+    nextFocusable.focus();
+  }
+
+  // Close dialog
   emits('blur');
+
+  // Reset Values
   autoCompleteInput.value = '';
   isMenuOpen.value = false;
 };
@@ -276,7 +292,7 @@ const handleContainerKeydown = (e: KeyboardEvent) => {
   }
 }
 
-onClickOutside(selectCountryRef, () => closeMenu());
+onClickOutside(countryWrapperRef, () => closeMenu());
 </script>
 
 <style scoped lang="scss">
