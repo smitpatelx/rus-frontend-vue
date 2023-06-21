@@ -219,7 +219,6 @@ const touchedIndividually = reactive({
 const submitForm = handleSubmit(async (values) => {
   if (!props.userData.value?.id || props.userData.value?.id === undefined) return;
 
-  console.log('submitForm', values);
   editUserM.mutate({
     id: props.userData.value.id,
     billing_country: values.country,
@@ -290,6 +289,7 @@ const getSelectCountryProps = (key: EditFormKeys) => {
       && touchedIndividually[key]
       && !!errors.value?.[key])
       && errors.value?.[key],
+    nextFocusableId: `rus-acc-d-${EditFormKeys.Phone}`,
   };
 
   return selectCountryProps;
