@@ -26,10 +26,9 @@ export interface TableHeaderItem {
   label: string;
   align: TableAlign;
   sortable: boolean;
-  sortActive: boolean;
   sticky?: boolean;
   canHide: boolean;
-  sortDirection?: TableSortDirection;
+  sortDirection?: TableSortDirection | null;
 }
 
 export type TableHeaderItems = TableHeaderItem[];

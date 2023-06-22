@@ -83,7 +83,7 @@ export type GetAllUserRes = User[];
 export type GetAllUserReq = {
   page: number;
   page_size: number;
-  sort: TableSortDirection;
+  sort: TableSortDirection | null;
   sort_by: TableHeaderItemKey;
   search_text: string;
   role: string;

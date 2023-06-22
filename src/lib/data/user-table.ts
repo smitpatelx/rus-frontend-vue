@@ -7,7 +7,6 @@ export const USER_TABLE_HEADER: TableHeaderItem[] = [
     label: 'Username',
     align: TableAlign.Left,
     sortable: true,
-    sortActive: false,
     canHide: false,
   },
   {
@@ -15,7 +14,6 @@ export const USER_TABLE_HEADER: TableHeaderItem[] = [
     label: 'First name',
     align: TableAlign.Left,
     sortable: true,
-    sortActive: false,
     canHide: true,
   },
   {
@@ -23,7 +21,6 @@ export const USER_TABLE_HEADER: TableHeaderItem[] = [
     label: 'Last name',
     align: TableAlign.Left,
     sortable: true,
-    sortActive: false,
     canHide: true,
   },
   {
@@ -31,7 +28,6 @@ export const USER_TABLE_HEADER: TableHeaderItem[] = [
     label: 'Roles',
     align: TableAlign.Left,
     sortable: false,
-    sortActive: false,
     canHide: true,
   },
   {
@@ -39,7 +35,6 @@ export const USER_TABLE_HEADER: TableHeaderItem[] = [
     label: 'Phone',
     align: TableAlign.Left,
     sortable: true,
-    sortActive: false,
     canHide: true,
   },
   {
@@ -47,7 +42,6 @@ export const USER_TABLE_HEADER: TableHeaderItem[] = [
     label: 'Email',
     align: TableAlign.Left,
     sortable: true,
-    sortActive: false,
     canHide: false,
   },
   {
@@ -55,7 +49,6 @@ export const USER_TABLE_HEADER: TableHeaderItem[] = [
     label: 'Company Name',
     align: TableAlign.Left,
     sortable: true,
-    sortActive: false,
     canHide: true,
   },
   {
@@ -63,7 +56,6 @@ export const USER_TABLE_HEADER: TableHeaderItem[] = [
     label: 'Created At',
     align: TableAlign.Left,
     sortable: true,
-    sortActive: true,
     canHide: true,
   },
   {
@@ -71,7 +63,6 @@ export const USER_TABLE_HEADER: TableHeaderItem[] = [
     label: 'Actions',
     align: TableAlign.Right,
     sortable: false,
-    sortActive: false,
     canHide: false,
     sticky: true,
   },
