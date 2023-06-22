@@ -6,11 +6,8 @@ cp .env.local .env.production.local
 
 ## Project Setup
 
-- Yarn recommended
-
-```sh
-yarn
-```
+- Yarn `yarn install` (**recommended**)
+- NPM `npm install`
 
 ### Compile and Output to `dist/`
 
