@@ -4,13 +4,13 @@
 cp .env.local .env.production.local
 ```
 
-````sh
 ## Project Setup
+
 - Yarn recommended
 
 ```sh
 yarn
-````
+```
 
 ### Compile and Output to `dist/`
 
