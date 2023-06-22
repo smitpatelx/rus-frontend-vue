@@ -1,7 +1,7 @@
 # Copy env file and input your own values
 
 ```sh
-cp .env.local .env.production.local
+cp .env.sample .env.production.local
 ```
 
 ## Project Setup
