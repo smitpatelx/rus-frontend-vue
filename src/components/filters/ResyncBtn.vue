@@ -24,11 +24,11 @@ import { mdiRefresh } from '@mdi/js';
 import { reactive } from 'vue';
 
 const renderCount = reactive({ count: 0 });
-const { refetch } = useGetAllUsers();
+const getAllUsersQ = useGetAllUsers();
 
 const handleButtonClick = () => {
   renderCount.count++;
-  refetch();
+  getAllUsersQ.refetch();
 }
 </script>
 

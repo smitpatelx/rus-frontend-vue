@@ -4,9 +4,9 @@
       <table class="rus-table">
         <TableHeader :columns="rowHeaders" />
         <!-- User Table Data -->
-        <tbody v-if="data !== undefined && data.data?.length > 0">
+        <tbody v-if="getAllUsersQ?.data?.value && getAllUsersQ?.data?.value?.length > 0">
           <tr
-            v-for="item in data.data"
+            v-for="item in getAllUsersQ.data.value"
             :key="item.username"
           >
             <td v-if="isColumnAvailable(TableHeaderItemKey.Username)">
@@ -285,7 +285,7 @@ defineProps<{
 const filterStore = useUserFilter();
 
 // Handle APIs
-const { data } = useGetAllUsers();
+const getAllUsersQ = useGetAllUsers();
 
 const rowHeaders = computed<TableHeaderItems>(() => {
   const allColumns = structuredClone(USER_TABLE_HEADER);

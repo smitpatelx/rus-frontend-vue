@@ -13,6 +13,7 @@ const useGetAllUsers = () => {
       const res = await UserApi.getAllUsers(filters.value);
       return res;
     },
+    select: (res) => res.data,
     enabled: true,
     refetchOnReconnect: true,
     refetchOnWindowFocus: true,
