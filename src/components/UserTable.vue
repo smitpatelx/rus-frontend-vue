@@ -2,10 +2,7 @@
   <div class="w-full flex-1 p-4 flex flex-col">
     <div class="rus-table-wrap">
       <table class="rus-table">
-        <TableHeader
-          :columns="rowHeaders"
-          @toggleSortDirection="hToggleSortDirection"
-        />
+        <TableHeader :columns="rowHeaders" />
         <!-- User Table Data -->
         <tbody v-if="data !== undefined && data.data?.length > 0">
           <tr
@@ -258,7 +255,7 @@
 
 <script setup lang="ts">
 import RusIcon from '@/components/generic/RusIcon.vue';
-import { TableHeaderItemKey, type TableHeaderItems, type TableSortDirection } from '@/interfaces/table';
+import { TableHeaderItemKey, type TableHeaderItem, type TableHeaderItems } from '@/interfaces/table';
 import TableHeader from '@/components/generic/TableHeader.vue';
 import {
   mdiPencil,
@@ -287,6 +284,9 @@ defineProps<{
 
 const filterStore = useUserFilter();
 
+// Handle APIs
+const { data } = useGetAllUsers();
+
 const rowHeaders = computed<TableHeaderItems>(() => {
   const allColumns = structuredClone(USER_TABLE_HEADER);
 
@@ -299,22 +299,18 @@ const rowHeaders = computed<TableHeaderItems>(() => {
       return true;
     }
   );
-  return filteredColumns;
+  console.log('Filters: ', filterStore.filters);
+  const attachSort = filteredColumns.map((col) => {
+    if (col.sortable) {
+      return {
+        ...col,
+        sortDirection: filterStore.sortDirection,
+      } as TableHeaderItem;
+    }
+    return col;
+  });
+  return attachSort;
 });
-
-const hToggleSortDirection = (sortD: TableSortDirection) => {
-  switch (sortD) {
-    case 'asc':
-      return 'desc';
-    case 'desc':
-      return 'asc';
-    default:
-      return undefined;
-  }
-};
-
-// Handle APIs
-const { data } = useGetAllUsers();
 
 const isColumnAvailable = (key: TableHeaderItemKey) => {
   return rowHeaders.value.some((col) => col.key === key);

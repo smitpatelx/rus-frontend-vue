@@ -19,16 +19,21 @@
           <button
             v-if="column.sortable"
             type="button"
-            @click="toggleBetweenSortDirections(column)"
+            @click="toggleBetweenSortDirections(column.key, column.sortDirection)"
           >
             {{ column.label }}
-            <span v-if="column.sortActive">
+            <span
+              :class="cn({
+                'opacity-0': !(column?.sortDirection !== undefined && filterStore.sortBy === column.key && column.sortDirection !== null)
+              })"
+            >
               <RusIcon
                 :icon="mdiMenuUp"
                 :class-name="cn(
                   'w-5 h-5 inline-block text-teal-600',
+                  'transform transition-all duration-300 ease-out',
                   {
-                    'rotate-180': column.sortDirection === 'desc',
+                    'rotate-180': column.sortDirection === TableSortDirection.Desc,
                   }
                 )"
               />
@@ -44,34 +49,43 @@
 </template>
 
 <script setup lang="ts">
-import { TableSortDirection, type TableHeaderItem } from '@/interfaces/table';
+import { TableSortDirection, type TableHeaderItem, TableHeaderItemKey } from '@/interfaces/table';
 import RusIcon from '@/components/generic/RusIcon.vue';
 import { mdiMenuUp } from '@mdi/js';
 import { cn } from '@/lib/utils';
+import { useUserFilter } from '@/stores/user-filters';
+
+const filterStore = useUserFilter();
 
 defineProps<{
   columns: TableHeaderItem[];
 }>();
 
-const emit = defineEmits<{
-  toggleSortDirection: [val: TableSortDirection],
-  isSortActive: [val: boolean],
-}>();
+const toggleSortDirection = (key: TableHeaderItemKey, sortD?: TableSortDirection | null) => {
+  if (filterStore.sortBy !== key) {
+    filterStore.sortBy = key;
+    filterStore.sortDirection = TableSortDirection.Asc;
+    return;
+  } else if (filterStore.sortBy === key) {
+    filterStore.sortBy = key;
 
-const toggleBetweenSortDirections = (col: TableHeaderItem) => {
-  if (!col.sortable) return;
-
-  if (col.sortDirection === undefined) {
-    emit('toggleSortDirection', TableSortDirection.Asc);
+    if (sortD === null) {
+      filterStore.sortDirection = TableSortDirection.Asc;
+    } else if (sortD === TableSortDirection.Asc) {
+      filterStore.sortDirection = TableSortDirection.Desc;
+    } else if (sortD === TableSortDirection.Desc) {
+      filterStore.sortDirection = null;
+    }
     return;
   }
-  if (col.sortDirection === TableSortDirection.Asc) {
-    emit('toggleSortDirection', TableSortDirection.Desc);
-    return;
-  }
-  if (col.sortDirection === TableSortDirection.Desc) {
-    emit('isSortActive', false);
-  }
+};
+
+const toggleBetweenSortDirections = (
+  key: TableHeaderItemKey,
+  sortDirection?: TableSortDirection | null
+) => {
+  console.log('toggleBetweenSortDirections', key, sortDirection);
+  toggleSortDirection(key, sortDirection);
 }
 </script>
 
