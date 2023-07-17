@@ -6,7 +6,7 @@
     <!-- Search SVG -->
     <span class="search-icon-container group-focus-within:text-teal-500">
       <RusIcon
-        :icon="mdiAccountSearch"
+        :icon="mdiMagnify"
         className="group-focus-within:animate-pulse"
       />
     </span>
@@ -17,7 +17,7 @@
       type="text"
       placeholder="Search Accounts"
       v-model="search"
-      @keyup.stop.esc="clearSearch"
+      @keyup.stop.prevent.esc="clearSearch"
     />
 
     <!-- Shortcut Icons -->
@@ -30,15 +30,25 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import RusIcon from '../generic/RusIcon.vue';
 import ShortcutKeys from '../generic/ShortcutKeys.vue';
 import {
-  mdiAccountSearch
+  mdiMagnify
 } from '@mdi/js';
+import { refDebounced } from '@vueuse/core';
+import { useUserFilter } from '@/stores/user-filters';
+
+const filterStore = useUserFilter();
 
 const search = ref('');
+const searchD = refDebounced(search, 1000);
+
 const searchInputRef = ref<HTMLInputElement | null>(null);
+
+watch(searchD, (value) => {
+  filterStore.searchText = value;
+});
 
 const clearSearch = () => {
   search.value = '';
