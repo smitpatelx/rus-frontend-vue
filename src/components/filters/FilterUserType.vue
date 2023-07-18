@@ -68,7 +68,6 @@ import { mdiClose, mdiFilter } from '@mdi/js';
 import { computed, reactive, ref, watch } from 'vue';
 import { useUserFilter } from '@/stores/user-filters';
 import useGetAllRoles from '@/lib/hooks/useGetAllRoles';
-import RusSpinner from '@/components/generic/RusSpinner.vue';
 
 const randomId = ref(randomAlpha());
 const filterStore = useUserFilter();

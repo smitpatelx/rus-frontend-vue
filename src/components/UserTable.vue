@@ -4,9 +4,9 @@
       <table class="rus-table">
         <TableHeader :columns="rowHeaders" />
         <!-- User Table Data -->
-        <tbody v-if="getAllUsersQ?.data?.value && getAllUsersQ?.data?.value?.length > 0">
+        <tbody v-if="getAllUsersQ?.data?.value && getAllUsersQ?.data?.value.users?.length > 0">
           <tr
-            v-for="item in getAllUsersQ.data.value"
+            v-for="item in getAllUsersQ.data.value.users"
             :key="item.username"
           >
             <td v-if="isColumnAvailable(TableHeaderItemKey.Username)">

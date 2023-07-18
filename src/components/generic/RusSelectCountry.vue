@@ -292,7 +292,11 @@ const handleContainerKeydown = (e: KeyboardEvent) => {
   }
 }
 
-onClickOutside(countryWrapperRef, () => closeMenu());
+onClickOutside(countryWrapperRef, (e) => {
+  if (isMenuOpen.value) {
+    closeMenu();
+  }
+});
 </script>
 
 <style scoped lang="scss">

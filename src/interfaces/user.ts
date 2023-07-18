@@ -78,7 +78,10 @@ export interface User {
   billing_phone: string;
 }
 
-export type GetAllUserRes = User[];
+export type GetAllUserRes = {
+  users: User[];
+  total: number;
+};
 
 export type GetAllUserReq = {
   page: number;
