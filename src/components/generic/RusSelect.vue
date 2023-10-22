@@ -273,7 +273,7 @@ onClickOutside(wrapperRef, () => {
 #rus-select-menu {
   @apply absolute top-full mt-1 right-0 z-50 w-52 bg-teal-50 rounded-md shadow-lg
     overflow-hidden transition-all duration-300 ease-in-out shadow-teal-900/20
-    border border-teal-500;
+    border border-teal-500 isolate;
 
   & > div {
     @apply px-4 py-3 cursor-pointer hover:bg-teal-500 text-base font-medium
