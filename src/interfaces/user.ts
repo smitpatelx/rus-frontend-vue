@@ -81,6 +81,8 @@ export interface User {
 export type GetAllUserRes = {
   users: User[];
   total: number;
+  page: number;
+  page_size: number;
 };
 
 export type GetAllUserReq = {

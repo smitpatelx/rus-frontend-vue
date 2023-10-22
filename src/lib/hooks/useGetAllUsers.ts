@@ -19,6 +19,10 @@ const useGetAllUsers = () => {
     refetchOnWindowFocus: true,
     retry: 0,
     refetchOnMount: true,
+    onSuccess: (data) => {
+      filterStore.filters.page = data.page;
+      filterStore.filters.page_size = data.page_size;
+    },
   });
 
   return getAllUsersQ;
