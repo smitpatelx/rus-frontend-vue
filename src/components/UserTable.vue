@@ -166,88 +166,54 @@
     <div
       class="w-full bg-slate-100 rounded-b-md border
         border-teal-500 flex flex-wrap items-center justify-between
-        px-4 py-2"
+        px-4 py-2 z-20"
     >
-      <span class="text-slate-500 text-sm"> Showing 1 to 10 of 100 entries </span>
+      <div
+        class="w-auto flex flex-row flex-wrap items-center justify-start gap-2 md:gap-x-5 md:gap-y-0"
+      >
+        <!-- Page info lines -->
+        <span class="text-slate-500 text-sm">
+          {{pageLines}}
+        </span>
 
-      <div class="flex flex-row flex-nowrap gap-x-2">
-        <button
-          title="First page"
-          class="w-9 h-9 flex items-center justify-center rounded-full bg-transparent
-            hover:bg-teal-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
-            duration-300 ease-in-out transition-all focus:outline-none focus-visible:ring-1
-            focus-visible:ring-offset-1 focus-visible:ring-teal-600
-            focus-visible:ring-offset-slate-100 active:scale-110"
+        <!-- Page size -->
+        <div
+          v-if="pageSizeOptions.length > 0"
+          class="flex flex-row flex-nowrap gap-x-4 items-center justify-end"
         >
-          <RusIcon :icon="mdiChevronDoubleLeft" />
-        </button>
-
-        <button
-          title="Previous page"
-          class="w-9 h-9 flex items-center justify-center rounded-full bg-transparent
-            hover:bg-teal-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
-            duration-300 ease-in-out transition-all focus:outline-none focus-visible:ring-1
-            focus-visible:ring-offset-1 focus-visible:ring-teal-600
-            focus-visible:ring-offset-slate-100 active:scale-110"
-        >
-          <RusIcon :icon="mdiChevronLeft" />
-        </button>
-
-        <button
-          :title="`Current Page: 1`"
-          disabled
-          class="w-9 h-9 flex items-center justify-center rounded-full bg-slate-500/20
-            text-slate-500 duration-300 ease-in-out transition-all focus:outline-none
-            focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-teal-600
-            focus-visible:ring-offset-slate-100 active:scale-110
-            text-base font-medium"
-        >
-          1
-        </button>
-
-        <button
-          title="Next page"
-          class="w-9 h-9 flex items-center justify-center rounded-full bg-transparent
-            hover:bg-teal-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
-            duration-300 ease-in-out transition-all focus:outline-none focus-visible:ring-1
-            focus-visible:ring-offset-1 focus-visible:ring-teal-600
-            focus-visible:ring-offset-slate-100 active:scale-110"
-        >
-          <RusIcon :icon="mdiChevronRight" />
-        </button>
-
-        <button
-          title="Last page"
-          class="w-9 h-9 flex items-center justify-center rounded-full bg-transparent
-            hover:bg-teal-500 text-slate-500 hover:text-teal-100 active:bg-opacity-30
-            duration-300 ease-in-out transition-all focus:outline-none focus-visible:ring-1
-            focus-visible:ring-offset-1 focus-visible:ring-teal-600
-            focus-visible:ring-offset-slate-100 active:scale-110"
-        >
-          <RusIcon :icon="mdiChevronDoubleRight" />
-        </button>
+          <p class="text-slate-700 font-medium text-base">Page size</p>
+          <select
+            v-model="filterStore.filters.page_size"
+            name="page-size"
+            class="rounded-md text-teal-800 select-none
+              !bg-teal-200/20 hover:bg-teal-300/40 hover:text-teal-800 group
+              focus:outline-none !ring-1 !ring-teal-400 focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-teal-600
+              focus-visible:ring-offset-slate-100 focus:border-0 transition-all duration-300 ease-in-out
+              rounded-l-md flex flex-wrap items-center justify-center
+              leading-none border-0"
+            placeholder="Page size"
+            @change="handlePageSizeChange"
+          >
+            <option
+              v-for="size in pageSizeOptions"
+              :key="size"
+              :value="size"
+              class="py-1.5"
+            >
+              {{size}}
+            </option>
+          </select>
+        </div>
       </div>
 
-      <!-- Page size -->
-      <div class="flex flex-row flex-nowrap gap-x-4 items-center justify-end">
-        <p class="text-slate-700 font-medium text-base">Page size</p>
-        <select
-          value="10"
-          name="page-size"
-          class="rounded-md text-teal-800 select-none
-            !bg-teal-200/20 hover:bg-teal-300/40 hover:text-teal-800 group
-            focus:outline-none !ring-1 !ring-teal-400 focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-teal-600
-            focus-visible:ring-offset-slate-100 focus:border-0 transition-all duration-300 ease-in-out
-            rounded-l-md flex flex-wrap items-center justify-center
-            leading-none border-0"
-          placeholder="Page size"
-        >
-          <option>10</option>
-          <option>20</option>
-          <option>50</option>
-          <option>100</option>
-          <option>200</option>
-        </select>
+      <!-- Pagination Wrapper -->
+      <div class="flex flex-row flex-nowrap gap-x-2">
+        <TablePagination
+          :totalRecords="typeof getAllUsersQ.data?.value?.total === 'undefined' ? 0 : getAllUsersQ.data?.value?.total"
+          :currentPage="typeof getAllUsersQ.data?.value?.page === 'undefined' ? 0 : getAllUsersQ.data?.value?.page"
+          :pageSize="typeof getAllUsersQ.data?.value?.page_size === 'undefined' ? 0 : getAllUsersQ.data?.value?.page_size"
+          @pageChanged="handlePageChange"
+        />
       </div>
     </div>
   </div>
@@ -260,13 +226,9 @@ import TableHeader from '@/components/generic/TableHeader.vue';
 import {
   mdiPencil,
   mdiDelete,
-  mdiChevronRight,
-  mdiChevronLeft,
   mdiEye,
-  mdiChevronDoubleRight,
-  mdiChevronDoubleLeft,
   mdiOpenInNew,
-mdiEmoticonSadOutline,
+  mdiEmoticonSadOutline,
 } from '@mdi/js';
 import type { DialogMode } from '@/interfaces/dialog';
 import { USER_TABLE_HEADER } from '@/lib/data/user-table';
@@ -277,6 +239,7 @@ import { getDialCode } from '@/interfaces/countries';
 import { formatPhone } from '@/lib/helpers';
 import { useUserFilter } from '@/stores/user-filters';
 import { computed } from 'vue';
+import TablePagination from '@/components/generic/TablePagination.vue';
 
 defineProps<{
   openDialog: (mode: DialogMode, user: User) => void;
@@ -286,6 +249,15 @@ const filterStore = useUserFilter();
 
 // Handle APIs
 const getAllUsersQ = useGetAllUsers();
+
+const pageSizeOptions = computed(() => {
+  return [10, 20, 50, 100, 200].filter((size) => {
+    if (getAllUsersQ.data?.value?.total) {
+      return size <= getAllUsersQ.data?.value?.total;
+    }
+    return false;
+  })
+});
 
 const rowHeaders = computed<TableHeaderItems>(() => {
   const allColumns = structuredClone(USER_TABLE_HEADER);
@@ -299,7 +271,7 @@ const rowHeaders = computed<TableHeaderItems>(() => {
       return true;
     }
   );
-  console.log('Filters: ', filterStore.filters);
+
   const attachSort = filteredColumns.map((col) => {
     if (col.sortable) {
       return {
@@ -315,6 +287,21 @@ const rowHeaders = computed<TableHeaderItems>(() => {
 const isColumnAvailable = (key: TableHeaderItemKey) => {
   return rowHeaders.value.some((col) => col.key === key);
 }
+
+const handlePageSizeChange = async () => {
+  await getAllUsersQ.refetch();
+}
+
+const handlePageChange = async (page: number) => {
+  filterStore.filters.page = page;
+  await getAllUsersQ.refetch();
+}
+
+const pageLines = computed(() => {
+  const { page, page_size, total } = getAllUsersQ.data?.value || {};
+  const totalPages = (total !== undefined && page_size !== undefined) ? Math.ceil(total / page_size) : 0;
+  return `Showing ${page} of ${totalPages} pages`;
+});
 </script>
 
 <style scoped lang="scss">
